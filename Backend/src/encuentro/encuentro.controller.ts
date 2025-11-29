@@ -8,6 +8,7 @@ import {
   UseGuards 
 } from '@nestjs/common';
 import { EncuentroService } from './encuentro.service';
+import { UpdateEncuentroDto } from './dto/update-encuentro.dto';
 // Importaciones de Seguridad
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { RolesGuard } from '../auth/roles.guard';
@@ -31,7 +32,7 @@ export class EncuentroController {
   @Roles(Role.PRESIDENTA)
   updateResult(
     @Param('id', ParseIntPipe) id: number,
-    @Body() body: any // Idealmente usa un UpdateEncuentroDto aquí
+    @Body() body: UpdateEncuentroDto
   ) {
       // Asumiendo que tu servicio tiene un método update
       return this.encuentroService.update(id, body); 
