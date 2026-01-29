@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import FormularioDatos from "./FormularioDatos"; 
 import FormularioDocumentacion from "./FormularioDocumentacion";
+import './jugadores-responsive.css';
 
 // Definición local
 type Jugador = {
@@ -56,61 +57,57 @@ const VerJugadores: React.FC<Props> = ({
     };
 
     return (
-        <>
-            <style>{`
-                /* ... TUS ESTILOS CSS PREVIOS (VerJugadores) ... */
-                .action-buttons-container { display: flex; gap: 10px; margin-top: 20px; border-top: 1px dashed #ccc; padding-top: 15px; }
-                .btn-volver { background-color: #6c757d; color: white; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer; }
-                .player-card { padding: 20px; }
-                .document-link { color: #007bff; display: block; margin-top: 5px; }
-            `}</style>
+        <div className="player-card" role="region" aria-label={`Ficha de ${jugador.nombre} ${jugador.apellido}`}>
+            <button onClick={onVolver} className="btn-volver" style={{marginBottom: '12px'}}>← Volver</button>
 
-            <div className="player-card">
-                <button onClick={onVolver} className="btn-volver" style={{marginBottom: '15px'}}>← Volver</button>
+            <h3 className="player-name" style={{margin:0, marginBottom:8}}>{jugador.nombre} {jugador.apellido}</h3>
 
-                <h3 className="player-name">{jugador.nombre} {jugador.apellido}</h3>
-                <p className="player-info"><strong>Club:</strong> {jugador.club?.nombre}</p>
-                <p className="player-info"><strong>DNI:</strong> {jugador.dni}</p>
-                <p className="player-info">
-                    <strong>Estado:</strong> 
-                    <span className={getStatusClass(jugador.estado)}>{jugador.estado || 'activo'}</span>
-                </p>
-                <p className="player-info"><strong>Categoría:</strong> {jugador.categoria}</p>
-                {jugador.telefono && <p className="player-info"><strong>Teléfono:</strong> {jugador.telefono}</p>}
-                {jugador.vencimiento && <p className="player-info"><strong>Vencimiento:</strong> {jugador.vencimiento}</p>}
+            <div className="player-info-list">
+              <p className="player-info"><strong>Club:</strong> {jugador.club?.nombre}</p>
+              <p className="player-info"><strong>DNI:</strong> {jugador.dni}</p>
+              <p className="player-info">
+                <strong>Estado:</strong> 
+                <span className={getStatusClass(jugador.estado)} style={{marginLeft:8}}>{jugador.estado || 'activo'}</span>
+              </p>
+              <p className="player-info"><strong>Categoría:</strong> {jugador.categoria}</p>
+              {jugador.telefono && <p className="player-info"><strong>Teléfono:</strong> {jugador.telefono}</p>}
+              {jugador.vencimiento && <p className="player-info"><strong>Vencimiento:</strong> {jugador.vencimiento}</p>}
+            </div>
 
-                {jugador.carnetUrl && <img src={jugador.carnetUrl} alt="Carnet" style={{maxWidth: '200px', marginTop: '10px'}} />}
-                {jugador.fichaMedicaUrl && <a href={jugador.fichaMedicaUrl} target="_blank" className="document-link">Ver Ficha Médica</a>}
+            {/* previsualización de carnet si existe */}
+            {jugador.carnetUrl && (
+              <div className="file-preview" style={{marginTop:12}}>
+                <img src={jugador.carnetUrl} alt={`Carnet de ${jugador.nombre}`} />
+                <a className="document-link" href={jugador.carnetUrl} target="_blank" rel="noopener noreferrer">Ver Carnet</a>
+              </div>
+            )}
 
-                {/* 🔒 ACCIONES PROTEGIDAS */}
-                {(permisoEditar || permisoEliminar) && (
-                    <div className="action-buttons-container">
-                        {permisoEditar && (
-                            <>
-                                <button onClick={() => {setEditandoDocs(false); setEditandoDatos(!editandoDatos);}} className="action-button btn-edit-data">
-                                    {editandoDatos ? "Cancelar Edición" : "Editar Datos"}
-                                </button>
-                                <button onClick={() => {setEditandoDatos(false); setEditandoDocs(!editandoDocs);}} className="action-button btn-edit-docs">
-                                    {editandoDocs ? "Cancelar Docs" : "Editar Docs"}
-                                </button>
-                            </>
-                        )}
-                        
-                        {permisoEliminar && (
-                            <button onClick={handleEliminar} className="action-button btn-delete">Eliminar</button>
-                        )}
-                    </div>
+            {/* acciones adaptadas a móvil: apiladas y táctiles */}
+            <div className="action-buttons-container" style={{marginTop:12}}>
+                {permisoEditar && (
+                  <button className="btn-action btn-primary" onClick={() => setEditandoDatos(true)}>Editar Datos</button>
                 )}
-
-                {/* FORMULARIOS DE EDICIÓN */}
-                {(editandoDatos || editandoDocs) && (
-                    <div className="edit-form-container">
-                        {editandoDatos && <FormularioDatos jugador={jugador as any} onGuardar={handleGuardarDatos} onCancelar={() => setEditandoDatos(false)} />}
-                        {editandoDocs && <FormularioDocumentacion jugadorInfo={jugador} onGuardar={handleGuardarDocs} onCancelar={() => setEditandoDocs(false)} />}
-                    </div>
+                {permisoEditar && (
+                  <button className="btn-action btn-primary" onClick={() => setEditandoDocs(true)}>Editar Docs</button>
+                )}
+                {permisoEliminar && (
+                  <button className="btn-action btn-delete" onClick={handleEliminar}>Eliminar</button>
                 )}
             </div>
-        </>
+
+            {/* Subformularios en línea (mantengo la lógica, los formularios reutilizan los componentes ya existentes) */}
+            {editandoDatos && (
+              <div style={{marginTop:12}}>
+                <FormularioDatos jugador={jugador as any} onGuardar={handleGuardarDatos} onCancelar={() => setEditandoDatos(false)} jugadores={[]} />
+              </div>
+            )}
+
+            {editandoDocs && (
+              <div style={{marginTop:12}}>
+                <FormularioDocumentacion jugadorInfo={jugador as any} onGuardar={(docs) => handleGuardarDocs({...jugador, ...docs})} onCancelar={() => setEditandoDocs(false)} />
+              </div>
+            )}
+        </div>
     );
 };
 
