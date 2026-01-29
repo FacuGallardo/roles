@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import './jugadores-responsive.css';
 
 // Definición local para evitar conflicto de imports
 interface Club { id: number; nombre: string; }
@@ -60,33 +61,54 @@ const EditarJugador: React.FC<Props> = ({
   };
 
   return (
-    <>
-      <style>{/* ... TUS ESTILOS CSS PREVIOS (EditarJugador) ... */}</style>
-      <form onSubmit={handleSubmit}>
-        <h2 className="edit-title">Editando a {jugador.nombre}</h2>
-        {error && <div className="error-message-edit">{error}</div>}
-        
-        <div className="edit-form-grid">
-            {/* Inputs... (Mismos que tu archivo original, omitidos por brevedad pero deben estar) */}
-            <div className="form-group-edit">
-                <label className="form-label-edit">Nombre</label>
-                <input name="nombre" value={form.nombre} onChange={handleChange} className="form-input-edit" />
-            </div>
-            {/* ... Resto de inputs (Apellido, DNI, Club, etc) ... */}
-             <div className="form-group-edit">
-                <label className="form-label-edit">Club</label>
-                <select name="clubId" value={form.clubId} onChange={handleChange} className="form-select-edit">
-                    {clubes.map(c => <option key={c.id} value={c.id}>{c.nombre}</option>)}
-                </select>
-            </div>
-        </div>
+    <form onSubmit={handleSubmit} className="form-container-edit" noValidate>
+      <h2 className="form-title-edit">Editando a {jugador.nombre}</h2>
+      {error && <div className="error-message-edit" style={{color:'red', marginBottom:8}}>{error}</div>}
+      
+      <div className="edit-form-grid form-fields-grid">
+          <div className="form-group">
+              <label className="form-label-edit" htmlFor="nombre">Nombre</label>
+              <input id="nombre" name="nombre" value={form.nombre} onChange={handleChange} className="form-input" />
+          </div>
 
-        <div className="button-group-edit">
-          <button type="submit" className="btn-action btn-update">Actualizar</button>
-          <button type="button" onClick={onCancelar} className="btn-action btn-cancel">Cancelar</button>
-        </div>
-      </form>
-    </>
+          <div className="form-group">
+              <label className="form-label-edit" htmlFor="apellido">Apellido</label>
+              <input id="apellido" name="apellido" value={form.apellido} onChange={handleChange} className="form-input" />
+          </div>
+
+          <div className="form-group">
+              <label className="form-label-edit" htmlFor="dni">DNI</label>
+              <input id="dni" name="dni" value={form.dni} onChange={handleChange} className="form-input" />
+          </div>
+
+          <div className="form-group">
+              <label className="form-label-edit" htmlFor="clubId">Club</label>
+              <select id="clubId" name="clubId" value={form.clubId} onChange={handleChange} className="form-input">
+                  {clubes.map(c => <option key={c.id} value={c.id}>{c.nombre}</option>)}
+              </select>
+          </div>
+
+          <div className="form-group">
+              <label className="form-label-edit" htmlFor="categoria">Categoría</label>
+              <input id="categoria" name="categoria" value={form.categoria} onChange={handleChange} className="form-input" />
+          </div>
+
+          <div className="form-group">
+              <label className="form-label-edit" htmlFor="telefono">Teléfono</label>
+              <input id="telefono" name="telefono" value={form.telefono} onChange={handleChange} className="form-input" />
+          </div>
+
+          <div className="form-group">
+              <label className="form-label-edit" htmlFor="vencimiento">Vencimiento</label>
+              <input id="vencimiento" name="vencimiento" value={form.vencimiento} onChange={handleChange} className="form-input" />
+          </div>
+      </div>
+
+      <div className="button-group-edit" style={{marginTop:12}}>
+        <button type="submit" className="btn-action btn-update">Actualizar</button>
+        <button type="button" onClick={onCancelar} className="btn-action btn-cancel">Cancelar</button>
+      </div>
+    </form>
   );
 };
 
