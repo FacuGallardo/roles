@@ -6,6 +6,7 @@ import BarraProgreso from "./BarraProgreso";
 import EditarJugador from "./EditarJugador"; 
 import VerJugadores from "./VerJugadores"; // Asegúrate de importar esto si lo usas
 import { hasRole } from "../utils/auth"; // Importamos la utilidad
+import './jugadores-responsive.css';
 
 // --- TIPOS EXPORTABLES ---
 export interface Club {
