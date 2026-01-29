@@ -1,4 +1,5 @@
 import React from "react";
+import './jugadores-responsive.css';
 
 // --- Definición local para evitar conflictos de importación ---
 interface Club {
@@ -57,23 +58,8 @@ const ListaJugadores: React.FC<Props> = ({
 
   return (
     <>
-      <style>{`
-        /* ... ESTILOS CSS DE TABLA PREVIOS ... */
-        .icon { width: 1.2em; height: 1.2em; margin-right: 5px; }
-        .action-button { padding: 6px 12px; border-radius: 6px; border: none; cursor: pointer; display: inline-flex; alignItems: center; margin-right: 5px; color: white; font-weight: 600; font-size: 0.9rem; }
-        .btn-view { background-color: #17a2b8; } /* Color para ver */
-        .btn-edit { background-color: #ffc107; color: #000; }
-        .btn-delete { background-color: #dc3545; }
-        .table-container { overflow-x: auto; }
-        .player-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
-        .table-header th { background-color: #1f3c88; color: white; padding: 10px; text-align: left; }
-        .table-row td { padding: 10px; border-bottom: 1px solid #ddd; }
-        .status-activo { color: green; font-weight: bold; }
-        .status-inactivo { color: gray; }
-      `}</style>
-      
       <div className="table-container">
-        <table className="player-table">
+        <table className="player-table" role="table">
           <thead className="table-header">
             <tr>
               <th>Nombre</th>
@@ -87,30 +73,31 @@ const ListaJugadores: React.FC<Props> = ({
           <tbody>
             {jugadores.map((j) => (
               <tr key={j.id} className="table-row">
-                <td>{j.nombre}</td>
-                <td>{j.apellido}</td>
-                <td>{j.club ? j.club.nombre : "-"}</td>
-                <td>{j.dni}</td>
-                <td className={getStatusClass(j.estado)}>{j.estado || "Activo"}</td>
+                <td data-label="Nombre">{j.nombre}</td>
+                <td data-label="Apellido">{j.apellido}</td>
+                <td data-label="Club">{j.club ? j.club.nombre : "-"}</td>
+                <td data-label="DNI">{j.dni}</td>
+                <td data-label="Estado" className={getStatusClass(j.estado)}>{j.estado || "Activo"}</td>
                 
                 {mostrarColumnaAcciones && (
-                  <td className="action-cell">
+                  <td className="action-cell" data-label="Acciones">
                     {/* Botón VER (Siempre visible) */}
-                    <button onClick={() => onVer(j)} className="action-button btn-view">
-                      <EyeIcon /> Ver
+                    <button onClick={() => onVer(j)} className="action-button btn-view" aria-label={`Ver ${j.nombre} ${j.apellido}`}>
+                      <EyeIcon />
+                      <span className="visible-label">Ver</span>
                     </button>
 
                     {/* Botón EDITAR (Condicional) */}
                     {permisoEditar && (
-                      <button onClick={() => onIniciarEdicion(j)} className="action-button btn-edit">
-                        <EditIcon /> Editar
+                      <button onClick={() => onIniciarEdicion(j)} className="action-button btn-edit" aria-label={`Editar ${j.nombre} ${j.apellido}`}>
+                        <EditIcon /> <span className="visible-label">Editar</span>
                       </button>
                     )}
 
                     {/* Botón ELIMINAR (Condicional) */}
                     {permisoEliminar && (
-                      <button onClick={() => onEliminar(j.id)} className="action-button btn-delete">
-                        <DeleteIcon /> Borrar
+                      <button onClick={() => onEliminar(j.id)} className="action-button btn-delete" aria-label={`Eliminar ${j.nombre} ${j.apellido}`}>
+                        <DeleteIcon /> <span className="visible-label">Borrar</span>
                       </button>
                     )}
                   </td>
