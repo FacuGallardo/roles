@@ -1,6 +1,6 @@
 import React, { useState } from "react";
+import './jugadores-responsive.css';
 
-// Props simplificadas
 type Props = {
   jugadorInfo: { nombre: string; apellido: string };
   onGuardar: (docs: { carnetUrl?: string; fichaMedicaUrl?: string; vencimientoFichaMedica?: string }) => void;
@@ -16,6 +16,7 @@ const FormularioDocumentacion: React.FC<Props> = ({
   const [fichaMedica, setFichaMedica] = useState<string | undefined>(undefined);
   const [vencimientoFichaMedica, setVencimientoFichaMedica] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
+  const [fichaNombre, setFichaNombre] = useState<string | undefined>(undefined);
 
   const handleFechaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let valorLimpio = e.target.value.replace(/\D/g, '');
@@ -53,7 +54,10 @@ const FormularioDocumentacion: React.FC<Props> = ({
     reader.onloadend = () => {
       if (typeof reader.result === "string") {
         if (tipo === "carnet") setCarnet(reader.result);
-        if (tipo === "ficha") setFichaMedica(reader.result);
+        if (tipo === "ficha") {
+          setFichaMedica(reader.result);
+          setFichaNombre(file.name);
+        }
       }
     };
     reader.readAsDataURL(file);
@@ -62,83 +66,83 @@ const FormularioDocumentacion: React.FC<Props> = ({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
-    
+
     onGuardar({ carnetUrl: carnet, fichaMedicaUrl: fichaMedica, vencimientoFichaMedica: vencimientoFichaMedica || undefined });
   };
 
   return (
-    <div className="max-w-lg mx-auto">
-      <h2 className="text-xl font-bold mb-4 text-center">
-        Paso 2: Documentación de {jugadorInfo.nombre} {jugadorInfo.apellido}
-      </h2>
+    <form onSubmit={handleSubmit} className="form-container-edit" noValidate>
+      <h2 className="form-title-edit" style={{ marginTop: 0 }}>Paso 2: Documentación</h2>
+
       {error && <div style={{ color: "red", textAlign: "center", marginBottom: "1rem" }}>{error}</div>}
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="block font-semibold">Carnet (Imagen, max 5MB):</label>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => handleFileUpload(e, "carnet")}
-            className="w-full p-2 border rounded"
-          />
-          {carnet && (
-            <img
-              src={carnet}
-              alt="Carnet"
-              style={{ maxWidth: 200, marginTop: 10, borderRadius: '8px' }}
+
+      <div className="form-fields-grid">
+        <div className="form-group">
+          <label htmlFor="carnet-upload">Carnet (Imagen, max 5MB)</label>
+          <label className="upload-btn" aria-label="Subir carnet">
+            <input
+              id="carnet-upload"
+              type="file"
+              accept="image/*"
+              onChange={(e) => handleFileUpload(e, "carnet")}
+              style={{ display: 'none' }}
             />
+            Subir Carnet
+          </label>
+
+          {carnet && (
+            <div className="file-preview" aria-live="polite">
+              <img src={carnet} alt="Carnet subido" />
+            </div>
           )}
         </div>
 
-        <div>
-          <label className="block font-semibold">Ficha Médica (PDF, max 5MB):</label>
-          <input
-            type="file"
-            accept="application/pdf"
-            onChange={(e) => handleFileUpload(e, "ficha")}
-            className="w-full p-2 border rounded"
-          />
-          {fichaMedica && (
-            <a
-              href={fichaMedica}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-600 underline"
-            >
-              Ver ficha médica cargada
-            </a>
+        <div className="form-group">
+          <label htmlFor="ficha-upload">Ficha Médica (PDF, max 5MB)</label>
+          <label className="upload-btn" aria-label="Subir ficha medica">
+            <input
+              id="ficha-upload"
+              type="file"
+              accept="application/pdf"
+              onChange={(e) => handleFileUpload(e, "ficha")}
+              style={{ display: 'none' }}
+            />
+            Subir Ficha Médica (PDF)
+          </label>
+
+          {fichaNombre && (
+            <div style={{ marginTop: 8 }}>
+              <a
+                href={fichaMedica}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "#1f3c88", textDecoration: "underline", display: "inline-block" }}
+              >
+                {fichaNombre}
+              </a>
+            </div>
           )}
         </div>
 
-        <div>
-          <label className="block font-semibold">Vencimiento Ficha Médica:</label>
+        <div className="form-group">
+          <label htmlFor="vencimiento">Vencimiento de la Ficha Médica (dd/mm/yyyy)</label>
           <input
-            type="text"
-            placeholder="dd/mm/yyyy"
+            id="vencimiento"
+            name="vencimiento"
+            className="form-input"
             value={vencimientoFichaMedica}
             onChange={handleFechaChange}
-            maxLength={10}
-            className="w-full p-2 border rounded"
+            placeholder="dd/mm/yyyy"
+            inputMode="numeric"
           />
         </div>
+      </div>
 
-        <div className="flex gap-2 mt-4">
-          <button
-            type="submit"
-            className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 w-1/2"
-          >
-            Finalizar Registro
-          </button>
-          <button
-            type="button"
-            onClick={onCancelar}
-            className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500 w-1/2"
-          >
-            Atrás
-          </button>
-        </div>
-      </form>
-    </div>
+      <div className="button-group-edit" style={{ marginTop: 12 }}>
+        <button type="submit" className="btn-action btn-primary">Guardar Documentación</button>
+        <button type="button" onClick={onCancelar} className="btn-action btn-secondary">Cancelar</button>
+      </div>
+    </form>
   );
 };
 
