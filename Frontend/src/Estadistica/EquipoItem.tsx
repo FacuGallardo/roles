@@ -87,7 +87,8 @@ const EquipoItem: React.FC<Props> = ({
     textAlign: "center",
     borderBottom: "1px solid #e9ecef", 
     fontSize: '0.9rem', 
-    verticalAlign: 'middle', 
+    verticalAlign: 'middle',
+    color: '#333', // Color oscuro para contraste
   };
   const inputStyle: React.CSSProperties = {
     padding: '4px 6px',

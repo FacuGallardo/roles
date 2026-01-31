@@ -31,7 +31,7 @@ const EditarPago: React.FC<Props> = ({ pago, montoMinimo, partidos, onGuardar, o
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
-        setForm(prev => ({
+        setForm((prev: any) => ({
              ...prev,
              [name]: (name === "monto" || name === "partidoId" || name === "cantidadJugadores") ? Number(value) : value
         }));

@@ -1,17 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import RegistroJugador from "./RegistroJugador";
 import ListaJugadores from "./ListaJugadores";
 import FormularioDocumentacion from "./FormularioDocumentacion";
 import BarraProgreso from "./BarraProgreso";
-import EditarJugador from "./EditarJugador"; 
-<<<<<<< Updated upstream
-import VerJugadores from "./VerJugadores"; // Asegúrate de importar esto si lo usas
-import { hasRole } from "../utils/auth"; // Importamos la utilidad
-=======
-import VerJugadores from "./VerJugadores"; 
+import EditarJugador from "./EditarJugador";
+import VerJugadores from "./VerJugadores";
 import { hasRole } from "../utils/auth";
->>>>>>> Stashed changes
-import './jugadores-responsive.css';
+import "./jugadores-responsive.css";
 
 // --- TIPOS EXPORTABLES ---
 export interface Club {

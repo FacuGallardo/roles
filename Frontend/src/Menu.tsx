@@ -301,7 +301,7 @@ export default function App() {
                 aria-haspopup="true"
                 aria-expanded={openHandball}
               >
-                <span role="img" aria-label="handball">🤾‍♂️</span> Handball ▼
+                Handball ▼
               </button>
               {openHandball && (
                 <div className="dropdown" onClick={stop}>
@@ -324,7 +324,7 @@ export default function App() {
                 aria-haspopup="true"
                 aria-expanded={openInstitucional}
               >
-                <span role="img" aria-label="institucional">🏛️</span> Institucional ▼
+                Institucional ▼
               </button>
               {openInstitucional && (
                 <div className="dropdown" onClick={stop}>

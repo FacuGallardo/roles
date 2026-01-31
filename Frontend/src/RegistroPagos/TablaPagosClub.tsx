@@ -1,5 +1,6 @@
 import React from "react";
 import "./registropagos-responsive.css";
+
 type TipoPago = "cuota" | "arbitraje" | "multa" | "otro";
 
 interface Pago {

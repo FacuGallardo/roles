@@ -4,6 +4,7 @@
     /* Contenedor principal */
     .estadistica-container {
         padding: 20px 10px !important;
+        padding-top: 25px !important;
     }
 
     .estadistica-container h2 {
