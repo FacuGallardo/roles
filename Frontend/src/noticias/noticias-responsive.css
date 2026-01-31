@@ -1,0 +1,279 @@
+/* noticias-responsive.css */
+/* Mobile-first overrides for 360-390px viewports (max-width: 480px) */
+
+@media (max-width: 480px) {
+  /* Main page container */
+  .noticias-page-container {
+    padding: 12px !important;
+  }
+
+  /* Content wrapper */
+  .noticias-content-wrapper {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  /* Main title */
+  .noticias-main-title {
+    font-size: 1.4rem !important;
+    margin-bottom: 20px !important;
+    padding-bottom: 8px !important;
+    text-align: center;
+  }
+
+  /* Toggle buttons */
+  .noticias-toggle-buttons {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .noticias-toggle-buttons button {
+    width: 100% !important;
+    padding: 0.6rem 0.8rem !important;
+    font-size: 0.85rem !important;
+    min-height: 44px;
+  }
+
+  /* Carousel section */
+  .noticias-carrusel-section {
+    padding: 1rem !important;
+    border-radius: 0.75rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .noticias-carrusel-title {
+    font-size: 1.3rem !important;
+    margin-bottom: 1rem !important;
+    padding-bottom: 8px !important;
+  }
+
+  /* Carousel container */
+  .noticias-carrusel-container {
+    overflow-x: auto !important;
+    gap: 1rem !important;
+    padding: 0.5rem !important;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Carousel cards */
+  .noticias-carrusel-card {
+    min-width: 240px !important;
+    max-width: 240px !important;
+    border-radius: 0.5rem !important;
+  }
+
+  .noticias-card-content {
+    padding: 0.75rem !important;
+  }
+
+  .noticias-card-date {
+    font-size: 0.7rem !important;
+    margin-top: 0 !important;
+  }
+
+  .noticias-card-title {
+    font-size: 0.95rem !important;
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  .noticias-card-text {
+    font-size: 0.8rem !important;
+  }
+
+  /* Management section */
+  .noticias-management-section {
+    padding: 1.5rem !important;
+    border-radius: 1rem !important;
+    width: 100% !important;
+  }
+
+  /* Form container */
+  .noticias-formulario {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1rem !important;
+  }
+
+  .noticias-form-title {
+    font-size: 1.3rem !important;
+    margin-bottom: 1rem !important;
+    padding-bottom: 8px !important;
+  }
+
+  /* Input groups */
+  .noticias-input-group {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .noticias-input-group label {
+    font-size: 0.85rem !important;
+    margin-bottom: 4px !important;
+    font-weight: 600;
+  }
+
+  /* Form inputs */
+  .noticias-form-input {
+    width: 100% !important;
+    padding: 0.65rem 0.75rem !important;
+    font-size: 0.95rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.4rem;
+    box-sizing: border-box;
+  }
+
+  /* Textarea */
+  .noticias-form-textarea {
+    width: 100% !important;
+    padding: 0.65rem 0.75rem !important;
+    font-size: 0.95rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.4rem;
+    box-sizing: border-box;
+    font-family: inherit;
+    line-height: 1.4;
+  }
+
+  /* File input */
+  .noticias-form-file {
+    width: 100% !important;
+    padding: 0.5rem !important;
+    font-size: 0.85rem;
+  }
+
+  /* Button groups */
+  .noticias-button-group {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+    margin-top: 1rem !important;
+  }
+
+  .noticias-button-save,
+  .noticias-button-cancel {
+    width: 100% !important;
+    padding: 0.75rem 1rem !important;
+    font-size: 0.9rem !important;
+    min-height: 44px;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+  }
+
+  /* List section */
+  .noticias-list-title {
+    font-size: 1.3rem !important;
+    margin-bottom: 1rem !important;
+    padding-bottom: 8px !important;
+  }
+
+  .noticias-lista-scroll,
+  .list-scroll-container {
+    max-height: 100% !important;
+    overflow-y: auto !important;
+    padding-right: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.75rem !important;
+  }
+
+  /* List items */
+  .noticias-list-item {
+    padding: 0.75rem !important;
+    border-radius: 0.5rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.75rem !important;
+    align-items: stretch !important;
+  }
+
+  .noticias-list-content {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+    align-items: stretch !important;
+  }
+
+  .noticias-list-image {
+    width: 100% !important;
+    max-width: 100px !important;
+    height: 80px !important;
+    object-fit: cover;
+    border-radius: 0.4rem;
+  }
+
+  .noticias-list-no-image {
+    width: 100px !important;
+    height: 80px !important;
+    border-radius: 0.4rem;
+    font-size: 0.7rem !important;
+  }
+
+  .noticias-list-text {
+    flex-grow: 1;
+  }
+
+  .noticias-list-text h4 {
+    font-size: 0.95rem !important;
+    margin: 0 0 0.25rem 0 !important;
+  }
+
+  .noticias-list-text p {
+    margin: 0.2rem 0 !important;
+    font-size: 0.8rem !important;
+  }
+
+  /* List buttons */
+  .noticias-list-buttons {
+    display: flex !important;
+    gap: 0.5rem !important;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .noticias-button-edit,
+  .noticias-button-delete {
+    padding: 0.4rem 0.8rem !important;
+    font-size: 0.75rem !important;
+    white-space: nowrap;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    border: none;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    min-height: auto;
+  }
+
+  .noticias-button-edit {
+    background-color: #1f3c88 !important;
+    color: white !important;
+  }
+
+  .noticias-button-delete {
+    background-color: #dc2626 !important;
+    color: white !important;
+  }
+
+  /* Formulario container */
+  .noticias-formulario-container {
+    width: 100%;
+  }
+
+  /* Lista container */
+  .noticias-lista-container {
+    width: 100%;
+  }
+
+  /* Ensure no horizontal overflow */
+  body {
+    overflow-x: hidden !important;
+  }
+}

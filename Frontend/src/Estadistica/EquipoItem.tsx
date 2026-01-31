@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./estadistica-responsive.css";
 
 // --- Definición del tipo Equipo ---
 export type Equipo = {
@@ -111,6 +112,7 @@ const EquipoItem: React.FC<Props> = ({
 
   return (
     <tr
+      className={editando ? "equipo-item-edit-row" : ""}
       style={combinedRowStyle}
       onMouseEnter={(e) => {
         if (!editando) e.currentTarget.style.backgroundColor = "#e9ecef";
@@ -142,7 +144,7 @@ const EquipoItem: React.FC<Props> = ({
           <td style={{ ...cellStyle, fontWeight: "bold" }}>
             {puntosCalculados}
           </td>
-          <td style={cellStyle}>
+          <td style={cellStyle} className="equipo-actions">
             <button onClick={guardarCambios} style={{ ...baseButtonStyle, backgroundColor: "#1f3c88", color: "white" }}>
               Guardar
             </button>
@@ -164,7 +166,7 @@ const EquipoItem: React.FC<Props> = ({
           
           {/* 🔒 Botones solo visibles si tiene permiso */}
           {puedeEditar && (
-            <td style={cellStyle}>
+            <td style={cellStyle} className="equipo-actions">
                 <button
                 onClick={() => setEditando(true)}
                 style={{ ...baseButtonStyle, backgroundColor: "#1f3c88", color: "white" }}

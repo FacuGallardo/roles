@@ -6,12 +6,11 @@ import ReferentesPage from "./Referentes/ReferentesPage";
 import FixturePage from "./Fixture/FixturePage";
 import Historia from "./Historia/Historia";
 import EstadisticasPage from "./Estadistica/EstadisticasPage";
-import NoticiasPage from "./Noticias/Noticiaspage";
+import NoticiasPage from "./noticias/Noticiaspage";
 import Reglamento from "./Reglamento/Reglamento";
 import PagosPage from "./RegistroPagos/PagosPage";
-// --- 1. IMPORTAR EL MODAL ---
 import LoginModal from "./LoginModal"; 
-
+import "./menu-responsive.css";
 
 export default function App() {
   const [vista, setVista] = useState(

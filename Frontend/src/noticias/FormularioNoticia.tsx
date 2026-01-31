@@ -185,43 +185,46 @@ const FormularioNoticia: React.FC<Props> = ({ onGuardar, onActualizar, noticiaAE
   };
 
   return (
-    <form onSubmit={handleSubmit} style={styles.formContainer}>
-      <div>
-        <label htmlFor="titulo" style={styles.label}>Título</label>
-        <input
-            id="titulo"
-            type="text"
-            name="titulo"
-            placeholder="Título de la Noticia (Mínimo 5 caracteres)"
-            value={form.titulo}
-            onChange={handleChange}
-            style={styles.inputBase}
-            required
-        />
-      </div>
+    <form onSubmit={handleSubmit} className="noticias-formulario" style={styles.formContainer}>
+      <div className="noticias-input-group">
+        <label htmlFor="titulo" style={styles.label}>Título</label>
+        <input
+            id="titulo"
+            type="text"
+            name="titulo"
+            placeholder="Título de la Noticia (Mínimo 5 caracteres)"
+            value={form.titulo}
+            onChange={handleChange}
+            className="noticias-form-input"
+            style={styles.inputBase}
+            required
+        />
+      </div>
 
-      <div>
-        <label htmlFor="contenido" style={styles.label}>Contenido</label>
-        <textarea
-            id="contenido"
-            name="contenido"
-            placeholder="Escribe el contenido completo de la noticia aquí..."
-            value={form.contenido}
-            onChange={handleChange}
-            rows={5}
+      <div className="noticias-input-group">
+        <label htmlFor="contenido" style={styles.label}>Contenido</label>
+        <textarea
+            id="contenido"
+            name="contenido"
+            placeholder="Escribe el contenido completo de la noticia aquí..."
+            value={form.contenido}
+            onChange={handleChange}
+            rows={5}
+            className="noticias-form-textarea"
             style={styles.textarea}
             required
         />
       </div>
       
-      <div>
-        <label htmlFor="fecha" style={styles.label}>Fecha de Publicación</label>
-        <input
-            id="fecha"
-            type="date"
-            name="fecha"
-            value={form.fecha}
-            onChange={handleChange}
+<div className="noticias-input-group">
+        <label htmlFor="fecha" style={styles.label}>Fecha de Publicación</label>
+        <input
+            id="fecha"
+            type="date"
+            name="fecha"
+            value={form.fecha}
+            onChange={handleChange}
+            className="noticias-form-input"
             style={styles.inputBase}
             required
         />

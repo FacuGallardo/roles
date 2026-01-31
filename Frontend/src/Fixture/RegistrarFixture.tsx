@@ -282,7 +282,7 @@ const RegistrarFixture: React.FC<Props> = ({
 
             {/* --- Formulario de Agregación de Partido --- */}
             <h4 style={formStyles.sectionHeader}>Datos del Partido (Uno a la vez)</h4>
-            <div style={formStyles.formPartidoGrid}>
+            <div style={formStyles.formPartidoGrid} className="form-partido-grid">
                 
                 {/* Jornada */}
                 <div>
@@ -366,13 +366,15 @@ const RegistrarFixture: React.FC<Props> = ({
                 </div>
 
                 {/* Botón Agregar Partido (sin ícono) */}
-                <button
-                    style={botonAgregarPartidoStyle} // Usa el nuevo estilo base para el botón con el color #1f3c88
-                    onClick={agregarPartido}
-                    type="button"
-                >
-                    Agregar Partido
-                </button>
+                <div style={formStyles.gridButton} className="gridButton">
+                  <button
+                      style={botonAgregarPartidoStyle} // Usa el nuevo estilo base para el botón con el color #1f3c88
+                      onClick={agregarPartido}
+                      type="button"
+                  >
+                      Agregar Partido
+                  </button>
+                </div>
             </div>
 
             {/* Mensajes de Alerta */}

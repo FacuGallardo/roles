@@ -1,16 +1,6 @@
 import React, { useState } from "react";
 
-type TipoPago = "cuota" | "arbitraje" | "multa" | "otro";
-interface Pago {
-    id: number;
-    tipo: TipoPago;
-    club: string;
-    monto: number;
-    comprobante: string;
-    fecha: string;
-    estado: string;
-    // ... otros campos
-}
+type Pago = any;
 
 type Props = {
     pagos: Pago[];
@@ -43,7 +33,7 @@ const HistorialPagos: React.FC<Props> = ({ pagos, clubes, onEditar, onEliminar, 
     return (
         <>
             <style>{globalStyles}</style>
-            <div>
+            <div className="historial-pagos">
                 {/* ... Filtros ... */}
                 <div style={{overflowX: 'auto'}}> 
                     <table style={{width: '100%', borderCollapse: 'collapse'}}>

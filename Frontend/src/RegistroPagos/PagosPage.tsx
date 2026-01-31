@@ -5,7 +5,7 @@ import HistorialPagos from "./HistorialPagos";
 import EditarPago from "./EditarPago";
 import type { CSSProperties } from "react";
 import { hasRole } from "../utils/auth"; // 🔒 Importar utilidad de roles
-
+import "./registropagos-responsive.css";
 // ============================================
 // CONFIGURACIÓN DE ESTILOS (Mantenida)
 // ============================================
@@ -276,7 +276,7 @@ const PagosPage: React.FC = () => {
                         Gestión de Pagos de Clubes
                     </h2>
 
-                    <nav style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginBottom: '2rem', borderBottom: '1px solid #e5e7eb', paddingBottom: '1rem' }}>
+                   <nav className="pagos-nav" style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginBottom: '2rem', borderBottom: '1px solid #e5e7eb', paddingBottom: '1rem' }}>
                         <button style={{ ...baseNavButtonStyle, ...(activeSection === 'tablaClubes' ? activeNavButtonStyle : {}), opacity: activeSection === 'tablaClubes' ? 1 : 0.8 }} onClick={() => setActiveSection('tablaClubes')}>
                             Resumen por Club
                         </button>

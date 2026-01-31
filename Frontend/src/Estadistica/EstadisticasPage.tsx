@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import TablaEquipos from "./TablaEquipos";
 import { hasRole } from "../utils/auth"; // 🔒 Importar utilidad de roles
+import "./estadistica-responsive.css";
 
 // --- 👇 DEFINICIÓN DE API_URL 👇 ---
 const API_URL = "http://localhost:3001"; 
@@ -108,6 +109,7 @@ const EstadisticasPage: React.FC = () => {
   // --- Renderizado ---
   return (
     <div
+     className="estadistica-container"
       style={{
         padding: "40px 20px",
         backgroundColor: "#f4f7f6", 
@@ -123,10 +125,9 @@ const EstadisticasPage: React.FC = () => {
           fontSize: "2.5em",
           fontWeight: 600,
           borderBottom: "3px solid #1f3c88", 
-          display: "inline-block",
+          display: "block",
           paddingBottom: "5px",
           margin: "0 auto 30px auto", 
-          display: "block",
           width: "fit-content"
         }}
       >

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import FormularioNoticia from "./FormularioNoticia";
 import NoticiasLista from "./NoticiasLista";
 import CarrouselNoticias from "./CarruselNoticias";
-import { hasRole } from "../utils/auth"; // 🔒 Importar
-
+import { hasRole } from "../utils/auth"; 
+import "./noticias-responsive.css";
 // Tipos
 type Noticia = {
   id: number;
@@ -252,13 +252,13 @@ const NoticiasPage: React.FC = () => {
   };
 
   return (
-    <div style={styles.pageContainer as React.CSSProperties}>
-      <div style={styles.contentWrapper}>
-        <h2 style={styles.mainTitle as React.CSSProperties}>
+    <div style={styles.pageContainer as React.CSSProperties} className="noticias-page-container">
+      <div style={styles.contentWrapper} className="noticias-content-wrapper">
+        <h2 style={styles.mainTitle as React.CSSProperties} className="noticias-main-title">
             Portal de Noticias y Anuncios
         </h2>
 
-        <div style={styles.toggleButtonContainer}>
+        <div style={styles.toggleButtonContainer} className="noticias-toggle-buttons">
             {/* Botón visible para todos */}
             <button
                 onClick={() => handleVistaToggle('novedades')} 
@@ -296,8 +296,8 @@ const NoticiasPage: React.FC = () => {
         </div>
 
         {activeView === 'novedades' && (
-          <section style={styles.carrouselSection}>
-            <h3 style={styles.carrouselTitle as React.CSSProperties}>
+          <section style={styles.carrouselSection} className="noticias-carrusel-section">
+            <h3 style={styles.carrouselTitle as React.CSSProperties} className="noticias-carrusel-title">
               Últimas Novedades
             </h3>
             <CarrouselNoticias noticias={noticias} />
@@ -306,11 +306,11 @@ const NoticiasPage: React.FC = () => {
 
         {/* 🔒 Sección de gestión solo si es Presidenta */}
         {activeView !== 'novedades' && esPresidenta && (
-            <section style={styles.managementSection}> 
+            <section style={styles.managementSection} className="noticias-management-section"> 
                 
                 {activeView === 'formulario' && (
-                    <div>
-                        <h3 style={styles.formTitle as React.CSSProperties}>
+                    <div className="noticias-formulario-container">
+                        <h3 style={styles.formTitle as React.CSSProperties} className="noticias-form-title">
                             {noticiaAEditar ? 'Editar Noticia Existente' : 'Crear Nueva Noticia'}
                         </h3>
                         <FormularioNoticia 
@@ -323,8 +323,8 @@ const NoticiasPage: React.FC = () => {
                 )}
 
                 {activeView === 'lista' && (
-                    <div>
-                        <h3 style={styles.listTitle as React.CSSProperties}>
+                    <div className="noticias-lista-container">
+                        <h3 style={styles.listTitle as React.CSSProperties} className="noticias-list-title">
                             Noticias Publicadas
                         </h3>
                         <NoticiasLista 

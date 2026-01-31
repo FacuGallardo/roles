@@ -59,6 +59,33 @@ export default function Reglamento() {
           overflow-x: auto;
         }
 
+        @media (max-width: 420px) {
+  .reglamento-pdf-container {
+    max-width: 100%;
+    min-height: 420px; /* reducir para que no sobresalga */
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+  }
+  .reglamento-pdf-iframe {
+    width: 100%;
+    height: calc(100vh - 140px); /* deja espacio para header + botones */
+    min-height: 360px;
+  }
+}
+
+/* Ajustes específicos para 360 / 375 / 390 (mejor control de altura) */
+@media (max-width: 390px) {
+  .reglamento-pdf-container { min-height: 380px; padding: 0.6rem; }
+  .reglamento-pdf-iframe { height: calc(100vh - 130px); }
+}
+
+/* Tablet breakpoint (mantener la versión actual pero con padding) */
+@media (min-width: 768px) {
+  .reglamento-pdf-container { min-height: 600px; padding: 1rem; }
+  .reglamento-pdf-iframe { height: 90vh; }
+}
+
         .reglamento-footer {
           text-align: center;
           margin-top: auto;

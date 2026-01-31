@@ -16,7 +16,7 @@ type Props = {
 };
 
 const FormularioPartido: React.FC<Props> = ({ partido, onChange, clubesValidos, gruposValidos }) => (
-  <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center", marginBottom: 8 }}>
+  <div className="formulario-partido-row" style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center", marginBottom: 8 }}>
     <label>
       Jornada:
       <input
@@ -25,12 +25,13 @@ const FormularioPartido: React.FC<Props> = ({ partido, onChange, clubesValidos, 
         min={1}
         value={partido.jornada}
         onChange={e => onChange("jornada", e.target.value)}
+        className="form-input-small"
         style={{ width: 60 }}
       />
     </label>
     <label>
       Grupo:
-      <select value={partido.grupo} onChange={e => onChange("grupo", e.target.value)}>
+      <select value={partido.grupo} onChange={e => onChange("grupo", e.target.value)} className="form-input-small">
         {gruposValidos.map((g) => (
           <option key={g} value={g}>Grupo {g}</option>
         ))}
@@ -38,7 +39,7 @@ const FormularioPartido: React.FC<Props> = ({ partido, onChange, clubesValidos, 
     </label>
     <label>
       Club 1:
-      <select value={partido.club1} onChange={e => onChange("club1", e.target.value)}>
+      <select value={partido.club1} onChange={e => onChange("club1", e.target.value)} className="form-input-small">
         <option value="">Selecciona Club 1</option>
         {clubesValidos.map((club) => (
           <option key={club} value={club}>{club}</option>
@@ -47,7 +48,7 @@ const FormularioPartido: React.FC<Props> = ({ partido, onChange, clubesValidos, 
     </label>
     <label>
       Club 2:
-      <select value={partido.club2} onChange={e => onChange("club2", e.target.value)}>
+      <select value={partido.club2} onChange={e => onChange("club2", e.target.value)} className="form-input-small">
         <option value="">Selecciona Club 2</option>
         {clubesValidos.map((club) => (
           <option key={club} value={club}>{club}</option>
@@ -61,6 +62,7 @@ const FormularioPartido: React.FC<Props> = ({ partido, onChange, clubesValidos, 
         placeholder="Ej: 25-21 o -"
         value={partido.resultado}
         onChange={e => onChange("resultado", e.target.value)}
+        className="form-input-small"
         style={{ width: 80 }}
       />
     </label>

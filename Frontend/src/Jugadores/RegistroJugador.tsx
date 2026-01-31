@@ -211,4 +211,8 @@ const RegistroJugador: React.FC<Props> = ({ onRegistrar, clubes }) => {
   );
 };
 
+<<<<<<< Updated upstream
 export default RegistroJugador;
+=======
+export default RegistroJugador;
+>>>>>>> Stashed changes

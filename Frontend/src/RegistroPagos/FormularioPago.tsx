@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import "./registropagos-responsive.css";
 // Tipos
 type TipoPago = 'cuota' | 'arbitraje' | 'multa' | 'otro';
 

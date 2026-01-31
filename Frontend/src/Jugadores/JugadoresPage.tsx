@@ -4,8 +4,13 @@ import ListaJugadores from "./ListaJugadores";
 import FormularioDocumentacion from "./FormularioDocumentacion";
 import BarraProgreso from "./BarraProgreso";
 import EditarJugador from "./EditarJugador"; 
+<<<<<<< Updated upstream
 import VerJugadores from "./VerJugadores"; // Asegúrate de importar esto si lo usas
 import { hasRole } from "../utils/auth"; // Importamos la utilidad
+=======
+import VerJugadores from "./VerJugadores"; 
+import { hasRole } from "../utils/auth";
+>>>>>>> Stashed changes
 import './jugadores-responsive.css';
 
 // --- TIPOS EXPORTABLES ---
@@ -168,7 +173,7 @@ const JugadoresPage: React.FC = () => {
   };
 
   const eliminarJugador = async (id: number) => {
-    // 🔒 Verificación extra antes de llamar a la API
+    //  Verificación extra antes de llamar a la API
     if (!puedeEliminar) return; 
 
     if (window.confirm("¿Seguro que quieres eliminar este jugador?")) {
@@ -225,12 +230,12 @@ const JugadoresPage: React.FC = () => {
             onVer={(j) => { setJugadorVer(j); setVista("detalle"); }} // Nuevo manejador "Ver"
             onIniciarEdicion={(j) => { setJugadorEditando(j); setVista("editar"); setError(null); }}
             onEliminar={eliminarJugador}
-            // 🔒 Pasamos los permisos
+            //  Pasamos los permisos
             permisoEditar={puedeCrearEditar}
             permisoEliminar={puedeEliminar}
           />
           
-          {/* 🔒 Botón solo visible si tiene permiso */}
+          {/*  Botón solo visible si tiene permiso */}
           {puedeCrearEditar && (
             <button onClick={irARegistro} className="action-button-switch">
                 + Nuevo Jugador
@@ -285,6 +290,27 @@ const JugadoresPage: React.FC = () => {
         .card { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
         .error-message { background-color: #fef2f2; color: #b91c1c; padding: 1rem; margin-bottom: 1rem; text-align: center; border-radius: 8px; }
         .action-button-switch { background-color: #1f3c88; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: 20px; display: block; margin-left: auto; margin-right: auto; }
+        /* Mobile-first: proteger ancho y paddings */
+.list-card, .form-card, .card {
+  width: 100%;
+  max-width: 100%;
+  padding: 0.75rem; /* cómodo en móvil */
+  box-sizing: border-box;
+  overflow-x: hidden; /* evitar que los hijos generen scroll horizontal */
+}
+
+/* Pequeña protección global para evitar micro-overflow horizontales */
+html, body, #root, #app {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Desktop: más espacio */
+@media (min-width: 768px) {
+  .list-card, .form-card, .card {
+    padding: 1.5rem;
+  }
+}
       `}</style>
       <div className="page-container">
         <h1 className="page-title">Gestión de Jugadores</h1>

@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from "react";
+import "./historia-responsive.css";
 
 const eventos = [
   {

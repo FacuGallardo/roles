@@ -93,37 +93,38 @@ const CarrouselNoticias: React.FC<Props> = ({ noticias }) => {
     .sort((a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime())
     .slice(0, 5);
 
-  return (
-    <div style={styles.carrouselContainer}>
-      {ultimas.map((n) => (
-        <div 
-            key={n.id} 
-            style={styles.card}
-        >
-          {n.imagenUrl ? (
-            <img 
-                src={n.imagenUrl} 
-                alt={n.titulo} 
-                style={styles.image} 
-            />
-          ) : (
-            <div style={styles.noImage}>
-               [Imagen de Placeholder de Noticia]
-            </div>
-          )}
-          <div style={styles.cardContent}>
-            <p style={styles.date}>
-                {new Date(n.fecha).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })}
-            </p>
-            <h4 style={styles.title}>{n.titulo}</h4>
-            <p style={styles.content}>
-                {n.contenido}
-            </p>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-};
-
+return (
+    <div style={styles.carrouselContainer} className="noticias-carrusel-container">
+      {ultimas.map((n) => (
+        <div 
+          key={n.id} 
+          style={styles.card}
+          className="noticias-carrusel-card"
+        >
+          {n.imagenUrl ? (
+            <img 
+              src={n.imagenUrl} 
+              alt={n.titulo} 
+              style={styles.image} 
+            />
+          ) : (
+            <div style={styles.noImage}>
+              [Imagen de Placeholder de Noticia]
+            </div>
+          )}
+          <div style={styles.cardContent} className="noticias-card-content">
+            <p style={styles.date} className="noticias-card-date">
+              {new Date(n.fecha).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })}
+            </p>
+            <h4 style={styles.title} className="noticias-card-title">{n.titulo}</h4>
+            <p style={styles.content} className="noticias-card-text">
+              {n.contenido}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+  };
+  
 export default CarrouselNoticias;

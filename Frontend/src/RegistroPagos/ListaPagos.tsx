@@ -1,21 +1,7 @@
 import React from "react";
+import "./registropagos-responsive.css";
 
-// Inlined Pago type
-type Pago = {
-    motivo: string;
-    id: number;
-    tipo: "cuota" | "arbitraje";
-    club: string;
-    categoria: "Masculino" | "Femenino" | "Ambos";
-    partidoId?: number;
-    monto: number;
-    comprobante: string;
-    comprobanteArchivo?: string;
-    fecha: string;
-    estado: "pendiente" | "pagado" | "invalido";
-    cantidadJugadores?: number;
-    sancion?: string;
-};
+type Pago = any;
 
 type Props = {
     pagos: Pago[];

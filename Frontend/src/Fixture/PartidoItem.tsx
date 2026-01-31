@@ -1,17 +1,34 @@
 import React from "react";
-// (Pega las interfaces EncuentroAPI, Club aquí)
-// ...
 
-type Props = { partido: EncuentroAPI }; // Recibe el tipo de la API
+interface Club {
+  id: number;
+  nombre: string;
+}
+
+interface EncuentroAPI {
+  id: number;
+  jornada: number;
+  grupo?: string;
+  fecha?: string;
+  resultado: string;
+  club1Id: number;
+  club2Id: number;
+  club1: Club;
+  club2: Club;
+}
+
+type Props = { partido: EncuentroAPI };
 
 const PartidoItem: React.FC<Props> = ({ partido }) => (
-  <li style={{ marginBottom: 4, fontSize: '0.9em' }}>
-    <strong>J{partido.jornada}</strong> {partido.grupo ? `| G.${partido.grupo}` : ''} |
-    {/* --- CAMBIO: Mostrar nombres de clubes --- */}
-    <span style={{fontWeight: 500}}> {partido.club1?.nombre || 'Club Local ?'}</span> vs
-    <span style={{fontWeight: 500}}> {partido.club2?.nombre || 'Club Visit. ?'}</span>
-    <span style={{ color: "#1F3C88", marginLeft: '5px' }}>({partido.resultado})</span>
-    {partido.fecha && <span style={{fontSize: '0.8em', color: '#777', marginLeft: '5px'}}>[{partido.fecha}]</span>}
+  <li className="partido-item" style={{ marginBottom: 4, fontSize: '0.9em' }}>
+    <strong>J{partido.jornada}</strong>
+    <span className="club-names" style={{ marginLeft: 6 }}>
+      <span className="club-local" style={{ fontWeight: 500 }}>{partido.club1?.nombre || 'Club Local ?'}</span>
+      <span> vs </span>
+      <span className="club-visit" style={{ fontWeight: 500 }}>{partido.club2?.nombre || 'Club Visit. ?'}</span>
+    </span>
+    <span className="resultado" style={{ color: "#1F3C88", marginLeft: 5 }}>({partido.resultado})</span>
+    {partido.fecha && <span className="fecha" style={{ fontSize: '0.8em', color: '#777', marginLeft: 5 }}>[{partido.fecha}]</span>}
   </li>
 );
 

@@ -1,4 +1,18 @@
 import React, { useState } from "react";
+import "./registropagos-responsive.css";
+
+type Pago = {
+    id: number;
+    tipo: string;
+    club: string;
+    categoria: string;
+    monto: number;
+    comprobante: string;
+    comprobanteArchivo?: string;
+    fecha: string;
+    estado: string;
+    cantidadJugadores: number;
+};
 
 type Props = {
     club: string;

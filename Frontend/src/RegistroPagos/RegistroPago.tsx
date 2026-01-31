@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./registropagos-responsive.css";
 
 // Inlined Pago type (used by this file)
 type Pago = {

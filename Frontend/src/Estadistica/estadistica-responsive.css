@@ -1,0 +1,88 @@
+/* estadistica-responsive.css */
+
+@media (max-width: 480px) {
+    /* Contenedor principal */
+    .estadistica-container {
+        padding: 20px 10px !important;
+    }
+
+    .estadistica-container h2 {
+        font-size: 1.5em !important;
+        margin-bottom: 20px !important;
+    }
+
+    /* Wrapper de tabla con scroll horizontal */
+    .tabla-wrapper {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        margin: 0 -10px !important;
+        padding: 0 10px !important;
+    }
+
+    /* Tabla: mantener estructura pero permitir scroll */
+    .tabla-wrapper table {
+        min-width: 600px !important; /* Ancho mínimo para que no colapse */
+        font-size: 0.85em !important;
+    }
+
+    .tabla-wrapper th,
+    .tabla-wrapper td {
+        padding: 8px 6px !important;
+        font-size: 0.8em !important;
+    }
+
+    /* Columna Equipo sticky para que siempre se vea */
+    .tabla-wrapper table th:first-child,
+    .tabla-wrapper table td:first-child {
+        position: sticky !important;
+        left: 0 !important;
+        background-color: white !important;
+        z-index: 10 !important;
+        box-shadow: 2px 0 4px rgba(0,0,0,0.1) !important;
+    }
+    
+    .tabla-wrapper table th:first-child {
+        background-color: #1f3c88 !important;
+    }
+    
+    /* Alternar color en filas pares */
+    .tabla-wrapper table tbody tr:nth-child(even) td:first-child {
+        background-color: #f8f9fa !important;
+    }
+
+    /* Fila en modo edición */
+    .equipo-item-edit-row td {
+        padding: 10px 5px !important;
+    }
+    
+    .equipo-item-edit-row td:first-child {
+        background-color: #fff3cd !important;
+    }
+
+    /* Inputs en modo edición */
+    .equipo-item-edit-row input {
+        font-size: 0.85em !important;
+        padding: 6px 4px !important;
+    }
+
+    /* Botones de acción - Stack vertical */
+    .equipo-actions {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 8px !important;
+        align-items: stretch !important;
+    }
+
+    .equipo-actions button {
+        width: 100% !important;
+        padding: 8px 12px !important;
+        font-size: 0.8em !important;
+        margin: 0 !important;
+    }
+
+    /* Mensajes de error/loading */
+    .estadistica-container p {
+        font-size: 0.9em !important;
+        padding: 8px !important;
+    }
+}

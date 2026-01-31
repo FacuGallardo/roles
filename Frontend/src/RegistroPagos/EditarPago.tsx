@@ -1,20 +1,7 @@
 import React, { useState, useEffect } from "react";
+import "./registropagos-responsive.css";
 
-// Tipos locales
-type TipoPago = 'cuota' | 'arbitraje' | 'multa' | 'otro';
-interface Pago {
-    id: number;
-    club: string;
-    tipo: TipoPago;
-    monto: number;
-    comprobante: string;
-    fecha: string;
-    estado: string;
-    categoria?: string;
-    cantidadJugadores?: number;
-    partidoId?: number;
-    motivo?: string;
-}
+type Pago = any;
 
 type Props = {
     pago: Pago;

@@ -4,6 +4,7 @@ import EditarFixture from "./EditarFixture";
 import ListaFixture from "./ListaFixture";
 import type { CSSProperties } from "react";
 import { hasRole } from "../utils/auth"; // 🔒 Importar seguridad
+import './fixture-responsive.css';
 
 // --- Tipos de la API ---
 interface Club {
@@ -289,9 +290,14 @@ const FixturePage: React.FC = () => {
   };
 
   return (
-    <div style={styles.pageContainer}>
-      <div style={styles.fixtureCard}>
-        <h2 style={styles.title}>Gestión y Registro de Fixture</h2>
+    <main style={styles.pageContainer} className="pageContainer">
+      <section style={styles.fixtureCard} className="fixture-card">
+        <header className="fixture-header">
+          <h1 style={styles.title} className="title">Gestión y Registro de Fixture</h1>
+          <div style={styles.buttonContainer} className="buttonContainer">
+            {/* buttons handled below */}
+          </div>
+        </header>
 
         {error && <div style={styles.errorMessage}>{error}</div>}
         {loading && <p style={styles.loadingMessage}>Cargando...</p>}
@@ -328,8 +334,8 @@ const FixturePage: React.FC = () => {
           onEdit={iniciarEdicion}
           canEdit={esPresidenta} // 🔒 Pasamos el permiso al componente hijo
         />
-      </div>
-    </div>
+      </section>
+    </main>
   );
 };
 

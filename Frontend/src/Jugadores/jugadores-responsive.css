@@ -280,7 +280,11 @@ html, body { -webkit-text-size-adjust: 100%; }
   font-size: 15px;
 }
 
+<<<<<<< Updated upstream
 
+=======
+/* Si el viewport es extremadamente pequeño (<= 340px) reducir paddings y fuente levemente */
+>>>>>>> Stashed changes
 @media (max-width: 340px) {
   .form-container-edit { padding: 6px 8px; }
   .form-title-edit { font-size: clamp(1rem, 7vw, 1.2rem); }
@@ -288,7 +292,11 @@ html, body { -webkit-text-size-adjust: 100%; }
   .btn-action { padding: 8px 10px; font-size: 14px; min-height: 42px; }
 }
 
+<<<<<<< Updated upstream
 
+=======
+/* En pantallas >= 600px (tablet+) usar grid de 2 columnas para los campos */
+>>>>>>> Stashed changes
 @media (min-width: 600px) {
   .form-fields-grid {
     display: grid;
@@ -298,4 +306,8 @@ html, body { -webkit-text-size-adjust: 100%; }
   }
   .button-group-edit { flex-direction: row; gap: 12px; }
   .btn-action { width: auto; min-width: 140px; }
+<<<<<<< Updated upstream
 }
+=======
+}
+>>>>>>> Stashed changes

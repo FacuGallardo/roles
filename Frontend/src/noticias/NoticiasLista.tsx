@@ -123,7 +123,7 @@ const NoticiasLista: React.FC<Props> = ({ noticias, onEliminar, onEditar }) => {
   );
 
   return (
-    <div className="list-scroll-container" style={styles.listContainer as React.CSSProperties}>
+    <div className="noticias-lista-scroll" style={styles.listContainer as React.CSSProperties}>
       {noticiasOrdenadas.map((n) => (
         <div 
             key={n.id} 
