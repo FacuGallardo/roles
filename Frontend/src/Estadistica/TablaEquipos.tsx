@@ -32,7 +32,7 @@ const TablaEquipos: React.FC<Props> = ({ equipos, onActualizar, onEliminar, pued
   });
 
   return (
-    <div style={{ margin: "0 auto", maxWidth: "1000px" }}>
+    <div style={{ margin: "0 auto", maxWidth: "1000px", width: "100%", boxSizing: "border-box", padding: "0 4px" }}>
 
       {equiposOrdenados.length === 0 ? (
           <p style={{textAlign: 'center', color: '#6c757d', marginTop: '20px'}}>No hay equipos registrados para mostrar estadísticas.</p>

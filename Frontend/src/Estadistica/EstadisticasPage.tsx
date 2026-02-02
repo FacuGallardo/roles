@@ -111,25 +111,31 @@ const EstadisticasPage: React.FC = () => {
     <div
      className="estadistica-container"
       style={{
-        padding: "40px 20px",
-        paddingTop: "50px", /* Espacio para el header sticky */
+        padding: "20px 8px",
+        paddingTop: "50px",
         backgroundColor: "#f4f7f6", 
         minHeight: "100vh",
         fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+        boxSizing: "border-box",
+        width: "100%",
+        maxWidth: "100vw",
+        overflowX: "hidden",
       }}
     >
       <h2
         style={{
           color: "#1f3c88", 
-          marginBottom: "30px",
+          marginBottom: "20px",
           textAlign: "center",
-          fontSize: "2.5em",
+          fontSize: "clamp(1.5rem, 5vw, 2.5rem)",
           fontWeight: 600,
           borderBottom: "3px solid #1f3c88", 
           display: "block",
           paddingBottom: "5px",
-          margin: "0 auto 30px auto", 
-          width: "fit-content"
+          margin: "0 auto 20px auto", 
+          width: "fit-content",
+          maxWidth: "90%",
+          boxSizing: "border-box",
         }}
       >
         Tabla de Posiciones

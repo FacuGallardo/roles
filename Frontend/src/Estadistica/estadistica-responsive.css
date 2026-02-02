@@ -1,35 +1,53 @@
 /* estadistica-responsive.css */
 
-@media (max-width: 480px) {
+/* Mobile-first: Aplicar estilos base para todos los tamaños */
+.estadistica-container {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
+.tabla-wrapper {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
     /* Contenedor principal */
     .estadistica-container {
-        padding: 20px 10px !important;
-        padding-top: 25px !important;
+        padding: 20px 8px !important;
+        padding-top: 30px !important;
     }
 
     .estadistica-container h2 {
-        font-size: 1.5em !important;
-        margin-bottom: 20px !important;
+        font-size: clamp(1.3rem, 5vw, 2rem) !important;
+        margin-bottom: 16px !important;
+        padding-bottom: 4px !important;
     }
 
     /* Wrapper de tabla con scroll horizontal */
     .tabla-wrapper {
         overflow-x: auto !important;
         -webkit-overflow-scrolling: touch !important;
-        margin: 0 -10px !important;
-        padding: 0 10px !important;
+        margin: 0 -8px !important;
+        padding: 0 8px !important;
+        width: calc(100% + 16px) !important;
+        box-sizing: border-box !important;
     }
 
     /* Tabla: mantener estructura pero permitir scroll */
     .tabla-wrapper table {
-        min-width: 600px !important; /* Ancho mínimo para que no colapse */
-        font-size: 0.85em !important;
+        min-width: 650px !important;
+        font-size: 0.9em !important;
+        width: 100% !important;
     }
 
     .tabla-wrapper th,
     .tabla-wrapper td {
-        padding: 8px 6px !important;
-        font-size: 0.8em !important;
+        padding: 10px 8px !important;
+        font-size: 0.85em !important;
+        white-space: nowrap !important;
     }
 
     /* Columna Equipo sticky para que siempre se vea */
@@ -39,11 +57,13 @@
         left: 0 !important;
         background-color: white !important;
         z-index: 10 !important;
-        box-shadow: 2px 0 4px rgba(0,0,0,0.1) !important;
+        box-shadow: 2px 0 5px rgba(0,0,0,0.08) !important;
+        min-width: 120px !important;
     }
     
     .tabla-wrapper table th:first-child {
         background-color: #1f3c88 !important;
+        color: white !important;
     }
     
     /* Alternar color en filas pares */
@@ -53,7 +73,7 @@
 
     /* Fila en modo edición */
     .equipo-item-edit-row td {
-        padding: 10px 5px !important;
+        padding: 10px 6px !important;
     }
     
     .equipo-item-edit-row td:first-child {
@@ -64,26 +84,83 @@
     .equipo-item-edit-row input {
         font-size: 0.85em !important;
         padding: 6px 4px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
     }
 
     /* Botones de acción - Stack vertical */
     .equipo-actions {
         display: flex !important;
         flex-direction: column !important;
-        gap: 8px !important;
+        gap: 6px !important;
         align-items: stretch !important;
+        min-width: 100px !important;
     }
 
     .equipo-actions button {
         width: 100% !important;
-        padding: 8px 12px !important;
-        font-size: 0.8em !important;
+        padding: 8px 10px !important;
+        font-size: 0.75em !important;
         margin: 0 !important;
+        white-space: nowrap !important;
     }
 
     /* Mensajes de error/loading */
     .estadistica-container p {
         font-size: 0.9em !important;
         padding: 8px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Contenedor principal */
+    .estadistica-container {
+        padding: 16px 4px !important;
+        padding-top: 25px !important;
+    }
+
+    .estadistica-container h2 {
+        font-size: clamp(1.1rem, 5vw, 1.5rem) !important;
+        margin-bottom: 12px !important;
+    }
+
+    /* Wrapper de tabla con scroll horizontal */
+    .tabla-wrapper {
+        margin: 0 -4px !important;
+        padding: 0 4px !important;
+        width: calc(100% + 8px) !important;
+    }
+
+    /* Tabla: mantener estructura pero permitir scroll */
+    .tabla-wrapper table {
+        min-width: 550px !important;
+        font-size: 0.8em !important;
+    }
+
+    .tabla-wrapper th,
+    .tabla-wrapper td {
+        padding: 8px 6px !important;
+        font-size: 0.75em !important;
+    }
+
+    .tabla-wrapper table th:first-child,
+    .tabla-wrapper table td:first-child {
+        min-width: 100px !important;
+    }
+
+    /* Inputs en modo edición */
+    .equipo-item-edit-row input {
+        font-size: 0.75em !important;
+        padding: 5px 3px !important;
+    }
+
+    /* Botones de acción */
+    .equipo-actions {
+        min-width: 80px !important;
+    }
+
+    .equipo-actions button {
+        padding: 6px 8px !important;
+        font-size: 0.7em !important;
     }
 }

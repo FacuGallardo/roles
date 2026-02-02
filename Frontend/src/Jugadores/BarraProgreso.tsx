@@ -15,62 +15,65 @@ const COLOR_GRIS_FONDO = '#e5e7eb'; // Gris muy claro para la barra base
 const Separador = ({ completado }: { completado: boolean }) => (
   <div style={{
     flexGrow: 1,
-    height: '3px',
-    margin: '0 1rem',
-    backgroundColor: completado ? COLOR_SECUNDARIO : COLOR_GRIS_FONDO,
-    transition: 'background-color 0.5s ease',
-    alignSelf: 'center',
-  }} />
+    flexShrink: 1,
+    height: '2px',
+    margin: '0 0.25rem',
+    minWidth: '20px',
+    backgroundColor: completado ? COLOR_SECUNDARIO : COLOR_GRIS_FONDO,
+    transition: 'background-color 0.5s ease',
+    alignSelf: 'center',
+  }} />
 );
 
 const BarraProgreso = ({ fase }: BarraProgresoProps) => {
 
-  // --- Estilos Dinámicos para los pasos ---
-  const estiloPaso = (pasoActual: 1 | 2) => {
-    const estaCompletado = fase > pasoActual;
-    const estaActivo = fase === pasoActual;
+  // --- Estilos Dinámicos para los pasos ---
+  const estiloPaso = (pasoActual: 1 | 2) => {
+    const estaCompletado = fase > pasoActual;
+    const estaActivo = fase === pasoActual;
 
-    let colorFondo;
-    if (estaCompletado) {
-      colorFondo = COLOR_SECUNDARIO;
-    } else if (estaActivo) {
-      // Usa un color diferente para cada fase activa para diferenciarlas mejor
-      colorFondo = (pasoActual === 1) ? COLOR_PRIMARIO : COLOR_AZUL_SECUNDARIO;
-    } else {
-      colorFondo = COLOR_GRIS_BASE;
-    }
-    
-    return {
-      padding: '0.75rem 1.5rem', // Un poco más de padding
-      borderRadius: '9999px',
-      backgroundColor: colorFondo,
-      color: '#FFFFFF', // Texto siempre blanco para mayor contraste
-      fontWeight: estaActivo ? '700' : '500',
-      fontSize: '1rem', // Un poco más grande
-      display: 'flex',
-      alignItems: 'center',
-      transition: 'all 0.4s ease',
-      cursor: 'default',
-      boxShadow: estaActivo ? '0 6px 10px rgba(0, 0, 0, 0.2)' : '0 2px 4px rgba(0, 0, 0, 0.1)', // Sombra más prominente para el paso activo
-      transform: estaActivo ? 'scale(1.03)' : 'scale(1)',
-    };
-  };
+    let colorFondo;
+    if (estaCompletado) {
+      colorFondo = COLOR_SECUNDARIO;
+    } else if (estaActivo) {
+      colorFondo = (pasoActual === 1) ? COLOR_PRIMARIO : COLOR_AZUL_SECUNDARIO;
+    } else {
+      colorFondo = COLOR_GRIS_BASE;
+    }
+    
+    return {
+      padding: '0.4rem 0.75rem',
+      borderRadius: '9999px',
+      backgroundColor: colorFondo,
+      color: '#FFFFFF',
+      fontWeight: estaActivo ? '700' : '500',
+      fontSize: 'clamp(0.75rem, 3vw, 1rem)',
+      display: 'flex',
+      alignItems: 'center',
+      transition: 'all 0.4s ease',
+      cursor: 'default',
+      boxShadow: estaActivo ? '0 4px 8px rgba(0, 0, 0, 0.15)' : '0 1px 3px rgba(0, 0, 0, 0.1)',
+      transform: estaActivo ? 'scale(1.02)' : 'scale(1)',
+      whiteSpace: 'nowrap' as const,
+      minWidth: 0,
+      flex: '0 1 auto',
+    }; 
+  };
 
-  // 50% para fase 1, 100% para fase 2
-  const porcentaje = fase === 1 ? 50 : 100;
-  
-  return (
-    <div style={{ 
-        maxWidth: '800px', // Un poco más ancho
-        margin: '2rem auto', 
-        padding: '1.5rem',
-        borderRadius: '1rem',
-        backgroundColor: '#FFFFFF',
-        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.08)', // Sombra más suave
-    }}>
-        
+  const porcentaje = fase === 1 ? 50 : 100;
+  
+  return (
+    <div style={{ 
+        maxWidth: '100%',
+        margin: '0.75rem auto', 
+        padding: '0.5rem',
+        borderRadius: '0.5rem',
+        backgroundColor: '#FFFFFF',
+        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.06)',
+        boxSizing: 'border-box',
+    }}>
       {/* Indicadores de Fase (Con Pastillas) */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem', gap: '0.5rem', flexWrap: 'nowrap', overflow: 'hidden' }}>
         {/* Paso 1: Datos personales */}
         <div style={estiloPaso(1)}>
           {fase > 1 ? (

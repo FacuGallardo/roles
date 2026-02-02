@@ -228,23 +228,25 @@ html, body { -webkit-text-size-adjust: 100%; }
 .form-container-edit {
   width: 100%;
   max-width: 100%;
-  padding: 8px 12px;     /* mobile-first: compacto */
+  padding: 0 8px;
   margin: 0 auto;
   background: transparent;
-  padding-bottom: calc(24px + env(safe-area-inset-bottom)); /* evita que el botón quede oculto por barras */
+  padding-bottom: calc(16px + env(safe-area-inset-bottom));
+  box-sizing: border-box;
 }
 
 /* Título adaptativo: usa clamp para escalar dentro de un rango razonable */
 .form-title-edit {
-  margin: 0 0 8px;
+  margin: 0.5rem 0 0.75rem;
   text-align: center;
   color: var(--primary-blue, #1f3c88);
   font-weight: 700;
-  line-height: 1.1;
-  /* desde 1.05rem hasta 1.6rem, pero escala según viewport */
-  font-size: clamp(1.05rem, 6vw, 1.35rem);
-  padding-bottom: 6px;
-  border-bottom: 3px solid rgba(0, 188, 212, 0.15); /* subtile accent */
+  line-height: 1.2;
+  font-size: clamp(1rem, 4.5vw, 1.35rem);
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid rgba(0, 188, 212, 0.15);
+  box-sizing: border-box;
+  width: 100%;
 }
 
 /* Campos del form: inputs al 100% y legibles */
@@ -302,6 +304,74 @@ html, body { -webkit-text-size-adjust: 100%; }
   border: none;
 }
 
+@media (max-width: 576px) {
+  .form-card, .card, .list-card {
+    padding: 0.25rem !important;
+  }
+
+  .form-container-edit {
+    width: 100%;
+    max-width: 100%;
+    padding: 0 4px !important;
+    overflow-x: visible;
+    text-align: left;
+  }
+
+  .form-fields-grid {
+    gap: 8px !important;
+  }
+
+  .form-fields-grid,
+  .form-group {
+    min-width: 0;
+  }
+
+  .form-group {
+    gap: 4px !important;
+  }
+
+  .form-input,
+  .upload-btn,
+  .btn-action {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .form-input {
+    padding: 8px 10px !important;
+    font-size: 14px !important;
+  }
+
+  .upload-btn {
+    white-space: normal;
+    text-align: center;
+    padding: 10px 8px !important;
+    font-size: 13px !important;
+  }
+
+  .form-group label {
+    font-size: 12px !important;
+  }
+
+  .form-group label,
+  .file-preview a {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .button-group-edit {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px !important;
+    margin-top: 8px !important;
+  }
+
+  .btn-action {
+    padding: 10px 12px !important;
+    font-size: 14px !important;
+  }
+}
 
 @media (max-width: 340px) {
   .form-container-edit { padding: 6px 8px; }

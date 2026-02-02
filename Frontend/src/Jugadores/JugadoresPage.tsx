@@ -279,33 +279,61 @@ const JugadoresPage: React.FC = () => {
     <>
       {/* (Estilos CSS previos se mantienen igual, omitidos por brevedad pero deben estar aquí) */}
       <style>{`
-        /* ... TUS ESTILOS CSS PREVIOS ... */
-        .page-container { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
-        .page-title { text-align: center; color: #1f3c88; margin-bottom: 2rem; }
-        .card { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .error-message { background-color: #fef2f2; color: #b91c1c; padding: 1rem; margin-bottom: 1rem; text-align: center; border-radius: 8px; }
-        .action-button-switch { background-color: #1f3c88; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: 20px; display: block; margin-left: auto; margin-right: auto; }
-        /* Mobile-first: proteger ancho y paddings */
-.list-card, .form-card, .card {
-  width: 100%;
-  max-width: 100%;
-  padding: 0.75rem; /* cómodo en móvil */
-  box-sizing: border-box;
-  overflow-x: hidden; /* evitar que los hijos generen scroll horizontal */
-}
+        .page-container { 
+          max-width: 1200px; 
+          margin: 0 auto; 
+          padding: 0.5rem;
+          box-sizing: border-box;
+        }
+        .page-title { 
+          text-align: center; 
+          color: #1f3c88; 
+          margin-bottom: 1rem;
+          font-size: clamp(1.25rem, 5vw, 2rem);
+        }
+        .card { 
+          background: white; 
+          padding: 0.5rem;
+          border-radius: 12px; 
+          box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+          box-sizing: border-box;
+          width: 100%;
+        }
+        .error-message { 
+          background-color: #fef2f2; 
+          color: #b91c1c; 
+          padding: 0.75rem; 
+          margin-bottom: 0.75rem; 
+          text-align: center; 
+          border-radius: 8px;
+          font-size: 14px;
+        }
+        .action-button-switch { 
+          background-color: #1f3c88; 
+          color: white; 
+          border: none; 
+          padding: 10px 20px; 
+          border-radius: 5px; 
+          cursor: pointer; 
+          margin-top: 20px; 
+          display: block; 
+          margin-left: auto; 
+          margin-right: auto;
+          width: auto;
+        }
+        .list-card, .form-card {
+          width: 100%;
+          max-width: 100%;
+          padding: 0.5rem;
+          box-sizing: border-box;
+        }
 
-/* Pequeña protección global para evitar micro-overflow horizontales */
-html, body, #root, #app {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-/* Desktop: más espacio */
-@media (min-width: 768px) {
-  .list-card, .form-card, .card {
-    padding: 1.5rem;
-  }
-}
+        @media (min-width: 768px) {
+          .page-container { padding: 2rem; }
+          .page-title { margin-bottom: 2rem; }
+          .card { padding: 2rem; }
+          .list-card, .form-card { padding: 1.5rem; }
+        }
       `}</style>
       <div className="page-container">
         <h1 className="page-title">Gestión de Jugadores</h1>
