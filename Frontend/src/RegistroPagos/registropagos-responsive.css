@@ -121,18 +121,20 @@
   cursor: not-allowed;
 }
 
-/* ===== MEDIA QUERIES (MOBILE) ===== */
+
 @media (max-width: 768px) {
-  /* Contenedor principal - aumentar padding-top */
+  
   .pagos-container {
     padding: 0.75rem;
     padding-top: 1.5rem;
-    margin-top: 100px; /* Mayor para evitar que navbar tape */
+    margin-top: 100px; 
+    overflow-x: hidden;
   }
 
   .content-wrapper {
     padding: 1rem;
     gap: 1rem;
+    overflow-x: visible;
   }
 
   /* H2 principal - mejor espaciado */
@@ -166,12 +168,15 @@
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     border-radius: 0.375rem;
+    width: 100%;
+    display: block;
   }
 
   .table-pagos-club {
     width: 100%;
     min-width: 500px; /* Fuerza scroll horizontal si es necesario */
     font-size: 0.85rem;
+    margin: 0;
   }
 
   .table-pagos-club th {
@@ -236,12 +241,16 @@
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     margin-bottom: 0.5rem;
+    display: block; /* IMPORTANTE: Asegurar que es un bloque */
+    margin-left: 0; /* Reset margin */
+    margin-right: 0;
   }
 
   .table-pagos-club {
     width: 100%;
     min-width: 450px;
     font-size: 0.75rem;
+     margin: 0; /* Reset márgenes */
   }
 
   .table-pagos-club th {
