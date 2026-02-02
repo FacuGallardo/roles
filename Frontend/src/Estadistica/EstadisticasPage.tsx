@@ -112,6 +112,7 @@ const EstadisticasPage: React.FC = () => {
      className="estadistica-container"
       style={{
         padding: "40px 20px",
+        paddingTop: "50px", /* Espacio para el header sticky */
         backgroundColor: "#f4f7f6", 
         minHeight: "100vh",
         fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",

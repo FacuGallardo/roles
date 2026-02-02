@@ -54,9 +54,9 @@ const TablaPagosClub: React.FC<Props> = ({ clubes, pagos, onRealizarPago, canCre
             <table className={styleConfig.table}>
                 <thead>
                     <tr>
-                        <th style={{padding: '1rem', textAlign: 'left', backgroundColor: '#1f2937', color:'white'}}>Club</th>
+                        <th style={{padding: '1rem', textAlign: 'left', backgroundColor: '#1f3c88', color:'white'}}>Club</th>
                         {tiposTabla.map((t) => (
-                            <th key={t.tipo} style={{padding: '1rem', textAlign: 'center', backgroundColor: '#1f2937', color:'white'}}>{t.label}</th>
+                            <th key={t.tipo} style={{padding: '1rem', textAlign: 'center', backgroundColor: '#1f3c88', color:'white'}}>{t.label}</th>
                         ))}
                     </tr>
                 </thead>

@@ -22,6 +22,7 @@ const DARK_BLUE = "#1f3c88";
 const styles = {
   pageContainer: {
       padding: '1.5rem', 
+      paddingTop: '2.5rem', /* Espacio para header sticky */
       display: 'flex',
       flexDirection: 'column' as const,
       gap: '2rem', 

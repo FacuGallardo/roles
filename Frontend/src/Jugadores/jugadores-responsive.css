@@ -77,10 +77,10 @@
 }
 .action-button .icon { width: 1em; height: 1em; }
 
-/* Different colors */
-.btn-view { background: #17a2b8; color: #fff; }
-.btn-edit { background: #ffc107; color: #000; }
-.btn-delete { background: #dc3545; color: #fff; }
+/* Different colors (paleta simple) */
+.btn-view { background: #1f3c88; color: #fff; }
+.btn-edit { background: #1f3c88; color: #fff; }
+.btn-delete { background: #ef4444; color: #fff; }
 
 /* On larger screens show normal table */
 @media (min-width: 600px) {
@@ -157,7 +157,8 @@
   width: 100%;
   max-width: 100%;
   padding: 12px;
-  padding-top: calc(var(--header-height, 56px) + 8px); /* evita que el header fijo tape el contenido */
+  padding-top: calc(var(--header-height, 56px) + 12px); /* evita que el header fijo tape el contenido */
+  margin-top: 15px; /* Espacio adicional */
 }
 
 /* player card (detalle) */
@@ -278,6 +279,27 @@ html, body { -webkit-text-size-adjust: 100%; }
   padding: 10px 14px;
   border-radius: 8px;
   font-size: 15px;
+}
+
+/* Variantes de botones (paleta simple) */
+.btn-primary,
+.btn-update {
+  background: #1f3c88;
+  color: #fff;
+  border: none;
+}
+
+.btn-secondary,
+.btn-cancel {
+  background: #6b7280;
+  color: #fff;
+  border: none;
+}
+
+.btn-delete {
+  background: #ef4444;
+  color: #fff;
+  border: none;
 }
 
 

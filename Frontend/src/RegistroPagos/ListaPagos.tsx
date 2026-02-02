@@ -59,7 +59,7 @@ const globalStyles = `
 
 /* Cabecera de la tabla */
 .table-header-bg {
-    background-color: #3b82f6; /* bg-blue-500 */
+    background-color: #1f3c88; /* bg-blue-500 */
     color: #ffffff; /* text-white */
     text-transform: uppercase;
 }

@@ -17,8 +17,8 @@ const globalStyles = `
     .form-label { display: block; margin-bottom: 5px; font-weight: bold; color: #555; }
     .form-input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; margin-bottom: 15px; }
     .btn-group { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
-    .btn-save { background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
-    .btn-cancel { background: #dc3545; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+    .btn-save { background: #1f3c88; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+    .btn-cancel { background: #ef4444; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
 `;
 
 const EditarPago: React.FC<Props> = ({ pago, montoMinimo, partidos, onGuardar, onCancelar }) => {

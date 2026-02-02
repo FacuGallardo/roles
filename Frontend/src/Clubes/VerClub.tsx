@@ -82,6 +82,45 @@ export default function VerClubes() {
       .catch(() => setError("No se pudieron cargar los clubes."));
   }, []);
 
+  const iniciarEdicion = (club: Club) => {
+    setEditando(club);
+    setEditandoForm({
+      nombre: club.nombre,
+      categoria: club.categoria,
+      correo: club.correo,
+      telefono: club.telefono,
+      localidadId: club.localidad?.id,
+      fechaRegistro: club.fechaRegistro,
+      logoUrl: club.logoUrl,
+    });
+  };
+
+  const cancelarEdicion = () => {
+    setEditando(null);
+    setEditandoForm({});
+  };
+
+  const guardarEdicion = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!editando) return;
+    try {
+      setError("");
+      const response = await fetch(`${API_URL}/clubes/${editando.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(editandoForm),
+      });
+      if (!response.ok) {
+        throw new Error("No se pudo actualizar el club.");
+      }
+      const actualizado = await response.json();
+      setClubes(prev => prev.map(c => (c.id === editando.id ? actualizado : c)));
+      cancelarEdicion();
+    } catch {
+      setError("No se pudo actualizar el club.");
+    }
+  };
+
   const clubesFiltrados = clubes.filter(
     c =>
       c.activo &&
@@ -111,6 +150,10 @@ export default function VerClubes() {
         <h1>Gestión de Clubes</h1>
         <p>Administra y consulta los clubes registrados</p>
       </div>
+
+      {error && (
+        <p className="club-error">{error}</p>
+      )}
 
       <div className="clubes-filters">
         <input
@@ -146,8 +189,8 @@ export default function VerClubes() {
 
           {esPresidenta && (
             <div className="club-actions">
-              <button onClick={() => setEditando(club)}>Modificar</button>
-              <button onClick={() => setClubes(clubes.map(c => c.id === club.id ? { ...c, activo: false } : c))}>
+              <button className="club-action-btn club-action-primary" onClick={() => iniciarEdicion(club)}>Modificar</button>
+              <button className="club-action-btn club-action-danger" onClick={() => setClubes(clubes.map(c => c.id === club.id ? { ...c, activo: false } : c))}>
                 Borrar
               </button>
             </div>
@@ -155,8 +198,54 @@ export default function VerClubes() {
         </div>
       ))}
 
+      {editando && (
+        <form className="club-form" onSubmit={guardarEdicion}>
+          <input
+            placeholder="Nombre"
+            value={editandoForm.nombre || ""}
+            onChange={e => setEditandoForm({ ...editandoForm, nombre: e.target.value })}
+          />
+          <select
+            value={editandoForm.categoria || ""}
+            onChange={e => setEditandoForm({ ...editandoForm, categoria: e.target.value as any })}
+          >
+            <option value="">Categoría</option>
+            <option value="masculino">Masculino</option>
+            <option value="femenino">Femenino</option>
+          </select>
+          <input
+            placeholder="Correo"
+            value={editandoForm.correo || ""}
+            onChange={e => setEditandoForm({ ...editandoForm, correo: e.target.value })}
+          />
+          <input
+            placeholder="Teléfono"
+            value={editandoForm.telefono || ""}
+            onChange={e => setEditandoForm({ ...editandoForm, telefono: e.target.value })}
+          />
+          <select
+            value={editandoForm.localidadId || ""}
+            onChange={e => setEditandoForm({ ...editandoForm, localidadId: Number(e.target.value) })}
+          >
+            <option value="">Localidad</option>
+            {localidades.map(l => <option key={l.id} value={l.id}>{l.nombre}</option>)}
+          </select>
+          <input
+            type="date"
+            value={editandoForm.fechaRegistro || ""}
+            onChange={e => setEditandoForm({ ...editandoForm, fechaRegistro: e.target.value })}
+          />
+          <input type="file" accept="image/*" onChange={e => handleFileUpload(e, setEditandoForm)} />
+          {editandoForm.logoUrl && <img src={editandoForm.logoUrl} className="club-preview" />}
+          <div className="club-form-actions">
+            <button className="club-save-btn" type="submit">Guardar cambios</button>
+            <button className="club-cancel-btn" type="button" onClick={cancelarEdicion}>Cancelar</button>
+          </div>
+        </form>
+      )}
+
       {esPresidenta && (
-        <button onClick={() => setMostrarFormulario(true)}>Añadir Club</button>
+        <button className="club-add-btn" onClick={() => setMostrarFormulario(true)}>Añadir Club</button>
       )}
 
       {mostrarFormulario && (
@@ -177,8 +266,8 @@ export default function VerClubes() {
           <input type="file" accept="image/*" onChange={e => handleFileUpload(e, setNuevoClub)} />
           {nuevoClub.logoUrl && <img src={nuevoClub.logoUrl} className="club-preview" />}
           <div className="club-form-actions">
-            <button>Guardar</button>
-            <button type="button" onClick={() => setMostrarFormulario(false)}>Cancelar</button>
+            <button className="club-save-btn">Guardar</button>
+            <button className="club-cancel-btn" type="button" onClick={() => setMostrarFormulario(false)}>Cancelar</button>
           </div>
         </form>
       )}

@@ -56,6 +56,7 @@ interface Styles {
 const styles: Styles = {
   pageContainer: {
     padding: '30px 20px',
+    paddingTop: '50px', /* Espacio para header sticky */
     width: '100%',
     boxSizing: 'border-box',
     backgroundColor: '#eef2f6',

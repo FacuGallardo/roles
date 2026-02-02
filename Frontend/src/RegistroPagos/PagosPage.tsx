@@ -47,8 +47,8 @@ const activeNavButtonStyle: CSSProperties = {
 
 const globalStyles = `
 /* ... (Mismos estilos que tenías antes, omitidos para brevedad) ... */
-.pagos-container { min-height: 100vh; background-color: #f3f4f6; padding: 1rem; }
-@media (min-width: 768px) { .pagos-container { padding: 2rem; } }
+.pagos-container { min-height: 100vh; background-color: #f3f4f6; padding: 1rem; margin-top: 20px; }
+@media (min-width: 768px) { .pagos-container { padding: 2rem; margin-top: 20px; } }
 .content-wrapper { max-width: 80rem; margin: 0 auto; background-color: white; border-radius: 0.5rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 2rem; }
 .modal-backdrop { position: fixed; top: 0; right: 0; bottom: 0; left: 0; background-color: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 50; }
 .api-status-alert { padding: 0.75rem; margin-bottom: 1rem; border-radius: 0.375rem; font-weight: 500; }

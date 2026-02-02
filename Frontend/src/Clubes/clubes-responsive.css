@@ -11,6 +11,7 @@
   max-width: 100%;
   padding: 12px;
   margin: 0 auto;
+  margin-top: 15px; /* Evita superposición con header sticky */
   font-family: Arial, sans-serif;
 }
 
@@ -21,6 +22,17 @@
   padding: 16px;
   border-radius: 10px;
   margin-bottom: 16px;
+  text-align: center;
+}
+
+.club-error {
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fca5a5;
+  padding: 10px;
+  border-radius: 8px;
+  margin: 10px 0 16px;
+  font-weight: 600;
   text-align: center;
 }
 
@@ -92,6 +104,29 @@
   font-weight: 600;
 }
 
+/* Colores de acciones (paleta simple) */
+.club-action-btn.club-action-primary {
+  background: #1f3c88;
+  color: #fff;
+}
+
+.club-action-btn.club-action-danger {
+  background: #ef4444;
+  color: #fff;
+}
+
+/* Botón principal de agregar */
+.club-add-btn {
+  width: 100%;
+  min-height: 44px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  background: #1f3c88;
+  color: #fff;
+}
+
 /* Form */
 .club-form {
   margin-top: 16px;
@@ -114,6 +149,26 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+
+.club-save-btn {
+  min-height: 44px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  background: #1f3c88;
+  color: #fff;
+}
+
+.club-cancel-btn {
+  min-height: 44px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  background: #6b7280;
+  color: #fff;
 }
 
 /* Images preview */

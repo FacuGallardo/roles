@@ -128,7 +128,7 @@ const globalStyles = `
     font-weight: 600; /* font-semibold */
     text-align: center;
     color: #ffffff; /* text-white */
-    background-color: #10b981; /* bg-emerald-500 */
+    background-color: #1f3c88; /* bg-emerald-500 */
     border-radius: 0.5rem; /* rounded-lg */
     cursor: pointer;
     transition: background-color 0.2s;
@@ -137,7 +137,7 @@ const globalStyles = `
 }
 
 .btn-submit-cuota:hover {
-    background-color: #059669; /* hover:bg-emerald-600 */
+    background-color: #153d7b; /* hover:bg-emerald-600 */
 }
 `;
 // ============================================

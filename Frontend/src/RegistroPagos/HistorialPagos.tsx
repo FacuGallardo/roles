@@ -20,7 +20,7 @@ const styleConfig = {
 
 const globalStyles = `
   /* ... TUS ESTILOS PREVIOS ... */
-  .historial-edit-button { background-color: #3b82f6; color: white; padding: 5px 10px; border: none; border-radius: 4px; cursor: pointer; margin-right: 5px; }
+  .historial-edit-button { background-color: #1f3c88; color: white; padding: 5px 10px; border: none; border-radius: 4px; cursor: pointer; margin-right: 5px; }
   .historial-delete-button { background-color: #ef4444; color: white; padding: 5px 10px; border: none; border-radius: 4px; cursor: pointer; }
 `;
 
@@ -37,7 +37,7 @@ const HistorialPagos: React.FC<Props> = ({ pagos, clubes, onEditar, onEliminar, 
                 {/* ... Filtros ... */}
                 <div style={{overflowX: 'auto'}}> 
                     <table style={{width: '100%', borderCollapse: 'collapse'}}>
-                        <thead style={{backgroundColor: '#1f2937', color: 'white'}}>
+                        <thead style={{backgroundColor: '#1f3c88', color: 'white'}}>
                             <tr>
                                 <th style={{padding: '10px'}}>Club</th>
                                 <th style={{padding: '10px'}}>Tipo</th>

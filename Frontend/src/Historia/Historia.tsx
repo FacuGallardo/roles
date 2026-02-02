@@ -95,6 +95,7 @@ export default function Historia() {
           width: 90vw;
           max-width: 1200px;
           margin: 2rem auto;
+          margin-top: 3rem; /* Espacio para header sticky */
           padding: 3rem 1.5rem;
           border-radius: 12px;
           box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05); 

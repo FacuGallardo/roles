@@ -201,6 +201,7 @@ nav.is-open {
     .dropdown-btn {
         padding: 0.7rem 2rem !important;
         font-size: 0.9rem !important;
+         color: white !important;
     }
 
     .dropdown-btn:hover {

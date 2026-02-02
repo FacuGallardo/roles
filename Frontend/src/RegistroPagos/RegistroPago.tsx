@@ -95,8 +95,8 @@ const globalStyles = `
 }
 
 .form-input-select:focus, .form-input-number:focus, .form-input-file:focus {
-    border-color: #3b82f6; /* focus:ring-blue-500 */
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5); /* focus:ring */
+    border-color: #1f3c88; /* focus:ring-blue-500 */
+    box-shadow: 0 0 0 3px rgba(31, 60, 136, 0.5); /* focus:ring */
     outline: none;
     background-color: #ffffff;
 }
@@ -119,7 +119,7 @@ const globalStyles = `
     font-weight: 600; /* font-semibold */
     text-align: center;
     color: #ffffff; /* text-white */
-    background-color: #10b981; /* bg-emerald-500 */
+    background-color: #1f3c88; /* bg-emerald-500 */
     border-radius: 0.5rem; /* rounded-lg */
     cursor: pointer;
     transition: background-color 0.2s;
@@ -127,11 +127,11 @@ const globalStyles = `
 }
 
 .btn-submit:hover {
-    background-color: #059669; /* hover:bg-emerald-600 */
+    background-color: #153d7b; /* hover:bg-emerald-600 */
 }
 
 .btn-submit:disabled {
-    background-color: #a7f3d0; /* disabled:bg-emerald-200 */
+    background-color: #6b7280; /* disabled:bg-emerald-200 */
     cursor: not-allowed;
 }
 

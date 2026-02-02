@@ -207,6 +207,7 @@ export default function App() {
   .tabla-posiciones th, .tabla-posiciones td {
     padding: 0.75rem 0.5rem;
     border-bottom: 1px solid #eee;
+    color: #333; /* Agregar color oscuro para contraste */
   }
   .tabla-posiciones th {
     font-size: 0.85rem;
@@ -215,6 +216,7 @@ export default function App() {
   }
   .tabla-posiciones td {
     font-weight: 500;
+    color: #333; /* Asegurar color en datos */
   }
   .tabla-posiciones tr:hover {
     background-color: #f9f9f9;
