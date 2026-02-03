@@ -149,9 +149,9 @@ const FormularioNoticia: React.FC<Props> = ({ onGuardar, onActualizar, noticiaAE
   };
 
   // Función de validación de formulario
-  const validateForm = (data: FormNoticia): boolean => {
-    if (!data.titulo || data.titulo.length < 5) {
-      alert("El título debe tener al menos 5 caracteres.");
+ const validateForm = (data: FormNoticia): boolean => {
+    if (!data.titulo || data.titulo.length < 5 || data.titulo.length > 100) {
+      alert("El título debe tener entre 5 y 100 caracteres.");
       return false;
     }
     if (!data.contenido) {
@@ -177,7 +177,6 @@ const FormularioNoticia: React.FC<Props> = ({ onGuardar, onActualizar, noticiaAE
     } else {
         // GUARDAR NUEVA (Se elimina la creación de ID)
         onGuardar(form); // Se envía el formulario sin ID
-        alert(" Noticia guardada correctamente.");
     }
     // --- FIN CAMBIO 2 ---
     
@@ -186,15 +185,16 @@ const FormularioNoticia: React.FC<Props> = ({ onGuardar, onActualizar, noticiaAE
 
   return (
     <form onSubmit={handleSubmit} className="noticias-formulario" style={styles.formContainer}>
-      <div className="noticias-input-group">
+       <div className="noticias-input-group">
         <label htmlFor="titulo" style={styles.label}>Título</label>
         <input
             id="titulo"
             type="text"
             name="titulo"
-            placeholder="Título de la Noticia (Mínimo 5 caracteres)"
+            placeholder="Título de la Noticia (5-100 caracteres)"
             value={form.titulo}
             onChange={handleChange}
+            maxLength={100}
             className="noticias-form-input"
             style={styles.inputBase}
             required
@@ -210,11 +210,12 @@ const FormularioNoticia: React.FC<Props> = ({ onGuardar, onActualizar, noticiaAE
             value={form.contenido}
             onChange={handleChange}
             rows={5}
+            maxLength={1500}
             className="noticias-form-textarea"
-            style={styles.textarea}
-            required
-        />
-      </div>
+            style={styles.textarea}
+            required
+        />
+      </div>
       
 <div className="noticias-input-group">
         <label htmlFor="fecha" style={styles.label}>Fecha de Publicación</label>

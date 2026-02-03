@@ -164,7 +164,7 @@ const NoticiasPage: React.FC = () => {
   }, []);
 
   // --- CRUD CON TOKEN (Solo Presidenta debería poder llamar esto) ---
-  const handleGuardar = async (nueva: FormNoticia) => {
+   const handleGuardar = async (nueva: FormNoticia) => {
     if (!esPresidenta) return; 
 
     try {
@@ -172,7 +172,7 @@ const NoticiasPage: React.FC = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          "Authorization": `Bearer ${localStorage.getItem('token')}` // 🔒 TOKEN
+          "Authorization": `Bearer ${localStorage.getItem('token')}`
         },
         body: JSON.stringify(nueva),
       });
@@ -182,7 +182,8 @@ const NoticiasPage: React.FC = () => {
       const noticiaGuardada = await respuesta.json();
       setNoticias([noticiaGuardada, ...noticias]);
       setActiveView('lista');
-      setNoticiaAEditar(null); 
+      setNoticiaAEditar(null);
+      alert('✅ Noticia publicada correctamente.'); // ← AÑADIR AQUÍ
     } catch (error) {
       console.error(error);
       alert('Error al guardar la noticia.');
