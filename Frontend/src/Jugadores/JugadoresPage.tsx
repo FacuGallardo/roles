@@ -167,27 +167,30 @@ const JugadoresPage: React.FC = () => {
     }
   };
 
-  const eliminarJugador = async (id: number) => {
-    //  Verificación extra antes de llamar a la API
+const eliminarJugadorAPI = async (id: number) => {
     if (!puedeEliminar) return; 
 
-    if (window.confirm("¿Seguro que quieres eliminar este jugador?")) {
-      setError(null);
-      try {
-        const res = await fetch(`${API_URL}/jugadores/${id}`, {
-          method: "DELETE",
-          headers: {
-            "Authorization": `Bearer ${localStorage.getItem('token')}` // 🔒 TOKEN
-          }
-        });
-        if (!res.ok) throw new Error("Error al eliminar");
-        await cargarJugadores();
-        // Si estábamos viendo el detalle, volvemos a la lista
-        if (vista === "detalle") irALista();
-      } catch (err) {
-        setError((err as Error).message);
-      }
+    setError(null);
+    try {
+      const res = await fetch(`${API_URL}/jugadores/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem('token')}` // 🔒 TOKEN
+        }
+      });
+      if (!res.ok) throw new Error("Error al eliminar");
+      await cargarJugadores();
+      // Si estábamos viendo el detalle, volvemos a la lista
+      if (vista === "detalle") irALista();
+    } catch (err) {
+      setError((err as Error).message);
     }
+  };
+
+  // Función WRAPPER - Agrega confirmación antes de ejecutar
+  const eliminarJugador = (id: number) => {
+    if (!window.confirm("¿Seguro que quieres eliminar este jugador?")) return;
+    eliminarJugadorAPI(id);
   };
 
   // --- RENDERIZADO ---

@@ -285,22 +285,26 @@ const ReferentesPage: React.FC = () => {
     }
   };
 
-  const eliminarReferente = async (id: number) => {
-    if (window.confirm("¿Seguro que quieres eliminar este referente?")) {
-      setError(null);
-      try {
-        const res = await fetch(`${API_URL}/referentes/${id}`, {
-          method: "DELETE",
-        });
-        if (!res.ok) {
-          throw new Error("Error al eliminar referente");
-        }
-        await cargarReferentes();
-        manejarVolver();
-      } catch (err) {
-        setError((err as Error).message);
+ const eliminarReferenteAPI = async (id: number) => {
+    setError(null);
+    try {
+      const res = await fetch(`${API_URL}/referentes/${id}`, {
+        method: "DELETE",
+      });
+      if (!res.ok) {
+        throw new Error("Error al eliminar referente");
       }
+      await cargarReferentes();
+      manejarVolver();
+    } catch (err) {
+      setError((err as Error).message);
     }
+  };
+
+  // Función WRAPPER - Agrega confirmación antes de ejecutar
+  const eliminarReferente = (id: number) => {
+    if (!window.confirm("¿Seguro que quieres eliminar este referente?")) return;
+    eliminarReferenteAPI(id);
   };
 
   const vistaDetalleActiva = referenteSeleccionado !== null;

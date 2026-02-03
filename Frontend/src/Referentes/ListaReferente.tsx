@@ -91,8 +91,8 @@ const ListaReferente: React.FC<Props> = ({
   }
 
   return (
-    <div style={{ overflowX: "auto" }}>
-      <table style={{ width: "100%", borderCollapse: "collapse" }}>
+<div className="table-responsive" style={{ width: "100%", overflowX: "auto", WebkitOverflowScrolling: "touch" as const }}>
+      <table style={{ width: "100%", minWidth: "500px", borderCollapse: "collapse" }}>
         <thead style={tablaStyles.tableHeader}>
           <tr>
             <th style={{ ...tablaStyles.headerCell, borderTopLeftRadius: "10px" }}>

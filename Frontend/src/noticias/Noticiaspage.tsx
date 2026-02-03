@@ -216,9 +216,8 @@ const NoticiasPage: React.FC = () => {
     }
   };
 
-  const handleEliminar = async (id: number) => {
+  const eliminarNoticiaAPI = async (id: number) => {
     if (!esPresidenta) return;
-    if (!window.confirm("¿Estás seguro de que quieres eliminar esta noticia?")) return;
 
     try {
       const respuesta = await fetch(`${API_URL}/${id}`, {
@@ -236,6 +235,12 @@ const NoticiasPage: React.FC = () => {
       console.error(error);
       alert('Error al eliminar la noticia.');
     }
+  };
+
+  // Función WRAPPER - Agrega confirmación antes de ejecutar
+  const handleEliminar = (id: number) => {
+    if (!window.confirm("¿Estás seguro de que quieres eliminar esta noticia?")) return;
+    eliminarNoticiaAPI(id);
   };
 
   const handleEditar = (noticia: Noticia) => {

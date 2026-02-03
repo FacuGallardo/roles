@@ -414,7 +414,8 @@ export default function App() {
                 <div className="card">
                   <div className="card-content">
                     <h2>Tabla de Puntuaciones (Resumen)</h2>
-                    <table className="tabla-posiciones">
+                                        <div className="table-responsive" style={{ width: "100%", overflowX: "auto", WebkitOverflowScrolling: "touch" as const }}>
+                      <table className="tabla-posiciones" style={{ minWidth: "400px" }}>
                       <thead>
                         <tr>
                           <th>#</th>
@@ -462,6 +463,7 @@ export default function App() {
                         </tr>
                       </tbody>
                     </table>
+                    </div>
                   </div>
                 </div>
                 
