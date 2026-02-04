@@ -9,7 +9,7 @@ import EstadisticasPage from "./Estadistica/EstadisticasPage";
 import NoticiasPage from "./noticias/Noticiaspage";
 import Reglamento from "./Reglamento/Reglamento";
 import PagosPage from "./RegistroPagos/PagosPage";
-import LoginModal from "./LoginModal"; 
+import LoginModal from "./LoginModal";
 import "./menu-responsive.css";
 
 export default function App() {
@@ -258,23 +258,25 @@ export default function App() {
   
   /* --- Fin nuevos estilos --- */
   
-  /* Responsive para móviles (Tus estilos) */
+  /* Responsive para móviles */
   @media (max-width: 900px) {
     .inicio-data-grid {
-      grid-template-columns: 1fr; /* Apila tabla y calendario */
+      grid-template-columns: 1fr;
     }
   }
   
   @media (max-width: 768px) {
     header { padding: 1rem; }
     nav { display: none; flex-direction: column; position: absolute; top: 70px; right: 0; background: #1f3c88; width: 100%; padding: 1rem 0; box-shadow: 0 4px 8px rgba(0,0,0,0.1); animation: slideDown 0.3s ease-in-out forwards; }
+    nav.is-open { align-items: stretch; }
     @keyframes slideDown { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-    .nav-btn { width: 100%; text-align: center; padding: 1rem; }
+    .nav-btn { width: 100%; justify-content: flex-start; align-items: center; font-size: 1.15rem; padding: 1rem 0.5rem; gap: 0.75rem; }
+    .nav-btn span[role="img"] { font-size: 1.4rem; }
     .nav-btn::after { display: none; }
     .nav-btn.active-nav-btn { background-color: #1a326b; }
     .nav-btn.active-nav-btn::after { display: none; }
-    .dropdown { position: static; border-radius: 0; box-shadow: none; background: #2a4993; min-width: auto; }
-    .dropdown-btn { padding-left: 2rem; color: white; }
+    .dropdown { position: static; border-radius: 0; box-shadow: none; background: #2a4993; min-width: auto; margin-left: 1.5rem; margin-top: 0.5rem; }
+    .dropdown-btn { padding: 0.75rem 0; padding-left: 2rem; color: white; font-size: 1.05rem; }
     .hamburger-menu { display: block; }
     nav.is-open { display: flex; }
     main { padding: 1rem; }
@@ -303,7 +305,7 @@ export default function App() {
                 aria-haspopup="true"
                 aria-expanded={openHandball}
               >
-                Handball ▼
+                <span role="img" aria-label="handball"></span> Handball ▼
               </button>
               {openHandball && (
                 <div className="dropdown" onClick={stop}>
@@ -326,7 +328,7 @@ export default function App() {
                 aria-haspopup="true"
                 aria-expanded={openInstitucional}
               >
-                Institucional ▼
+                <span role="img" aria-label="institucional"></span> Institucional ▼
               </button>
               {openInstitucional && (
                 <div className="dropdown" onClick={stop}>
@@ -414,7 +416,7 @@ export default function App() {
                 <div className="card">
                   <div className="card-content">
                     <h2>Tabla de Puntuaciones (Resumen)</h2>
-                                        <div className="table-responsive" style={{ width: "100%", overflowX: "auto", WebkitOverflowScrolling: "touch" as const }}>
+                    <div className="table-responsive" style={{ width: "100%", overflowX: "auto", WebkitOverflowScrolling: "touch" as const }}>
                       <table className="tabla-posiciones" style={{ minWidth: "400px" }}>
                       <thead>
                         <tr>
