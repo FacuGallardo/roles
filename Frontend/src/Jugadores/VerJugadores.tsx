@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import FormularioDatos from "./FormularioDatos"; 
 import FormularioDocumentacion from "./FormularioDocumentacion";
+import { hasRole } from "../utils/auth";
 import './jugadores-responsive.css';
 
 // Definición local
@@ -33,6 +34,8 @@ const VerJugadores: React.FC<Props> = ({
     jugador, onActualizar, onEliminar, 
     permisoEditar, permisoEliminar, onVolver 
 }) => {
+    const puedeVerDatos = hasRole(['presidenta', 'referente']);
+    
     const [editandoDatos, setEditandoDatos] = useState(false);
     const [editandoDocs, setEditandoDocs] = useState(false);
 
@@ -64,21 +67,44 @@ const VerJugadores: React.FC<Props> = ({
 
             <div className="player-info-list">
               <p className="player-info"><strong>Club:</strong> {jugador.club?.nombre}</p>
-              <p className="player-info"><strong>DNI:</strong> {jugador.dni}</p>
+              {puedeVerDatos && <p className="player-info"><strong>DNI:</strong> {jugador.dni}</p>}
               <p className="player-info">
                 <strong>Estado:</strong> 
                 <span className={getStatusClass(jugador.estado)} style={{marginLeft:8}}>{jugador.estado || 'activo'}</span>
               </p>
               <p className="player-info"><strong>Categoría:</strong> {jugador.categoria}</p>
-              {jugador.telefono && <p className="player-info"><strong>Teléfono:</strong> {jugador.telefono}</p>}
-              {jugador.vencimiento && <p className="player-info"><strong>Vencimiento:</strong> {jugador.vencimiento}</p>}
+              {puedeVerDatos && jugador.telefono && <p className="player-info"><strong>Teléfono:</strong> {jugador.telefono}</p>}
+              {puedeVerDatos && jugador.vencimiento && <p className="player-info"><strong>Vencimiento:</strong> {jugador.vencimiento}</p>}
             </div>
 
             {/* previsualización de carnet si existe */}
-            {jugador.carnetUrl && (
+           {jugador.carnetUrl && (
               <div className="file-preview" style={{marginTop:12}}>
                 <img src={jugador.carnetUrl} alt={`Carnet de ${jugador.nombre}`} />
-                <a className="document-link" href={jugador.carnetUrl} target="_blank" rel="noopener noreferrer">Ver Carnet</a>
+                <button 
+                  className="document-link"
+                  onClick={() => {
+                    const link = document.createElement('a');
+                    link.href = jugador.carnetUrl!;
+                    link.download = `carnet-${jugador.nombre}-${jugador.apellido}.png`;
+                    link.click();
+                  }}
+                  style={{
+                    background: '#1f3c88',
+                    color: 'white',
+                    padding: '8px 16px',
+                    borderRadius: '6px',
+                    border: 'none',
+                    cursor: 'pointer',
+                    marginTop: '8px',
+                    display: 'block',
+                    width: '100%',
+                    textAlign: 'center',
+                    fontWeight: '600'
+                  }}
+                >
+                  Descargar Carnet
+                </button>
               </div>
             )}
 

@@ -35,8 +35,8 @@ const HistorialPagos: React.FC<Props> = ({ pagos, clubes, onEditar, onEliminar, 
             <style>{globalStyles}</style>
             <div className="historial-pagos">
                 {/* ... Filtros ... */}
-  <div style={{overflowX: 'auto'}}> 
-                    <table style={{width: '100%', borderCollapse: 'collapse'}}>
+                <div className="table-responsive" style={{ width: "100%", overflowX: "auto", WebkitOverflowScrolling: "touch" as const }}>
+                    <table style={{width: '100%', minWidth: '500px', borderCollapse: 'collapse'}}>
                         <thead style={{backgroundColor: '#1f3c88', color: 'white'}}>
                             <tr>
                                 <th style={{padding: '10px'}}>Club</th>

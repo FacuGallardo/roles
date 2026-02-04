@@ -14,18 +14,16 @@ type Props = {
 
 // Estilos convertidos a objeto para su uso en línea
 const styles = {
-    carrouselContainer: {
-        display: 'flex' as const,
-        overflowX: 'auto' as const,
-        gap: '1.5rem', 
-        paddingTop: '1rem', 
-        paddingBottom: '1rem', 
-        paddingLeft: '0.5rem', 
-        paddingRight: '0.5rem', 
-        marginRight: '-0.5rem',
-        marginLeft: '-0.5rem',
-        // Añadir estilos de scroll si lo deseas
-    },
+    carrouselContainer: {
+        display: 'flex' as const,
+        overflowX: 'auto' as const,
+        gap: '1.5rem', 
+        paddingTop: '1rem', 
+        paddingBottom: '1rem', 
+        paddingLeft: '0.5rem', 
+        paddingRight: '0.5rem', 
+        WebkitOverflowScrolling: 'touch' as const,
+    },
     card: {
         minWidth: '280px',
         maxWidth: '280px',

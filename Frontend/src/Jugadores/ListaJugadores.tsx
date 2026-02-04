@@ -1,4 +1,5 @@
 import React from "react";
+import { hasRole } from "../utils/auth";
 import './jugadores-responsive.css';
 
 // --- Definición local para evitar conflictos de importación ---
@@ -40,6 +41,8 @@ const ListaJugadores: React.FC<Props> = ({
   permisoEditar,
   permisoEliminar,
 }) => {
+  const puedeVerDatos = hasRole(['presidenta', 'referente']);
+  
   const getStatusClass = (estado?: string) => {
     switch (estado?.toLowerCase()) {
       case "lesionado": return "status-lesionado";
@@ -60,12 +63,12 @@ const ListaJugadores: React.FC<Props> = ({
     <>
       <div className="table-container">
         <table className="player-table" role="table">
-          <thead className="table-header">
+<thead className="table-header">
             <tr>
               <th>Nombre</th>
               <th>Apellido</th>
               <th>Club</th>
-              <th>DNI</th>
+              {puedeVerDatos && <th>DNI</th>}
               <th>Estado</th>
               {mostrarColumnaAcciones && <th>Acciones</th>}
             </tr>
@@ -73,11 +76,11 @@ const ListaJugadores: React.FC<Props> = ({
           <tbody>
             {jugadores.map((j) => (
               <tr key={j.id} className="table-row">
-                <td data-label="Nombre">{j.nombre}</td>
-                <td data-label="Apellido">{j.apellido}</td>
-                <td data-label="Club">{j.club ? j.club.nombre : "-"}</td>
-                <td data-label="DNI">{j.dni}</td>
-                <td data-label="Estado" className={getStatusClass(j.estado)}>{j.estado || "Activo"}</td>
+                 <td>{j.nombre}</td>
+                <td>{j.apellido}</td>
+                <td>{j.club ? j.club.nombre : "-"}</td>
+                {puedeVerDatos && <td>{j.dni}</td>}
+                <td className={getStatusClass(j.estado)}>{j.estado || "Activo"}</td>
                 
                 {mostrarColumnaAcciones && (
                   <td className="action-cell" data-label="Acciones">
