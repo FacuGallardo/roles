@@ -62,7 +62,7 @@
     }
 
     .evento img {
-        height: 200px !important;
+        height: clamp(180px, 45vw, 250px) !important;
         max-width: 100% !important;
         border: 3px solid #ffffff !important;
     }

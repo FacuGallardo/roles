@@ -100,9 +100,7 @@ return (
           className="noticias-carrusel-card"
         >
           {n.imagenUrl ? (
-            <img 
-              src={n.imagenUrl} 
-              alt={n.titulo} 
+            <img loading="lazy" src={n.imagenUrl} alt={n.titulo} 
               style={styles.image} 
             />
           ) : (
@@ -126,3 +124,4 @@ return (
   };
   
 export default CarrouselNoticias;
+

@@ -43,15 +43,15 @@ const styles = {
         paddingRight: '1rem', 
     } as React.CSSProperties,
     image: {
-        width: '5rem', 
-        height: '5rem', 
+        width: 'clamp(80px, 20vw, 120px)', 
+        height: 'clamp(80px, 20vw, 120px)', 
         objectFit: 'cover',
         borderRadius: '0.5rem', 
         flexShrink: 0,
     } as React.CSSProperties,
     noImage: {
-        width: '5rem', 
-        height: '5rem', 
+        width: 'clamp(80px, 20vw, 120px)', 
+        height: 'clamp(80px, 20vw, 120px)', 
         backgroundColor: '#e5e7eb', 
         borderRadius: '0.5rem', 
         display: 'flex',
@@ -131,9 +131,7 @@ const NoticiasLista: React.FC<Props> = ({ noticias, onEliminar, onEditar }) => {
         >
           <div style={styles.contentArea}>
                 {n.imagenUrl ? (
-                    <img 
-                        src={n.imagenUrl} 
-                        alt={n.titulo} 
+                    <img loading="lazy" src={n.imagenUrl} alt={n.titulo} 
                         style={styles.image}
                     />
                 ) : (
@@ -172,3 +170,6 @@ const NoticiasLista: React.FC<Props> = ({ noticias, onEliminar, onEditar }) => {
 };
 
 export default NoticiasLista;
+
+
+

@@ -285,18 +285,18 @@ const eliminarJugadorAPI = async (id: number) => {
         .page-container { 
           max-width: 1200px; 
           margin: 0 auto; 
-          padding: 0.5rem;
+          padding: clamp(0.5rem, 2vw, 1rem);
           box-sizing: border-box;
         }
         .page-title { 
           text-align: center; 
           color: #1f3c88; 
-          margin-bottom: 1rem;
+          margin-bottom: clamp(0.75rem, 2vw, 1rem);
           font-size: clamp(1.25rem, 5vw, 2rem);
         }
         .card { 
           background: white; 
-          padding: 0.5rem;
+          padding: clamp(0.5rem, 2vw, 1rem);
           border-radius: 12px; 
           box-shadow: 0 4px 6px rgba(0,0,0,0.1);
           box-sizing: border-box;
@@ -305,8 +305,8 @@ const eliminarJugadorAPI = async (id: number) => {
         .error-message { 
           background-color: #fef2f2; 
           color: #b91c1c; 
-          padding: 0.75rem; 
-          margin-bottom: 0.75rem; 
+          padding: clamp(0.5rem, 1.5vw, 0.75rem); 
+          margin-bottom: clamp(0.5rem, 1.5vw, 0.75rem); 
           text-align: center; 
           border-radius: 8px;
           font-size: 14px;
@@ -315,10 +315,10 @@ const eliminarJugadorAPI = async (id: number) => {
           background-color: #1f3c88; 
           color: white; 
           border: none; 
-          padding: 10px 20px; 
+          padding: clamp(8px, 2vw, 10px) clamp(16px, 4vw, 20px); 
           border-radius: 5px; 
           cursor: pointer; 
-          margin-top: 20px; 
+          margin-top: clamp(12px, 3vw, 20px); 
           display: block; 
           margin-left: auto; 
           margin-right: auto;
@@ -327,7 +327,7 @@ const eliminarJugadorAPI = async (id: number) => {
         .list-card, .form-card {
           width: 100%;
           max-width: 100%;
-          padding: 0.5rem;
+          padding: clamp(0.5rem, 2vw, 1rem);
           box-sizing: border-box;
         }
 

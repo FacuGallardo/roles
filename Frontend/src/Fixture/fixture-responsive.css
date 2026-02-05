@@ -24,8 +24,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  padding: 8px 0;
+  gap: clamp(8px, 2vw, 12px);
+  padding: clamp(6px, 1.5vw, 8px) 0;
   box-sizing: border-box;
 }
 .partido-row .team-name { font-weight: 600; }
@@ -41,13 +41,13 @@
    ----------------------------------------------------------------- */
 @media (max-width: 480px) {
   /* page / card */
-  .pageContainer { padding: 12px !important; }
-  .fixture-card { padding: 16px !important; margin: 6px !important; max-width: 100% !important; }
+  .pageContainer { padding: clamp(8px, 2vw, 12px) !important; }
+  .fixture-card { padding: clamp(12px, 3vw, 16px) !important; margin: clamp(4px, 1vw, 6px) !important; max-width: 100% !important; }
 
   /* list container */
   .lista-fixture-container {
-    padding: 6px 8px;
-    gap: 10px;
+    padding: clamp(4px, 1.5vw, 6px) clamp(6px, 1.5vw, 8px);
+    gap: clamp(8px, 2vw, 10px);
     overflow-x: hidden;
   }
 
@@ -57,7 +57,7 @@
     flex-direction: column !important;
     align-items: center !important;
     text-align: center !important;
-    gap: 8px !important;
+    gap: clamp(6px, 1.5vw, 8px) !important;
   }
   .fixture-header .title {
     font-size: clamp(1.15rem, 6vw, 1.6rem) !important;
@@ -73,7 +73,7 @@
 
   /* fixture card compact */
   .fixture-item-card {
-    padding: 12px !important;
+    padding: clamp(8px, 2vw, 12px) !important;
     border-radius: 8px !important;
     box-shadow: none !important;
   }
@@ -83,10 +83,10 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    gap: 8px;
-    margin-bottom: 12px;
+    gap: clamp(6px, 1.5vw, 8px);
+    margin-bottom: clamp(8px, 2vw, 12px);
     background: #1f3c88;
-    padding: 10px 12px;
+    padding: clamp(8px, 1.5vw, 10px) clamp(8px, 2vw, 12px);
     border-radius: 6px;
     color: white;
   }
@@ -100,7 +100,7 @@
   }
 
   .fixture-item-card .btn-action {
-    padding: 0.4rem 0.8rem !important;
+    padding: clamp(0.3rem, 0.75vw, 0.4rem) clamp(0.6rem, 1.25vw, 0.8rem) !important;
     font-size: 0.75rem;
     white-space: nowrap;
     background-color: white !important;
@@ -110,6 +110,7 @@
     font-weight: 600;
     cursor: pointer;
     flex-shrink: 0;
+    min-height: 44px;
   }
 
   /* PartidoRow: apilar equipos verticalmente */
@@ -117,8 +118,8 @@
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
-    gap: 6px !important;
-    padding: 10px 6px !important;
+    gap: clamp(4px, 1vw, 6px) !important;
+    padding: clamp(8px, 1.5vw, 10px) clamp(4px, 1vw, 6px) !important;
   }
   .partido-row .team-name {
     width: 100% !important;
@@ -131,13 +132,13 @@
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    gap: 10px !important;
-    margin: 6px 0 !important;
+    gap: clamp(8px, 2vw, 10px) !important;
+    margin: clamp(4px, 1vw, 6px) 0 !important;
   }
   .partido-row .score {
     font-size: 1.1rem !important;
     min-width: 40px !important;
-    padding: 6px 8px !important;
+    padding: clamp(4px, 1vw, 6px) clamp(6px, 1.5vw, 8px) !important;
     text-align: center !important;
   }
   .partido-row .separator { font-size: 1rem !important; }

@@ -1,0 +1,386 @@
+/* ============================================
+   PHASE 9️⃣ - IMAGES & MEDIA RESPONSIVE CSS
+   Target: 344×882px (Galaxy Z Fold 5)
+   ============================================ */
+
+/* Global Image Styles */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Aspect Ratio Preservation */
+.img-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background-color: #f0f0f0;
+}
+
+/* 16:9 Aspect Ratio */
+.aspect-video {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+/* 1:1 Square Aspect Ratio */
+.aspect-square {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+/* 4:3 Aspect Ratio */
+.aspect-3-4 {
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+/* ============================================
+   CARD IMAGES
+   ============================================ */
+
+/* Card Image Container */
+.card img {
+  width: 100%;
+  height: auto;
+  max-height: clamp(150px, 40vw, 250px);
+  object-fit: cover;
+  border-radius: 12px 12px 0 0;
+  transition: transform 0.4s ease;
+}
+
+.card:hover img {
+  transform: scale(1.05);
+}
+
+/* ============================================
+   NEWS/NOTICIAS IMAGES
+   ============================================ */
+
+/* Carousel News Images */
+.noticias-carrusel-card img {
+  width: 100%;
+  height: clamp(150px, 35vw, 200px);
+  object-fit: cover;
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+/* List News Images */
+.noticias-list-image {
+  width: clamp(80px, 20vw, 120px);
+  height: clamp(80px, 20vw, 120px);
+  object-fit: cover;
+  border-radius: 0.5rem;
+  flex-shrink: 0;
+}
+
+.noticias-list-no-image {
+  width: clamp(80px, 20vw, 120px);
+  height: clamp(80px, 20vw, 120px);
+  background-color: #e5e7eb;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+  font-size: 0.75rem;
+  flex-shrink: 0;
+}
+
+/* Form News Image Preview */
+.noticias-form-image-preview {
+  width: 100%;
+  max-width: clamp(180px, 50vw, 300px);
+  height: auto;
+  max-height: 250px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  margin-top: 0.75rem;
+  border: 1px solid #d1d5db;
+}
+
+/* ============================================
+   HISTORIA/TIMELINE IMAGES
+   ============================================ */
+
+/* Historia Timeline Images */
+.evento img {
+  width: 100%;
+  height: clamp(200px, 50vw, 280px);
+  object-fit: cover;
+  border-radius: 0.75rem;
+  transition: transform 0.3s ease;
+}
+
+.evento:hover img {
+  transform: scale(1.05);
+}
+
+/* ============================================
+   JUGADORES/PLAYERS IMAGES
+   ============================================ */
+
+/* Player Card Images */
+.player-card img,
+.file-preview img {
+  max-width: 100%;
+  height: auto;
+  max-height: clamp(200px, 50vw, 300px);
+  object-fit: cover;
+  border-radius: 0.5rem;
+  border: 1px solid #d1d5db;
+}
+
+/* Club Logo/Escudo Images */
+.club-logo,
+.escudo-img {
+  width: clamp(60px, 15vw, 100px);
+  height: clamp(60px, 15vw, 100px);
+  object-fit: contain;
+  border-radius: 0.5rem;
+  flex-shrink: 0;
+}
+
+/* ============================================
+   HEADER & SPONSOR IMAGES
+   ============================================ */
+
+/* Logo Image in Header */
+.logo img {
+  width: clamp(30px, 8vw, 40px);
+  height: clamp(30px, 8vw, 40px);
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* Sponsor Logos */
+.sponsor-logos img {
+  height: clamp(30px, 8vw, 40px);
+  object-fit: contain;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+  max-width: 100%;
+}
+
+.sponsor-logos img:hover {
+  opacity: 1;
+}
+
+/* ============================================
+   ICONS & SMALL IMAGES
+   ============================================ */
+
+/* Footer Contact Icons */
+.footer-contact img {
+  height: clamp(16px, 4vw, 20px);
+  margin-right: clamp(0.25rem, 1vw, 0.5rem);
+  vertical-align: middle;
+  object-fit: contain;
+}
+
+/* Button Icons */
+button .icon,
+.btn-action .icon,
+.action-button .icon {
+  width: clamp(16px, 4vw, 20px);
+  height: clamp(16px, 4vw, 20px);
+  object-fit: contain;
+  display: inline-block;
+}
+
+/* ============================================
+   RESPONSIVE PICTURE ELEMENTS
+   ============================================ */
+
+picture {
+  display: block;
+  width: 100%;
+}
+
+picture img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ============================================
+   LAZY LOADING SUPPORT
+   ============================================ */
+
+img[loading="lazy"] {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ============================================
+   MOBILE-FIRST RESPONSIVE (≤480px)
+   ============================================ */
+
+@media (max-width: 480px) {
+  /* Reduce card image height on mobile */
+  .card img {
+    max-height: clamp(120px, 35vw, 180px);
+  }
+
+  /* Optimize carousel image size */
+  .noticias-carrusel-card img {
+    height: clamp(120px, 30vw, 160px);
+  }
+
+  /* Smaller event images on mobile */
+  .evento img {
+    height: clamp(180px, 45vw, 240px);
+  }
+
+  /* Responsive club logos */
+  .club-logo,
+  .escudo-img {
+    width: clamp(50px, 12vw, 80px);
+    height: clamp(50px, 12vw, 80px);
+  }
+
+  /* Optimize list image sizes */
+  .noticias-list-image,
+  .noticias-list-no-image {
+    width: clamp(70px, 18vw, 100px);
+    height: clamp(70px, 18vw, 100px);
+  }
+
+  /* Reduce sponsor logo height */
+  .sponsor-logos img {
+    height: clamp(25px, 6vw, 35px);
+  }
+
+  /* Optimize player card images */
+  .player-card img,
+  .file-preview img {
+    max-height: clamp(180px, 45vw, 250px);
+  }
+}
+
+/* ============================================
+   TABLET & DESKTOP (≥768px)
+   ============================================ */
+
+@media (min-width: 768px) {
+  /* Larger images on desktop */
+  .card img {
+    max-height: clamp(180px, 25vw, 300px);
+  }
+
+  .evento img {
+    height: clamp(250px, 30vw, 350px);
+  }
+
+  .noticias-carrusel-card img {
+    height: clamp(200px, 25vw, 280px);
+  }
+
+  /* Sponsor logos larger */
+  .sponsor-logos img {
+    height: clamp(35px, 5vw, 50px);
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY & FALLBACK
+   ============================================ */
+
+/* No image placeholder styling */
+.no-image-placeholder {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-color: #e5e7eb;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* Alt text visibility */
+img::before {
+  content: attr(alt);
+  display: block;
+  padding: 1rem;
+  color: #6b7280;
+  font-size: 0.875rem;
+  background-color: #f3f4f6;
+  border-radius: 0.5rem;
+}
+
+/* Image with error state */
+img.img-error {
+  background-color: #fef2f2;
+  border: 1px solid #fca5a5;
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+/* ============================================
+   SRCSET & RESPONSIVE IMAGES
+   ============================================ */
+
+/* Ensure srcset images respect max-width */
+img[srcset] {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Grid image containers */
+.img-grid {
+  display: grid;
+  gap: clamp(0.75rem, 2vw, 1rem);
+  grid-template-columns: repeat(auto-fit, minmax(clamp(100px, 25vw, 150px), 1fr));
+  width: 100%;
+}
+
+.img-grid img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+.img-grid img:hover {
+  transform: scale(1.05);
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
+@media print {
+  img {
+    max-width: 100%;
+    page-break-inside: avoid;
+  }
+
+  /* Hide lazy-load animations in print */
+  img[loading="lazy"] {
+    animation: none;
+    background: transparent;
+  }
+}

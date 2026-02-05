@@ -164,14 +164,17 @@ export default function LoginModal({ onLoginSuccess, onClose }: LoginModalProps)
           backdrop-filter: blur(10px);
           border: 1px solid rgba(255,255,255,0.1);
           border-radius: 1rem;
-          padding: 2rem;
+          padding: clamp(1rem, 4vw, 2rem);
           width: 100%;
-          max-width: 400px;
+          max-width: clamp(300px, 90vw, 450px);
           box-shadow: 0 4px 15px rgba(0,0,0,0.2);
           color: white;
           position: relative;
           animation: slideIn 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
           transform: translateY(-20px);
+          max-height: 90vh;
+          overflow-y: auto;
+          -webkit-overflow-scrolling: touch;
         }
         
         @keyframes slideIn {
@@ -181,38 +184,63 @@ export default function LoginModal({ onLoginSuccess, onClose }: LoginModalProps)
 
         .modal-close-btn {
           position: absolute;
-          top: 1rem;
-          right: 1rem;
+          top: 0.5rem;
+          right: 0.5rem;
           background: none;
           border: none;
           color: white;
           font-size: 1.5rem;
           cursor: pointer;
           opacity: 0.7;
-          transition: opacity 0.2s ease;
+          transition: all 0.2s ease;
+          min-height: 44px;
+          min-width: 44px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0;
         }
         .modal-close-btn:hover {
           opacity: 1;
+          transform: scale(1.1);
+        }
+        .modal-close-btn:active {
+          transform: scale(0.95);
         }
 
         /* Estilos de formulario */
-        .logo { width: 100px; height: 100px; object-fit: contain; margin-bottom: 1rem; }
-        .title { font-size: 1.5rem; font-weight: bold; text-align: center; margin: 0; }
-        .subtitle { color: rgba(255,255,255,0.7); text-align: center; margin: 0.5rem 0 2rem 0; }
+        .logo { width: clamp(80px, 20vw, 100px); height: clamp(80px, 20vw, 100px); object-fit: contain; margin-bottom: 1rem; }
+        .title { font-size: clamp(1.2rem, 5vw, 1.5rem); font-weight: bold; text-align: center; margin: 0; }
+        .subtitle { color: rgba(255,255,255,0.7); text-align: center; margin: 0.5rem 0 1.5rem 0; font-size: clamp(0.85rem, 3vw, 1rem); }
         .modal-card form { display: flex; flex-direction: column; gap: 1rem; }
-        .modal-card label { font-size: 0.875rem; font-weight: 500; margin-bottom: 0.25rem; display: block; }
+        .modal-card label { 
+          font-size: clamp(0.85rem, 2.5vw, 0.875rem);
+          font-weight: 500; 
+          margin-bottom: 0.5rem; 
+          display: block;
+          line-height: 1.3;
+        }
         .modal-card input {
           width: 100%;
-          padding: 0.75rem;
+          padding: 0.75rem 1rem;
           border-radius: 0.5rem;
           border: 1px solid rgba(255,255,255,0.2);
           background-color: rgba(255,255,255,0.1);
           color: white;
           font-size: 1rem;
+          min-height: 44px;
+          box-sizing: border-box;
+          transition: all 0.2s ease;
         }
         .modal-card input::placeholder { color: rgba(255,255,255,0.5); }
+        .modal-card input:focus {
+          outline: none;
+          border-color: rgba(255,255,255,0.5);
+          background-color: rgba(255,255,255,0.15);
+          box-shadow: 0 0 0 3px rgba(31, 60, 136, 0.3);
+        }
         .modal-card .button {
-          padding: 0.75rem;
+          padding: 0.75rem 1.5rem;
           border: none;
           border-radius: 0.5rem;
           background-color: #1F3C88;
@@ -222,20 +250,52 @@ export default function LoginModal({ onLoginSuccess, onClose }: LoginModalProps)
           cursor: pointer;
           transition: all 0.3s ease;
           margin-top: 0.5rem;
+          min-height: 44px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
         }
-        .modal-card .button:hover:not(:disabled) { background-color: white; color: #0B0E19; }
-        .modal-card .button:disabled { opacity: 0.6; cursor: default; }
+        .modal-card .button:hover:not(:disabled) {
+          background-color: white;
+          color: #0B0E19;
+          transform: translateY(-2px);
+          box-shadow: 0 4px 8px rgba(31, 60, 136, 0.3);
+        }
+        .modal-card .button:active:not(:disabled) {
+          transform: translateY(0);
+        }
+        .modal-card .button:disabled { opacity: 0.6; cursor: not-allowed; }
         .modal-card .error { 
           color: #ff7070; 
           background-color: rgba(255, 112, 112, 0.1);
           text-align: center; 
-          font-size: 0.9rem; 
+          font-size: clamp(0.8rem, 2.5vw, 0.9rem);
           padding: 0.75rem;
           border-radius: 0.5rem;
           border: 1px solid #ff7070;
+          line-height: 1.4;
         }
-        .modal-card .link { font-size: 0.875rem; color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s ease; cursor: pointer; }
-        .modal-card .link:hover { color: white; text-decoration: underline; }
+        .modal-card .link { 
+          font-size: clamp(0.8rem, 2vw, 0.875rem);
+          color: rgba(255,255,255,0.7); 
+          text-decoration: none; 
+          transition: all 0.2s ease; 
+          cursor: pointer;
+          min-height: 44px;
+          display: inline-flex;
+          align-items: center;
+          padding: 0.5rem 1rem;
+          margin: 0 -1rem;
+        }
+        .modal-card .link:hover { 
+          color: white; 
+          text-decoration: underline;
+        }
+        .modal-card .link:focus {
+          outline: 2px solid rgba(255,255,255,0.3);
+          border-radius: 0.25rem;
+        }
       `}</style>
 
       {/* --- Fondo del Modal (Backdrop) --- */}

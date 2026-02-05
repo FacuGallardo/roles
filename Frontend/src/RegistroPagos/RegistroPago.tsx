@@ -51,14 +51,14 @@ const globalStyles = `
 /* Estilos del Formulario */
 .form-container {
     max-width: 400px;
-    margin: 2rem auto;
-    padding: 2rem;
+    margin: clamp(1rem, 4vw, 2rem) auto;
+    padding: clamp(1rem, 3vw, 2rem);
     background-color: #ffffff; /* bg-white */
     border-radius: 0.75rem; /* rounded-xl */
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-xl */
     display: flex;
     flex-direction: column;
-    gap: 1.5rem; /* space-y-6 */
+    gap: clamp(1rem, 3vw, 1.5rem); /* space-y-6 */
     border: 1px solid #e5e7eb;
 }
 
@@ -68,8 +68,8 @@ const globalStyles = `
     color: #1f2937; /* text-gray-800 */
     text-align: center;
     border-bottom: 2px solid #f3f4f6;
-    padding-bottom: 1rem;
-    margin-bottom: 0.5rem;
+    padding-bottom: clamp(0.75rem, 2vw, 1rem);
+    margin-bottom: clamp(0.25rem, 1vw, 0.5rem);
 }
 
 .form-label {
@@ -77,14 +77,14 @@ const globalStyles = `
     font-size: 0.875rem; /* text-sm */
     font-weight: 600; /* font-medium */
     color: #374151; /* text-gray-700 */
-    margin-bottom: 0.5rem;
+    margin-bottom: clamp(0.25rem, 1vw, 0.5rem);
 }
 
 /* Estilos comunes para select e input de texto */
 .form-input-select, .form-input-number, .form-input-file {
     display: block;
     width: 100%;
-    padding: 0.75rem 1rem;
+    padding: clamp(0.5rem, 1.5vw, 1rem) clamp(0.75rem, 2vw, 1rem);
     font-size: 1rem;
     line-height: 1.5;
     color: #1f2937; /* text-gray-900 */
@@ -109,12 +109,12 @@ const globalStyles = `
 /* Estilo para input de tipo file (generalmente más difícil de estilizar de forma nativa) */
 .form-input-file {
     /* Aquí se requiere override nativo o un componente personalizado para un estilo perfecto */
-    padding: 0.5rem;
+    padding: clamp(0.25rem, 1vw, 0.5rem);
 }
 
 .btn-submit {
     width: 100%;
-    padding: 0.75rem 1rem;
+    padding: clamp(0.5rem, 1.5vw, 1rem) clamp(0.75rem, 2vw, 1rem);
     font-size: 1rem;
     font-weight: 600; /* font-semibold */
     text-align: center;
@@ -124,6 +124,7 @@ const globalStyles = `
     cursor: pointer;
     transition: background-color 0.2s;
     border: none;
+    min-height: 44px;
 }
 
 .btn-submit:hover {
@@ -136,11 +137,11 @@ const globalStyles = `
 }
 
 .file-attached-message {
-    margin-top: 0.5rem;
+    margin-top: clamp(0.25rem, 1vw, 0.5rem);
     font-size: 0.75rem; /* text-xs */
     color: #047857; /* text-emerald-700 */
     background-color: #ecfdf5; /* bg-emerald-50 */
-    padding: 0.5rem;
+    padding: clamp(0.25rem, 1vw, 0.5rem);
     border-radius: 0.375rem; /* rounded-md */
     border: 1px dashed #34d399; /* border-emerald-300 */
 }

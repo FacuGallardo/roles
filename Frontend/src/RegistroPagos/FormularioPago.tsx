@@ -18,23 +18,34 @@ const categorias = ["Masculino", "Femenino", "Ambos"];
 const styleConfig = {
     modalContainer: {
         position: 'relative' as 'relative',
-        padding: '2rem',
-        maxWidth: '500px',
+        padding: 'clamp(1rem, 4vw, 2rem)',
+        width: '100%',
+        maxWidth: 'clamp(300px, 90vw, 500px)',
         margin: '2rem auto',
         backgroundColor: '#fff',
         borderRadius: '8px',
         boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
         border: '1px solid #ddd',
+        maxHeight: '90vh',
+        overflowY: 'auto' as 'auto',
+        WebkitOverflowScrolling: 'touch' as any,
     },
     closeButton: {
         position: 'absolute' as 'absolute',
-        top: '10px',
-        right: '10px',
+        top: '0.5rem',
+        right: '0.5rem',
         border: 'none',
         background: 'none',
         fontSize: '1.5rem',
         cursor: 'pointer',
         color: '#666',
+        width: '44px',
+        height: '44px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 0,
+        transition: 'all 0.2s ease',
     },
     title: {
         borderBottom: '2px solid #1f3c88',
@@ -42,6 +53,7 @@ const styleConfig = {
         marginBottom: '1.5rem',
         textAlign: 'center' as 'center',
         color: '#333',
+        fontSize: 'clamp(1.1rem, 4vw, 1.3rem)',
     },
     form: {
         display: 'grid',
@@ -49,31 +61,41 @@ const styleConfig = {
     },
     label: {
         display: 'block',
-        marginBottom: '0.3rem',
+        marginBottom: '0.5rem',
         fontWeight: 'bold' as 'bold',
         color: '#555',
+        fontSize: '0.95rem',
     },
     input: {
         width: '100%',
-        padding: '10px',
+        padding: '0.75rem 1rem',
         border: '1px solid #ccc',
         borderRadius: '4px',
         boxSizing: 'border-box' as 'border-box',
+        minHeight: '44px',
+        fontSize: '1rem',
+        transition: 'all 0.2s ease',
     },
     submitButton: {
         backgroundColor: '#1f3c88',
         color: 'white',
-        padding: '12px 20px',
+        padding: '0.75rem 1.5rem',
         border: 'none',
         borderRadius: '4px',
         cursor: 'pointer',
         marginTop: '1.5rem',
         fontSize: '1rem',
         fontWeight: 'bold' as 'bold',
+        minHeight: '44px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '100%',
+        transition: 'all 0.3s ease',
     },
     smallText: {
         display: 'block',
-        marginTop: '0.3rem',
+        marginTop: '0.5rem',
         fontSize: '0.85rem',
         color: '#777',
     }
@@ -159,7 +181,61 @@ const FormularioPago: React.FC<Props> = ({ tipo, club, montoMinimo, partidos = [
   const partidosRelevantes = tipo === 'arbitraje'
     ? partidos : []; // Ajusta esto si tu estructura de partidos es compleja
 
+  const categoriaGridStyles = `
+    .categoria-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 12px;
+      margin-bottom: 1rem;
+    }
+    
+    .categoria-option {
+      position: relative;
+    }
+    
+    .categoria-option input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .categoria-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 16px;
+      background-color: #f9fafb;
+      border: 2px solid #d1d5db;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #374151;
+      min-height: 44px;
+    }
+    
+    .categoria-option input[type="radio"]:checked + .categoria-label {
+      background-color: #1f3c88;
+      border-color: #1f3c88;
+      color: white;
+      box-shadow: 0 0 0 3px rgba(31, 60, 136, 0.2);
+    }
+    
+    .categoria-label:hover {
+      border-color: #1f3c88;
+      background-color: #f0f4ff;
+    }
+    
+    .categoria-option input[type="radio"]:checked + .categoria-label:hover {
+      background-color: #153d7b;
+    }
+  `;
+
   return (
+    <>
+      <style>{categoriaGridStyles}</style>
     <div style={styleConfig.modalContainer}>
       <button type="button" onClick={onCerrar} style={styleConfig.closeButton}>&times;</button>
       <h2 style={styleConfig.title}>
@@ -172,9 +248,24 @@ const FormularioPago: React.FC<Props> = ({ tipo, club, montoMinimo, partidos = [
         {(tipo === "cuota" || tipo === "arbitraje") && (
           <div>
             <label style={styleConfig.label}>Categoría *</label>
-            <select value={categoria} onChange={e => setCategoria(e.target.value)} style={styleConfig.input} required>
-              {categorias.map(cat => <option key={cat} value={cat}>{cat}</option>)}
-            </select>
+            <div className="categoria-grid">
+              {categorias.map(cat => (
+                <div key={cat} className="categoria-option">
+                  <input 
+                    type="radio" 
+                    id={`cat-${cat}`}
+                    name="categoria"
+                    value={cat}
+                    checked={categoria === cat}
+                    onChange={e => setCategoria(e.target.value)}
+                    required
+                  />
+                  <label htmlFor={`cat-${cat}`} className="categoria-label">
+                    {cat}
+                  </label>
+                </div>
+              ))}
+            </div>
           </div>
         )}
         
@@ -214,6 +305,7 @@ const FormularioPago: React.FC<Props> = ({ tipo, club, montoMinimo, partidos = [
         </button>
       </form>
     </div>
+    </>
   );
 };
 

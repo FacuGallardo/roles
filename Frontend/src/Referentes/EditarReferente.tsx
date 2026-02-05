@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import type { CSSProperties } from "react";
 import { styles } from "./ReferentesPage";
+import "./referentes-responsive.css";
 
 interface Club {
   id: number;
@@ -123,19 +124,29 @@ const EditarReferente: React.FC<Props> = ({
           />
         </div>
 
-        <select
-          name="categoria"
-          value={form.categoria}
-          onChange={handleChange}
-          style={styles.inputOscuro}
-          required
-        >
-          {categorias.map((c) => (
-            <option key={c} value={c}>
-              {c}
-            </option>
-          ))}
-        </select>
+        <div style={{ marginBottom: '16px' }}>
+          <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#1f2937' }}>
+            Categoría
+          </label>
+          <div className="categoria-grid">
+            {categorias.map((c) => (
+              <div key={c} className="categoria-option">
+                <input 
+                  type="radio" 
+                  id={`cat-${c}`}
+                  name="categoria"
+                  value={c}
+                  checked={form.categoria === c}
+                  onChange={handleChange}
+                  required
+                />
+                <label htmlFor={`cat-${c}`} className="categoria-label">
+                  {c}
+                </label>
+              </div>
+            ))}
+          </div>
+        </div>
 
         <input
           name="dni"

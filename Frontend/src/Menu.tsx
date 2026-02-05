@@ -10,7 +10,7 @@ import NoticiasPage from "./noticias/Noticiaspage";
 import Reglamento from "./Reglamento/Reglamento";
 import PagosPage from "./RegistroPagos/PagosPage";
 import LoginModal from "./LoginModal";
-import "./menu-responsive.css";
+import "./menu-responsive.css";\nimport "./images-responsive.css";
 
 export default function App() {
   const [vista, setVista] = useState(
@@ -100,7 +100,7 @@ export default function App() {
   header {
     background-color: #1f3c88;
     color: white;
-    padding: 1rem 2rem;
+    padding: 0.75rem 1rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -108,11 +108,12 @@ export default function App() {
     position: sticky;
     top: 0;
     z-index: 10;
+    height: var(--header-height);
   }
   .logo { display: flex; align-items: center; gap: 0.75rem; font-weight: bold; font-size: 1.25rem; cursor: pointer; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); transition: transform 0.3s ease; }
   .logo:hover { transform: scale(1.02); }
   .logo img { width: 40px; height: 40px; border-radius: 50%; }
-  nav { display: flex; gap: 2rem; align-items: center; transition: transform 0.3s ease, opacity 0.3s ease; }
+  nav { display: flex; gap: clamp(0.75rem, 4vw, 2rem); align-items: center; transition: transform 0.3s ease, opacity 0.3s ease; }
   .nav-btn { background: none; border: none; color: white; font-size: 1rem; font-weight: 600; cursor: pointer; position: relative; padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.5rem; transition: color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease; }
   .nav-btn:hover { color: #a0c4ff; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
   .nav-btn:active { transform: scale(0.95); }
@@ -122,22 +123,98 @@ export default function App() {
   .nav-btn:hover:not(.active-nav-btn)::after { width: 100%; }
   .nav-btn span[role="img"] { display: inline-block; transition: transform 0.3s ease; }
   .nav-btn[aria-expanded="true"] span[role="img"] { transform: rotate(180deg); }
-  .dropdown { position: absolute; top: 3.5rem; left: 0; background: white; color: #1f3c88; min-width: 200px; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.2); z-index: 100; display: flex; flex-direction: column; font-size: 1rem; overflow: hidden; animation: dropdownIn 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; transform-origin: top center; }
+  .dropdown { position: absolute; top: 3.5rem; left: 0; background: white; color: #1f3c88; min-width: 200px; max-width: 90vw; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.2); z-index: 100; display: flex; flex-direction: column; font-size: 1rem; overflow: hidden; animation: dropdownIn 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; transform-origin: top center; }
   @keyframes dropdownIn { from { opacity: 0; transform: translateY(-10px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
-  .dropdown-btn { background: none; border: none; color: #1f3c88; text-align: left; padding: 1rem 1.25rem; cursor: pointer; font-weight: 500; transition: background-color 0.2s ease, transform 0.1s ease; }
+  .dropdown-btn { background: none; border: none; color: #1f3c88; text-align: left; padding: 1rem 1.25rem; cursor: pointer; font-weight: 500; transition: background-color 0.2s ease, transform 0.1s ease; min-height: 44px; display: flex; align-items: center; }
   .dropdown-btn:hover { background: #e9ecef; }
   .dropdown-btn:active { transform: scale(0.98); }
-  main { flex: 1; padding: 2rem; display: flex; justify-content: center; }
+  main { flex: 1; padding: 1rem; padding-top: calc(1rem + var(--header-height, 60px)); display: flex; justify-content: center; }
   footer { background: #1f3c88; color: white; text-align: center; padding: 1rem; font-size: 0.9rem; }
-  .footer-contact { display: flex; flex-direction: column; align-items: center; gap: 0.25rem; margin-top: 0.5rem; font-size: 0.85rem; }
+  .footer-contact { display: flex; flex-direction: column; align-items: center; gap: 0.25rem; margin-top: 0.5rem; font-size: clamp(0.875rem, 2vw, 0.9rem); line-height: 1.4; }
   .footer-contact img { height: 20px; margin-right: 0.5rem; vertical-align: middle; }
   .footer-contact a { color: white; text-decoration: underline; }
-  .sponsors { background: white; border-radius: 12px; padding: 1.5rem; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.05); }
+  .sponsors { background: white; border-radius: 12px; padding: clamp(1rem, 4vw, 1.5rem); text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.05); }
   .sponsors h2 { margin-bottom: 1rem; color: #1f3c88; }
-  .sponsor-logos { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; }
+  .sponsor-logos { display: flex; flex-wrap: wrap; justify-content: center; gap: clamp(1rem, 4vw, 2rem); }
   .sponsor-logos img { height: 40px; object-fit: contain; opacity: 0.8; transition: opacity 0.3s; }
   .sponsor-logos img:hover { opacity: 1; }
-  .hamburger-menu { display: none; font-size: 1.5rem; cursor: pointer; border: none; background: none; color: white; }
+  .hamburger-menu { 
+    display: none; 
+    font-size: 1.5rem; 
+    cursor: pointer; 
+    border: none; 
+    background: none; 
+    color: white;
+    min-height: 44px;
+    min-width: 44px;
+    padding: 0.5rem;
+    margin: -0.5rem;
+    transition: transform 0.2s ease;
+  }
+  .hamburger-menu:hover { transform: scale(1.1); }
+  
+  /* --- BOTONES DE ACCIÓN (Editar, Eliminar, Guardar) --- */
+  .btn-primary, .btn-save, .btn-submit {
+    background-color: #1f3c88;
+    color: white;
+    min-height: 44px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .btn-primary:hover, .btn-save:hover, .btn-submit:hover {
+    background-color: #152a5f;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(31, 60, 136, 0.3);
+  }
+  .btn-secondary, .btn-cancel {
+    background-color: #e5e7eb;
+    color: #1f3c88;
+    min-height: 44px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .btn-secondary:hover, .btn-cancel:hover {
+    background-color: #d1d5db;
+    transform: translateY(-2px);
+  }
+  .btn-danger, .btn-delete {
+    background-color: #ef4444;
+    color: white;
+    min-height: 44px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .btn-danger:hover, .btn-delete:hover {
+    background-color: #dc2626;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(239, 68, 68, 0.3);
+  }
+  .btn-warning {
+    background-color: #f59e0b;
+    color: white;
+  }
+  .btn-warning:hover {
+    background-color: #d97706;
+  }
+  .btn-success {
+    background-color: #10b981;
+    color: white;
+  }
+  .btn-success:hover {
+    background-color: #059669;
+  }
   
   /* --- 7. NUEVOS ESTILOS PARA VISTA "INICIO" --- */
   .inicio-container {
@@ -149,7 +226,7 @@ export default function App() {
   }
   
   .inicio-section-title {
-    font-size: 1.75rem;
+    font-size: clamp(1.3rem, 4vw, 1.75rem);
     font-weight: 700;
     color: #1f3c88;
     margin-bottom: 1rem;
@@ -159,13 +236,13 @@ export default function App() {
   
   .inicio-noticias-grid {
     display: grid;
-    gap: 2rem;
+    gap: clamp(1rem, 4vw, 2rem);
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   }
   
   .inicio-data-grid {
     display: grid;
-    gap: 2rem;
+    gap: clamp(1rem, 4vw, 2rem);
     grid-template-columns: 2fr 1fr; /* 2/3 para tabla, 1/3 para calendario */
   }
 
@@ -186,16 +263,17 @@ export default function App() {
     border-color: #1f3c88;
   }
   
-  .card img { width: 100%; height: 180px; object-fit: cover; transition: transform 0.4s ease; }
+  .card img { width: 100%; height: clamp(150px, 40vw, 250px); object-fit: cover; transition: transform 0.4s ease; }
   .card:hover img { transform: scale(1.05); }
-  .card-content { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
-  .card-content h2 { font-size: 1.25rem; margin-bottom: 0.5rem; color: #1f3c88; }
-  .card-content p { font-size: 0.95rem; color: #555; margin-bottom: 1rem; }
+  .card-content { padding: clamp(1rem, 3vw, 1.5rem); flex: 1; display: flex; flex-direction: column; }
+  .card-content h2 { font-size: clamp(1.1rem, 3vw, 1.25rem); margin-bottom: 0.5rem; color: #1f3c88; line-height: 1.3; }
+  .card-content p { font-size: clamp(0.9rem, 2.5vw, 0.95rem); color: #555; margin-bottom: 1rem; line-height: 1.5; }
   .card-content .read-more {
     margin-top: auto;
     font-weight: 600;
     color: #1f3c88;
     text-decoration: none;
+    font-size: clamp(0.85rem, 2vw, 0.9rem);
   }
   .card-content .read-more:hover { text-decoration: underline; }
 
@@ -207,16 +285,18 @@ export default function App() {
   .tabla-posiciones th, .tabla-posiciones td {
     padding: 0.75rem 0.5rem;
     border-bottom: 1px solid #eee;
-    color: #333; /* Agregar color oscuro para contraste */
+    color: #333;
+    font-size: clamp(0.875rem, 2vw, 1rem);
   }
   .tabla-posiciones th {
-    font-size: 0.85rem;
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
     color: #555;
     text-transform: uppercase;
+    font-weight: 600;
   }
   .tabla-posiciones td {
     font-weight: 500;
-    color: #333; /* Asegurar color en datos */
+    color: #333;
   }
   .tabla-posiciones tr:hover {
     background-color: #f9f9f9;
@@ -265,21 +345,94 @@ export default function App() {
     }
   }
   
+  @media (max-width: 480px) {
+    /* Botones en mobile: asegurar que tengan buen tamaño */
+    .btn-primary, .btn-save, .btn-submit,
+    .btn-secondary, .btn-cancel,
+    .btn-danger, .btn-delete,
+    .btn-warning, .btn-success {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      font-size: 0.95rem;
+    }
+    
+    /* Grupos de botones en columna */
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+  }
+  
+  @media (min-width: 769px) {
+    header { 
+      padding: 1rem 2rem;
+    }
+  }
+  
   @media (max-width: 768px) {
-    header { padding: 1rem; }
-    nav { display: none; flex-direction: column; position: absolute; top: 70px; right: 0; background: #1f3c88; width: 100%; padding: 1rem 0; box-shadow: 0 4px 8px rgba(0,0,0,0.1); animation: slideDown 0.3s ease-in-out forwards; }
-    nav.is-open { align-items: stretch; }
+    header { 
+      padding: 0.75rem 1rem;
+      height: var(--header-height);
+    }
+    nav { 
+      display: none; 
+      flex-direction: column; 
+      position: fixed; 
+      top: var(--navbar-mobile-top); 
+      left: 0; 
+      right: 0;
+      background: #1f3c88; 
+      width: 100%; 
+      max-height: calc(100vh - var(--navbar-mobile-top));
+      overflow-y: auto;
+      padding: 0.5rem 0; 
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+      animation: slideDown 0.3s ease-in-out forwards; 
+      z-index: 9;
+      padding-bottom: env(safe-area-inset-bottom, 0);
+    }
+    nav.is-open { 
+      align-items: stretch;
+      display: flex;
+    }
     @keyframes slideDown { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-    .nav-btn { width: 100%; justify-content: flex-start; align-items: center; font-size: 1.15rem; padding: 1rem 0.5rem; gap: 0.75rem; }
-    .nav-btn span[role="img"] { font-size: 1.4rem; }
+    .nav-btn { 
+      width: 100%; 
+      justify-content: flex-start; 
+      align-items: center; 
+      font-size: 1rem;
+      min-height: 44px;
+      padding: 0.75rem 1rem; 
+      gap: 0.75rem;
+      border-radius: 0;
+    }
+    .nav-btn span[role="img"] { font-size: 1.2rem; }
     .nav-btn::after { display: none; }
-    .nav-btn.active-nav-btn { background-color: #1a326b; }
+    .nav-btn.active-nav-btn { background-color: rgba(255, 255, 255, 0.1); }
     .nav-btn.active-nav-btn::after { display: none; }
-    .dropdown { position: static; border-radius: 0; box-shadow: none; background: #2a4993; min-width: auto; margin-left: 1.5rem; margin-top: 0.5rem; }
-    .dropdown-btn { padding: 0.75rem 0; padding-left: 2rem; color: white; font-size: 1.05rem; }
+    .dropdown { 
+      position: static; 
+      border-radius: 0; 
+      box-shadow: none; 
+      background: #2a4993; 
+      min-width: auto; 
+      margin-left: 1.5rem; 
+      margin-top: 0.25rem;
+      animation: none;
+    }
+    .dropdown-btn { 
+      padding: 0.75rem 0; 
+      padding-left: 2rem; 
+      color: white; 
+      font-size: 0.95rem;
+      min-height: 40px;
+      display: flex;
+      align-items: center;
+    }
+    .dropdown-btn:hover { background: rgba(255, 255, 255, 0.1); }
     .hamburger-menu { display: block; }
-    nav.is-open { display: flex; }
-    main { padding: 1rem; }
+    main { padding: 1rem; padding-top: 1rem; }
   }
 `}</style>
 
@@ -416,8 +569,8 @@ export default function App() {
                 <div className="card">
                   <div className="card-content">
                     <h2>Tabla de Puntuaciones (Resumen)</h2>
-                    <div className="table-responsive" style={{ width: "100%", overflowX: "auto", WebkitOverflowScrolling: "touch" as const }}>
-                      <table className="tabla-posiciones" style={{ minWidth: "400px" }}>
+                    <div className="table-responsive">
+                      <table className="tabla-posiciones" style={{ minWidth: "300px" }}>
                       <thead>
                         <tr>
                           <th>#</th>
@@ -552,3 +705,4 @@ export default function App() {
     </>
   );
 }
+

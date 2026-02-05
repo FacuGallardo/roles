@@ -4,7 +4,7 @@
 @media (max-width: 480px) {
   /* Main page container */
   .noticias-page-container {
-    padding: 12px !important;
+    padding: clamp(8px, 2vw, 12px) !important;
   }
 
   /* Content wrapper */
@@ -16,8 +16,8 @@
   /* Main title */
   .noticias-main-title {
     font-size: 1.4rem !important;
-    margin-bottom: 20px !important;
-    padding-bottom: 8px !important;
+    margin-bottom: clamp(12px, 3vw, 20px) !important;
+    padding-bottom: clamp(6px, 1.5vw, 8px) !important;
     text-align: center;
   }
 
@@ -25,48 +25,48 @@
   .noticias-toggle-buttons {
     display: flex !important;
     flex-direction: column !important;
-    gap: 0.5rem !important;
-    margin-bottom: 1.5rem !important;
+    gap: clamp(0.35rem, 1vw, 0.5rem) !important;
+    margin-bottom: clamp(1rem, 2.5vw, 1.5rem) !important;
   }
 
   .noticias-toggle-buttons button {
     width: 100% !important;
-    padding: 0.6rem 0.8rem !important;
+    padding: clamp(0.5rem, 1.5vw, 0.6rem) clamp(0.6rem, 1.5vw, 0.8rem) !important;
     font-size: 0.85rem !important;
     min-height: 44px;
   }
 
   /* Carousel section */
   .noticias-carrusel-section {
-    padding: 1rem !important;
+    padding: clamp(0.75rem, 2vw, 1rem) !important;
     border-radius: 0.75rem !important;
-    margin-bottom: 1.5rem !important;
+    margin-bottom: clamp(1rem, 2.5vw, 1.5rem) !important;
   }
 
   .noticias-carrusel-title {
     font-size: 1.3rem !important;
-    margin-bottom: 1rem !important;
-    padding-bottom: 8px !important;
+    margin-bottom: clamp(0.75rem, 2vw, 1rem) !important;
+    padding-bottom: clamp(6px, 1.5vw, 8px) !important;
   }
 
   /* Carousel container */
   .noticias-carrusel-container {
     overflow-x: auto !important;
-    gap: 1rem !important;
-    padding: 0.5rem !important;
+    gap: clamp(0.75rem, 2vw, 1rem) !important;
+    padding: clamp(0.35rem, 1vw, 0.5rem) !important;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
   }
 
   /* Carousel cards */
   .noticias-carrusel-card {
-    min-width: 240px !important;
+    min-width: clamp(160px, 50vw, 240px) !important;
     max-width: 240px !important;
     border-radius: 0.5rem !important;
   }
 
   .noticias-card-content {
-    padding: 0.75rem !important;
+    padding: clamp(0.5rem, 1.5vw, 0.75rem) !important;
   }
 
   .noticias-card-date {
@@ -86,7 +86,7 @@
 
   /* Management section */
   .noticias-management-section {
-    padding: 1.5rem !important;
+    padding: clamp(1rem, 2.5vw, 1.5rem) !important;
     border-radius: 1rem !important;
     width: 100% !important;
   }
@@ -95,13 +95,13 @@
   .noticias-formulario {
     display: flex !important;
     flex-direction: column !important;
-    gap: 1rem !important;
+    gap: clamp(0.75rem, 2vw, 1rem) !important;
   }
 
   .noticias-form-title {
     font-size: 1.3rem !important;
-    margin-bottom: 1rem !important;
-    padding-bottom: 8px !important;
+    margin-bottom: clamp(0.75rem, 2vw, 1rem) !important;
+    padding-bottom: clamp(6px, 1.5vw, 8px) !important;
   }
 
   /* Input groups */
@@ -109,23 +109,24 @@
     display: flex !important;
     flex-direction: column !important;
     width: 100% !important;
-    margin-bottom: 0.5rem !important;
+    margin-bottom: clamp(0.35rem, 1vw, 0.5rem) !important;
   }
 
   .noticias-input-group label {
     font-size: 0.85rem !important;
-    margin-bottom: 4px !important;
+    margin-bottom: clamp(2px, 0.5vw, 4px) !important;
     font-weight: 600;
   }
 
   /* Form inputs */
   .noticias-form-input {
     width: 100% !important;
-    padding: 0.65rem 0.75rem !important;
+    padding: clamp(0.5rem, 1.5vw, 0.65rem) clamp(0.6rem, 1.5vw, 0.75rem) !important;
     font-size: 0.95rem;
     border: 1px solid #d1d5db;
     border-radius: 0.4rem;
     box-sizing: border-box;
+    min-height: 44px;
   }
 
   /* Textarea */
@@ -277,3 +278,4 @@
     overflow-x: hidden !important;
   }
 }
+

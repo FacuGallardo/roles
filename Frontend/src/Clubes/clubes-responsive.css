@@ -173,8 +173,8 @@
 
 /* Images preview */
 .club-preview {
-  width: 100px;
-  height: 100px;
+  width: clamp(60px, 15vw, 100px);
+  height: clamp(60px, 15vw, 100px);
   object-fit: contain;
   margin-top: 8px;
 }
@@ -212,3 +212,4 @@
     flex-direction: row;
   }
 }
+

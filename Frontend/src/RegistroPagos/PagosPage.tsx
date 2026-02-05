@@ -29,15 +29,17 @@ const styleConfig = {
 };
 
 const baseNavButtonStyle: CSSProperties = {
-    padding: "0.5rem 1rem",
+    padding: "clamp(0.35rem, 1.5vw, 0.5rem) clamp(0.75rem, 2.5vw, 1rem)",
     borderRadius: "5px",
     background: "#1f3c88",
     color: "white",
     border: "none",
     cursor: "pointer",
-    marginRight: "0.5rem",
+    marginRight: "clamp(0.25rem, 1vw, 0.5rem)",
     fontWeight: '600',
-    transition: 'background-color 0.2s, opacity 0.2s'
+    transition: 'background-color 0.2s, opacity 0.2s',
+    minHeight: '44px',
+    minWidth: '44px',
 };
 
 const activeNavButtonStyle: CSSProperties = {
@@ -47,14 +49,14 @@ const activeNavButtonStyle: CSSProperties = {
 
 const globalStyles = `
 /* ... (Mismos estilos que tenías antes, omitidos para brevedad) ... */
-.pagos-container { min-height: 100vh; background-color: #f3f4f6; padding: 1rem; margin-top: 20px; }
-@media (min-width: 768px) { .pagos-container { padding: 2rem; margin-top: 20px; } }
-.content-wrapper { max-width: 80rem; margin: 0 auto; background-color: white; border-radius: 0.5rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 2rem; }
+.pagos-container { min-height: 100vh; background-color: #f3f4f6; padding: clamp(0.75rem, 2vw, 1rem); margin-top: clamp(12px, 2.5vw, 20px); }
+@media (min-width: 768px) { .pagos-container { padding: clamp(1rem, 3vw, 2rem); margin-top: 20px; } }
+.content-wrapper { max-width: 80rem; margin: 0 auto; background-color: white; border-radius: 0.5rem; padding: clamp(1rem, 3vw, 1.5rem); display: flex; flex-direction: column; gap: clamp(1rem, 3vw, 2rem); }
 .modal-backdrop { position: fixed; top: 0; right: 0; bottom: 0; left: 0; background-color: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 50; }
-.api-status-alert { padding: 0.75rem; margin-bottom: 1rem; border-radius: 0.375rem; font-weight: 500; }
+.api-status-alert { padding: clamp(0.5rem, 1.5vw, 0.75rem); margin-bottom: clamp(0.75rem, 2vw, 1rem); border-radius: 0.375rem; font-weight: 500; }
 .api-status-alert.error { background-color: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
 .api-status-alert.loading { background-color: #f0f9ff; color: #0c4a6e; border: 1px solid #7dd3fc; }
-.content-section { padding-top: 1rem; }
+.content-section { padding-top: clamp(0.75rem, 2vw, 1rem); }
 `;
 
 // --- TIPOS ---

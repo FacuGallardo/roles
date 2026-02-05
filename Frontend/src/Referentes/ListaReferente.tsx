@@ -53,14 +53,19 @@ const tablaStyles: { [key: string]: CSSProperties } = {
     padding: '12px 16px',
   },
   buttonBase: {
-    padding: '6px 12px',
+    padding: '0.75rem 1rem',
     borderRadius: '6px',
-    fontWeight: '500',
-    fontSize: '14px',
+    fontWeight: '600',
+    fontSize: '0.9rem',
     border: 'none',
     cursor: 'pointer',
-    transition: 'opacity 0.2s ease, transform 0.1s ease',
+    transition: 'all 0.2s ease',
     whiteSpace: 'nowrap',
+    minHeight: '44px',
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '0.5rem',
   },
   buttonVer: {
     backgroundColor: '#1f3c88',
@@ -91,8 +96,8 @@ const ListaReferente: React.FC<Props> = ({
   }
 
   return (
-<div className="table-responsive" style={{ width: "100%", overflowX: "auto", WebkitOverflowScrolling: "touch" as const }}>
-      <table style={{ width: "100%", minWidth: "500px", borderCollapse: "collapse" }}>
+    <div className="table-responsive">
+      <table style={{ width: "100%", minWidth: "380px", borderCollapse: "collapse" }}>
         <thead style={tablaStyles.tableHeader}>
           <tr>
             <th style={{ ...tablaStyles.headerCell, borderTopLeftRadius: "10px" }}>

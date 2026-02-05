@@ -97,36 +97,60 @@ const globalStyles = `
 
 /* Botón Editar */
 .btn-edit {
-    padding: 0.375rem 0.75rem; /* px-3 py-1.5 */
-    font-size: 0.75rem; /* text-xs */
-    font-weight: 500;
-    color: #1d4ed8; /* text-blue-700 */
-    background-color: #bfdbfe; /* bg-blue-200 */
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: white;
+    background-color: #1f3c88;
     border: none;
-    border-radius: 0.375rem; /* rounded-md */
+    border-radius: 0.375rem;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: all 0.2s;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
 }
 
 .btn-edit:hover {
-    background-color: #93c5fd; /* hover:bg-blue-300 */
+    background-color: #0f2357;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-edit:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(31, 60, 136, 0.2);
 }
 
 /* Botón Eliminar */
 .btn-delete {
-    padding: 0.375rem 0.75rem;
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: #b91c1c; /* text-red-700 */
-    background-color: #fecaca; /* bg-red-200 */
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: white;
+    background-color: #ef4444;
     border: none;
     border-radius: 0.375rem;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: all 0.2s;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
 }
 
 .btn-delete:hover {
-    background-color: #fca5a5; /* hover:bg-red-300 */
+    background-color: #dc2626;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-delete:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
 }
 `;
 // ============================================

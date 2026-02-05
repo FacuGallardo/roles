@@ -45,8 +45,8 @@ const formStyles = {
     // Estilo base para Input y Select
     inputBase: {
         width: '100%',
-        padding: '10px 12px',
-        margin: '8px 0 16px 0',
+        padding: 'clamp(8px, 2vw, 12px) clamp(10px, 2.5vw, 12px)',
+        margin: 'clamp(6px, 1.5vw, 8px) 0 clamp(12px, 2vw, 16px) 0',
         display: 'inline-block',
         border: '1px solid #ccc',
         borderRadius: '6px',
@@ -58,25 +58,25 @@ const formStyles = {
     // Estilo para el contenedor de la información general
     infoGeneral: {
         display: 'flex',
-        gap: '20px',
-        marginBottom: '20px',
+        gap: 'clamp(12px, 4vw, 20px)',
+        marginBottom: 'clamp(12px, 3vw, 20px)',
     },
     // Estilo de la cabecera (h3) de sección
     sectionHeader: {
         color: '#1f3c88',
         fontSize: '1.4rem',
         borderBottom: '2px solid #f0f0f0',
-        paddingBottom: '10px',
-        marginBottom: '20px',
-        marginTop: '30px',
+        paddingBottom: 'clamp(8px, 2vw, 10px)',
+        marginBottom: 'clamp(12px, 3vw, 20px)',
+        marginTop: 'clamp(20px, 5vw, 30px)',
     },
     // Estilo para el contenedor del formulario de un solo partido (Grid)
     formPartidoGrid: {
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-        gap: '15px',
+        gap: 'clamp(12px, 3vw, 15px)',
         alignItems: 'flex-start',
-        padding: '15px',
+        padding: 'clamp(12px, 2.5vw, 15px)',
         backgroundColor: '#f9f9f9',
         borderRadius: '8px',
         border: '1px solid #eee',
@@ -89,14 +89,14 @@ const formStyles = {
     // Estilo para la lista de partidos
     partidoList: {
         listStyleType: 'none',
-        padding: '10px 0',
+        padding: 'clamp(8px, 1.5vw, 10px) 0',
         borderTop: '1px dashed #ddd',
-        marginTop: '15px',
+        marginTop: 'clamp(12px, 2.5vw, 15px)',
     },
     partidoListItem: {
         backgroundColor: '#fff',
-        padding: '10px 15px',
-        marginBottom: '5px',
+        padding: 'clamp(8px, 1.5vw, 10px) clamp(12px, 2.5vw, 15px)',
+        marginBottom: 'clamp(4px, 1vw, 5px)',
         borderRadius: '4px',
         borderLeft: '4px solid #3498db',
         boxShadow: '0 1px 3px rgba(0,0,0,0.05)',
@@ -106,7 +106,7 @@ const formStyles = {
     successMessage: {
         color: "#28a745", // Verde
         backgroundColor: "#d4edda", // Fondo verde claro
-        padding: "10px",
+        padding: "clamp(8px, 2vw, 10px)",
         borderRadius: "4px",
         textAlign: "center" as const,
         marginBottom: "1rem",

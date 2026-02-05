@@ -152,6 +152,57 @@ const globalStyles = `
 .btn-submit-arbitraje:hover {
     background-color: #153d7b; /* hover:bg-emerald-600 */
 }
+
+/* Categoría Grid Selection */
+.categoria-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+    margin-bottom: 1rem;
+}
+
+.categoria-option {
+    position: relative;
+}
+
+.categoria-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.categoria-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 16px;
+    background-color: #f9fafb;
+    border: 2px solid #d1d5db;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #374151;
+    min-height: 44px;
+}
+
+.categoria-option input[type="radio"]:checked + .categoria-label {
+    background-color: #1f3c88;
+    border-color: #1f3c88;
+    color: white;
+    box-shadow: 0 0 0 3px rgba(31, 60, 136, 0.2);
+}
+
+.categoria-label:hover {
+    border-color: #1f3c88;
+    background-color: #f0f4ff;
+}
+
+.categoria-option input[type="radio"]:checked + .categoria-label:hover {
+    background-color: #153d7b;
+}
 `;
 // ============================================
 
@@ -221,18 +272,27 @@ const FormularioArbitraje: React.FC<Props> = ({ club, partidos, montoMinimo, onG
                 </h2>
                 <form onSubmit={handleSubmit} className={styleConfig.form}>
                     
-                    {/* Categoría */}
+                    {/* Categoría - Grid Selection */}
                     <div>
-                        <label className={styleConfig.label} htmlFor="categoria">Categoría</label>
-                        <select 
-                            id="categoria"
-                            value={categoria} 
-                            onChange={e => setCategoria(e.target.value)} 
-                            className={styleConfig.input} 
-                            required
-                        >
-                            {categorias.map(c => <option key={c} value={c}>{c}</option>)}
-                        </select>
+                        <label className={styleConfig.label}>Categoría</label>
+                        <div className="categoria-grid">
+                            {categorias.map(c => (
+                                <div key={c} className="categoria-option">
+                                    <input 
+                                        type="radio" 
+                                        id={`cat-${c}`}
+                                        name="categoria"
+                                        value={c}
+                                        checked={categoria === c}
+                                        onChange={e => setCategoria(e.target.value)}
+                                        required
+                                    />
+                                    <label htmlFor={`cat-${c}`} className="categoria-label">
+                                        {c}
+                                    </label>
+                                </div>
+                            ))}
+                        </div>
                     </div>
 
                     {/* Partido */}

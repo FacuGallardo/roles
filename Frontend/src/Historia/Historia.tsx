@@ -214,7 +214,7 @@ export default function Historia() {
         
         .evento img {
           width: 100%;
-          height: 250px; /* Aumentado de 180px a 250px */ 
+          height: clamp(200px, 50vw, 280px); /* Aumentado de 180px a 250px */ 
           max-width: 450px; /* Aumentado de 400px a 450px para permitir más ancho */
           object-fit: cover; /* CAMBIO A 'COVER' para que la imagen ocupe todo el espacio. Si prefieres que la imagen se vea completa aunque deje espacios, usa 'contain'. */ 
           border-radius: 12px;
@@ -278,7 +278,7 @@ export default function Historia() {
       <div className="eventos-multiples-container">
         {eventosDelAñoActivo.map((evento, index) => (
           <div className="evento" key={index}>
-            <img src={evento.imagen} alt={`Evento ${evento.año}`} />
+            <img loading="lazy" src={evento.imagen} alt={`Evento ${evento.año}`} />
             <div className="evento-texto">
               **{evento.año}:** {evento.texto}
             </div>
@@ -288,3 +288,5 @@ export default function Historia() {
     </div>
   );
 }
+
+
