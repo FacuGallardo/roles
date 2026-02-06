@@ -112,13 +112,13 @@ const EstadisticasPage: React.FC = () => {
      className="estadistica-container"
       style={{
         padding: "20px 8px",
-        paddingTop: "50px",
+        paddingTop: "1rem",
         backgroundColor: "#f4f7f6", 
         minHeight: "100vh",
         fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
         boxSizing: "border-box",
         width: "100%",
-        maxWidth: "100vw",
+        maxWidth: "100%",
         overflowX: "hidden",
       }}
     >

@@ -172,31 +172,52 @@ export default function VerClubes() {
         </select>
       </div>
 
-      {clubesFiltrados.map(club => (
-        <div key={club.id} className="club-card">
-          <img
-            src={club.logoUrl || "https://via.placeholder.com/120?text=Logo"}
-            alt="Logo"
-            className="club-logo"
-          />
-
-          <div className="club-info">
-            <h4>{club.nombre}</h4>
-            <p>{club.localidad?.nombre || "Sin localidad"} | {club.categoria}</p>
-            <p>{club.correo} | {club.telefono}</p>
-            <p>Registrado: {club.fechaRegistro}</p>
-          </div>
-
-          {esPresidenta && (
-            <div className="club-actions">
-              <button className="club-action-btn club-action-primary" onClick={() => iniciarEdicion(club)}>Modificar</button>
-              <button className="club-action-btn club-action-danger" onClick={() => setClubes(clubes.map(c => c.id === club.id ? { ...c, activo: false } : c))}>
-                Borrar
+      {clubesFiltrados.length === 0 ? (
+        <div className="empty-state">
+          <div className="empty-state-icon">🏐</div>
+          <h3 className="empty-state-title">
+            {clubes.length === 0 ? "Sin Clubes Registrados" : "Sin Resultados"}
+          </h3>
+          <p className="empty-state-subtitle">
+            {clubes.length === 0 
+              ? "No hay clubes registrados aún. Comienza añadiendo el primer club."
+              : "Intenta cambiar los filtros de búsqueda o categoría."}
+          </p>
+          {clubes.length === 0 && esPresidenta && (
+            <div className="empty-state-action">
+              <button onClick={() => setMostrarFormulario(true)}>
+                + Añadir Primer Club
               </button>
             </div>
           )}
         </div>
-      ))}
+      ) : (
+        clubesFiltrados.map(club => (
+          <div key={club.id} className="club-card">
+            <img
+              src={club.logoUrl || "https://via.placeholder.com/120?text=Logo"}
+              alt="Logo"
+              className="club-logo"
+            />
+
+            <div className="club-info">
+              <h4>{club.nombre}</h4>
+              <p>{club.localidad?.nombre || "Sin localidad"} | {club.categoria}</p>
+              <p>{club.correo} | {club.telefono}</p>
+              <p>Registrado: {club.fechaRegistro}</p>
+            </div>
+
+            {esPresidenta && (
+              <div className="club-actions">
+                <button className="club-action-btn club-action-primary" onClick={() => iniciarEdicion(club)}>Modificar</button>
+                <button className="club-action-btn club-action-danger" onClick={() => setClubes(clubes.map(c => c.id === club.id ? { ...c, activo: false } : c))}>
+                  Borrar
+                </button>
+              </div>
+            )}
+          </div>
+        ))
+      )}
 
       {editando && (
         <form className="club-form" onSubmit={guardarEdicion}>

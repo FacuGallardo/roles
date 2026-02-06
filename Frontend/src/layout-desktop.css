@@ -1,0 +1,503 @@
+/* ============================================
+   DESKTOP LAYOUT BEST PRACTICES
+   Target: 1200px+ (Desktop Real)
+   Spacing, containers, alignment, consistency
+   ============================================ */
+
+/* ============================================
+   GLOBAL CONTAINER STYLES
+   ============================================ */
+
+/* Standard page container */
+.page-container,
+.container,
+.content-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 2rem);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Wide container (if needed) */
+.container-lg,
+.container-wide {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 2rem);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Narrow container (for single column) */
+.container-sm,
+.container-narrow {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 2rem);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ============================================
+   SPACING SYSTEM
+   ============================================ */
+
+/* Margin utilities */
+.mt-small { margin-top: 0.5rem; }
+.mt-medium { margin-top: 1rem; }
+.mt-large { margin-top: 1.5rem; }
+.mt-xl { margin-top: 2rem; }
+
+.mb-small { margin-bottom: 0.5rem; }
+.mb-medium { margin-bottom: 1rem; }
+.mb-large { margin-bottom: 1.5rem; }
+.mb-xl { margin-bottom: 2rem; }
+
+.mx-auto { margin-left: auto; margin-right: auto; }
+.my-auto { margin-top: auto; margin-bottom: auto; }
+
+/* Padding utilities */
+.p-small { padding: 0.5rem; }
+.p-medium { padding: 1rem; }
+.p-large { padding: 1.5rem; }
+.p-xl { padding: 2rem; }
+
+/* Gap utilities for flex/grid */
+.gap-small { gap: 0.5rem; }
+.gap-medium { gap: 1rem; }
+.gap-large { gap: 1.5rem; }
+.gap-xl { gap: 2rem; }
+
+/* ============================================
+   RESPONSIVE SPACING USING CLAMP
+   ============================================ */
+
+.spacing-small { margin: clamp(0.5rem, 1vw, 1rem); }
+.spacing-medium { margin: clamp(1rem, 2vw, 1.5rem); }
+.spacing-large { margin: clamp(1.5rem, 3vw, 2.5rem); }
+.spacing-xl { margin: clamp(2rem, 4vw, 3rem); }
+
+.gap-responsive { gap: clamp(1rem, 3vw, 2rem); }
+.padding-responsive { padding: clamp(1rem, 4vw, 1.5rem); }
+
+/* ============================================
+   GRID LAYOUT HELPERS
+   ============================================ */
+
+/* 2-column grid (common on desktop) */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(1rem, 3vw, 2rem);
+}
+
+/* 3-column grid */
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1rem, 3vw, 2rem);
+}
+
+/* Auto-fit grid (responsive) */
+.grid-auto {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: clamp(1rem, 3vw, 2rem);
+}
+
+/* ============================================
+   FLEXBOX HELPERS
+   ============================================ */
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-around {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.flex-end {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.flex-start {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(1rem, 3vw, 1.5rem);
+}
+
+/* ============================================
+   CARD STYLES
+   ============================================ */
+
+.card,
+.card-container {
+  background: white;
+  border-radius: 12px;
+  padding: clamp(1rem, 3vw, 1.5rem);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.card:hover,
+.card-container:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Card image */
+.card img {
+  width: 100%;
+  height: auto;
+  max-height: clamp(150px, 40vw, 250px);
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+/* Card content */
+.card-content,
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.card-header {
+  font-size: clamp(1.1rem, 3vw, 1.25rem);
+  font-weight: 600;
+  color: #1f3c88;
+}
+
+.card-text,
+.card-body p {
+  font-size: clamp(0.9rem, 2vw, 0.95rem);
+  color: #555;
+  line-height: 1.5;
+}
+
+.card-footer {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* ============================================
+   SECTION STYLES
+   ============================================ */
+
+.section {
+  padding: clamp(1.5rem, 5vw, 3rem) 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.section:last-child {
+  border-bottom: none;
+}
+
+.section-header {
+  margin-bottom: clamp(1rem, 3vw, 2rem);
+}
+
+.section-title {
+  font-size: clamp(1.3rem, 4vw, 1.75rem);
+  font-weight: 700;
+  color: #1f3c88;
+  margin: 0;
+}
+
+/* ============================================
+   BUTTONS & ACTIONS
+   ============================================ */
+
+/* Button group */
+.button-group,
+.action-buttons {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.button-group.centered {
+  justify-content: center;
+}
+
+.button-group.right {
+  justify-content: flex-end;
+}
+
+/* Button spacing */
+button,
+.btn {
+  min-height: 44px;
+  padding: 0.75rem 1.5rem;
+  font-size: clamp(0.875rem, 1.5vw, 0.95rem);
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+button:hover,
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+button:active,
+.btn:active {
+  transform: translateY(0);
+}
+
+/* ============================================
+   MODAL/DIALOG STYLES
+   ============================================ */
+
+.modal,
+.dialog {
+  max-width: 500px;
+  padding: clamp(1.5rem, 4vw, 2rem);
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-header {
+  font-size: clamp(1.2rem, 3vw, 1.4rem);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #1f3c88;
+}
+
+.modal-content {
+  font-size: clamp(0.95rem, 1.5vw, 1rem);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  color: #555;
+}
+
+.modal-footer {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* ============================================
+   EMPTY STATE STYLES
+   ============================================ */
+
+.empty-state,
+.no-data {
+  text-align: center;
+  padding: clamp(2rem, 5vw, 4rem);
+  color: #6b7280;
+}
+
+.empty-state-icon {
+  font-size: clamp(2rem, 8vw, 4rem);
+  margin-bottom: 1rem;
+}
+
+.empty-state-title {
+  font-size: clamp(1.1rem, 3vw, 1.3rem);
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.5rem;
+}
+
+.empty-state-text {
+  font-size: clamp(0.9rem, 2vw, 0.95rem);
+  color: #6b7280;
+  margin-bottom: 1.5rem;
+}
+
+.empty-state-action {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: #1f3c88;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.empty-state-action:hover {
+  background-color: #152a5f;
+  transform: translateY(-2px);
+}
+
+/* ============================================
+   ALERTS & MESSAGES
+   ============================================ */
+
+.alert,
+.message {
+  padding: clamp(1rem, 2vw, 1.25rem);
+  border-radius: 8px;
+  border-left: 4px solid;
+  margin-bottom: 1.5rem;
+  font-size: clamp(0.9rem, 1.5vw, 0.95rem);
+}
+
+.alert-success {
+  background-color: #f0fdf4;
+  border-left-color: #10b981;
+  color: #065f46;
+}
+
+.alert-danger,
+.alert-error {
+  background-color: #fef2f2;
+  border-left-color: #ef4444;
+  color: #7f1d1d;
+}
+
+.alert-warning {
+  background-color: #fffbeb;
+  border-left-color: #f59e0b;
+  color: #78350f;
+}
+
+.alert-info {
+  background-color: #f0f9ff;
+  border-left-color: #4f46e5;
+  color: #0c4a6e;
+}
+
+/* ============================================
+   FORM STYLES
+   ============================================ */
+
+.form-group,
+.form-field {
+  margin-bottom: clamp(1rem, 2vw, 1.5rem);
+}
+
+.form-group label {
+  display: block;
+  font-weight: 500;
+  color: #1f3c88;
+  margin-bottom: 0.5rem;
+  font-size: clamp(0.9rem, 1.5vw, 0.95rem);
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: clamp(0.95rem, 1.5vw, 1rem);
+  transition: border-color 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #1f3c88;
+  box-shadow: 0 0 0 3px rgba(31, 60, 136, 0.1);
+}
+
+/* ============================================
+   DESKTOP-SPECIFIC MEDIA QUERIES
+   ============================================ */
+
+@media (min-width: 1200px) {
+  .grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Increase spacing on larger screens */
+  .spacing-large {
+    margin: clamp(2rem, 4vw, 3rem);
+  }
+
+  /* Better button spacing */
+  button, .btn {
+    padding: 0.75rem 2rem;
+  }
+
+  /* Larger cards on desktop */
+  .card {
+    padding: 1.5rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  .container,
+  .page-container {
+    max-width: 1280px;
+  }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
+@media print {
+  .container,
+  .page-container {
+    max-width: 100%;
+  }
+
+  button,
+  .modal,
+  .empty-state-action {
+    display: none;
+  }
+
+  .card {
+    page-break-inside: avoid;
+  }
+}

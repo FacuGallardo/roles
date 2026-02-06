@@ -102,7 +102,7 @@ const RegistroJugador: React.FC<Props> = ({ onRegistrar, clubes }) => {
       <h2 className="form-title-edit">Paso 1: Datos del Jugador</h2>
 
       {error && (
-        <div style={{ color: "red", marginBottom: 8, fontSize: 14 }}>
+        <div className="form-error">
           {error}
         </div>
       )}
@@ -202,10 +202,23 @@ const RegistroJugador: React.FC<Props> = ({ onRegistrar, clubes }) => {
             inputMode="numeric"
           />
         </div>
+        <div className="form-group">
+          <label htmlFor="estado">Estado</label>
+          <select
+            id="estado"
+            name="estado"
+            className="form-input"
+            value={form.estado}
+            onChange={handleChange}
+          >
+            <option value="activo">Activo</option>
+            <option value="inactivo">Inactivo</option>
+          </select>
+        </div>
       </div>
 
-      <div className="button-group-edit" style={{ marginTop: 12 }}>
-        <button type="submit" className="btn-action btn-primary">Registrar</button>
+      <div className="button-group button-group-right">
+        <button type="submit" className="btn-primary">Registrar</button>
       </div>
     </form>
   );

@@ -17,6 +17,11 @@
   box-sizing: border-box; 
 }
 
+/* Fixture title - ensure white color */
+.title {
+  color: #ffffff !important;
+}
+
 /* ------------------------------------------------------------
    Desktop / base styles (no colores ni lógicas cambiadas)
    ------------------------------------------------------------ */

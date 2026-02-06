@@ -10,7 +10,14 @@ import NoticiasPage from "./noticias/Noticiaspage";
 import Reglamento from "./Reglamento/Reglamento";
 import PagosPage from "./RegistroPagos/PagosPage";
 import LoginModal from "./LoginModal";
-import "./menu-responsive.css";\nimport "./images-responsive.css";
+import "./menu-responsive.css";
+import "./images-responsive.css";
+import "./tables-desktop.css";
+import "./typography-desktop.css";
+import "./layout-desktop.css";
+import "./forms-desktop.css";
+import "./feedback-desktop.css";
+import "./desktop-fixes.css";
 
 export default function App() {
   const [vista, setVista] = useState(
@@ -105,7 +112,7 @@ export default function App() {
     align-items: center;
     justify-content: space-between;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    position: sticky;
+    position: relative;
     top: 0;
     z-index: 10;
     height: var(--header-height);
@@ -219,7 +226,9 @@ export default function App() {
   /* --- 7. NUEVOS ESTILOS PARA VISTA "INICIO" --- */
   .inicio-container {
     width: 100%;
-    max-width: 1500px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 clamp(1rem, 4vw, 2rem);
     display: flex;
     flex-direction: column;
     gap: 2.5rem; /* Espacio entre secciones */
@@ -378,7 +387,7 @@ export default function App() {
     nav { 
       display: none; 
       flex-direction: column; 
-      position: fixed; 
+      position: sticky; 
       top: var(--navbar-mobile-top); 
       left: 0; 
       right: 0;

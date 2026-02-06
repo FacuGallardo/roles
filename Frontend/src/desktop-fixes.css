@@ -1,0 +1,397 @@
+/* ========================================
+   DESKTOP FIXES - CRITICAL LAYOUT ISSUES
+   Target: 1200px and above
+   Focus: Navbar gap, table overflow, header overflow, h1 visibility
+   ======================================== */
+
+/* ========================================
+   FIX 1: NAVBAR SPACING & Z-INDEX
+   ======================================== */
+
+/* Remove white gap between navbar and content */
+header {
+    margin-bottom: 0 !important;
+}
+
+/* Ensure dropdown is above all content */
+.dropdown {
+    z-index: 1000 !important;
+    position: fixed !important;
+}
+
+/* Main content starts right below navbar */
+main {
+    padding-top: 1rem !important;
+    margin-top: 0 !important;
+}
+
+/* Ensure page containers respect navbar height */
+.page-container,
+.container,
+.content-container,
+.estadistica-container,
+.fixture-page,
+.referentes-container,
+.clubes-page {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+    max-width: 100% !important;
+}
+
+/* ========================================
+   FIX 2: TABLE OVERFLOW & CENTERING
+   ======================================== */
+
+/* Global table wrapper fix */
+.table-wrapper,
+.table-responsive,
+.table-pagos-club-wrapper,
+.table-container {
+    width: 100% !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
+}
+
+/* Ensure table doesn't exceed container */
+table,
+.table-pagos-club,
+.tabla-posiciones {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
+}
+
+/* Table rows and cells */
+table th,
+table td,
+.table-pagos-club th,
+.table-pagos-club td {
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+
+/* Fix table wrapper parent container */
+.table-responsive-wrapper,
+[class*="table-"],
+.flex-container {
+    width: 100% !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
+}
+
+/* ========================================
+   FIX 3: BLUE HEADERS NOT BREAKING CARDS
+   ======================================== */
+
+/* Fixture header alignment */
+.fixture-card {
+    max-width: 1100px !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* Fixture title section */
+.fixture-card header,
+.fixture-header,
+.page-header {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: clamp(1.5rem, 3vw, 2rem) !important;
+    background-color: #1f3c88 !important;
+    border-radius: 12px 12px 0 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* Title styling inside headers */
+.fixture-card h2,
+.fixture-header h2,
+.page-header h2,
+.fixture-card h3,
+.fixture-header h3,
+.page-header h3,
+.fixture-title {
+    color: white !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* Section headers */
+.section-header,
+.form-section-header,
+.lista-header {
+    width: 100% !important;
+    padding: clamp(1rem, 2vw, 1.5rem) !important;
+    margin: 0 !important;
+    background: white !important;
+    box-sizing: border-box !important;
+}
+
+/* ========================================
+   FIX 4: H1 VISIBILITY & PADDING
+   ======================================== */
+
+/* Main page titles */
+h1,
+.page-title,
+.main-title,
+.module-title {
+    margin-top: 0 !important;
+    margin-bottom: clamp(1.5rem, 3vw, 2rem) !important;
+    padding: 1rem 0 !important;
+    color: #1f3c88 !important;
+    font-size: clamp(1.8rem, 4vw, 2.5rem) !important;
+    font-weight: 700 !important;
+}
+
+/* Ensure H1/H2 not hidden behind anything */
+h1, h2, h3 {
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+/* Title containers */
+.titulo-contenedor,
+.title-wrapper,
+.header-section {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    position: relative !important;
+    z-index: 5 !important;
+}
+
+/* ========================================
+   FIX 5: CONTAINER WIDTH CONSISTENCY
+   ======================================== */
+
+/* Remove 100vw usage everywhere */
+[style*="maxWidth: \"100vw\""],
+[style*="width: 100vw"],
+[style*="max-width: 100vw"],
+[style*="width: 100vw"] {
+    max-width: 100% !important;
+    width: 100% !important;
+}
+
+/* All major containers */
+.inicio-container,
+.clubes-container,
+.jugadores-container,
+.estadistica-container,
+.fixture-container,
+.fixture-page,
+.referentes-container,
+.reglamento-container,
+.autoridades-container,
+.historia-container,
+.noticias-container,
+.pagos-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: clamp(1rem, 3vw, 2rem) !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
+}
+
+/* White card containers inside pages */
+.white-card,
+.card-container,
+.content-card,
+.fixture-card,
+section,
+article {
+    width: 100% !important;
+    max-width: 1200px !important;
+    margin: 0 auto clamp(1.5rem, 3vw, 2rem) auto !important;
+    padding: clamp(1.5rem, 2.5vw, 2rem) !important;
+    box-sizing: border-box !important;
+}
+
+/* Ensure no horizontal scroll */
+html, body {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+}
+
+/* Main layout wrapper */
+.app,
+main {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+}
+
+/* ========================================
+   FIX 6: MODAL & DROPDOWN POSITIONING
+   ======================================== */
+
+/* Modals should not cause overflow */
+.modal,
+.modal-content,
+.modal-overlay {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    height: 100vh !important;
+    position: fixed !important;
+    left: 0 !important;
+    top: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* Dropdown positioning */
+.dropdown {
+    position: fixed !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    max-width: 90vw !important;
+    z-index: 1000 !important;
+}
+
+/* ========================================
+   FIX 7: FLEXBOX ALIGNMENT
+   ======================================== */
+
+/* Fix flex containers with justify-center causing overflow */
+main {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: flex-start !important;
+}
+
+main > * {
+    width: 100% !important;
+    max-width: 1200px !important;
+    margin: 0 !important;
+    padding: clamp(1rem, 3vw, 2rem) !important;
+    box-sizing: border-box !important;
+}
+
+/* ========================================
+   FIX 8: INLINE STYLES OVERRIDE
+   ======================================== */
+
+/* Target problematic inline styles in components */
+[style*="paddingTop: 50px"],
+[style*="paddingTop: '50px'"],
+[style*="paddingTop: \"50px\""] {
+    padding-top: 1rem !important;
+}
+
+[style*="maxWidth: 100vw"],
+[style*="maxWidth: '100vw'"],
+[style*="maxWidth: \"100vw\""] {
+    max-width: 100% !important;
+}
+
+[style*="width: 100vw"],
+[style*="width: '100vw'"],
+[style*="width: \"100vw\""] {
+    width: 100% !important;
+}
+
+/* ========================================
+   FIX 9: FORM CONTAINERS
+   ======================================== */
+
+.form-container,
+.form-container-edit,
+.form-section {
+    width: 100% !important;
+    max-width: 600px !important;
+    margin: 0 auto clamp(1rem, 2vw, 1.5rem) auto !important;
+    padding: clamp(1.5rem, 2.5vw, 2rem) !important;
+    box-sizing: border-box !important;
+}
+
+/* Form inputs width */
+.form-input,
+.form-input-select,
+.form-input-number,
+.form-input-file,
+input,
+select,
+textarea {
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* ========================================
+   FIX 10: RESPONSIVE SAFEGUARDS
+   ======================================== */
+
+/* Ultra-wide screens - maintain max width */
+@media (min-width: 1920px) {
+    .container,
+    .page-container,
+    .content-container,
+    main > * {
+        max-width: 1200px !important;
+    }
+}
+
+/* Large screens - full width with padding */
+@media (min-width: 1200px) {
+    [style*="maxWidth: 1100px"],
+    [style*="maxWidth: '1100px'"],
+    [style*="maxWidth: \"1100px\""] {
+        max-width: 1200px !important;
+        margin: 0 auto !important;
+    }
+}
+
+/* ========================================
+   FIX 11: DEBUG VISIBILITY
+   ======================================== */
+
+/* Temporary debug class (remove in production) */
+.debug-container {
+    border: 2px solid red !important;
+}
+
+.debug-overflow {
+    overflow: visible !important;
+}
+
+/* ========================================
+   ACCESSIBILITY
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ========================================
+   PRINT STYLES
+   ======================================== */
+
+@media print {
+    .navbar,
+    nav,
+    header {
+        display: none !important;
+    }
+
+    main {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+}

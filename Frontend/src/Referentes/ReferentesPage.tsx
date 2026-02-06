@@ -48,7 +48,7 @@ interface Styles {
 export const styles: Styles = {
   contenedorPrincipal: {
     padding: '32px',
-    paddingTop: '50px', /* Espacio para header sticky */
+    paddingTop: '1rem',
     backgroundColor: '#eef2f6',
     minHeight: '100vh',
     display: 'flex',

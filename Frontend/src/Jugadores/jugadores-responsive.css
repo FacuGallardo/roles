@@ -91,7 +91,7 @@
   .player-table .table-row td { display: table-cell; padding: clamp(8px, 2vw, 10px); }
   .player-table .table-header th { padding: clamp(8px, 2vw, 10px); background: #1f3c88; color: #fff; text-align: left; }
   .action-cell { display: flex; gap: clamp(4px, 1vw, 6px); flex-wrap: nowrap; }
-  .action-button { min-width: auto; min-height: auto; padding: clamp(4px, 1vw, 6px) clamp(8px, 1.5vw, 12px); border-radius: 6px; font-size: 13px; }
+  .action-button { min-width: 90px; min-height: 40px; padding: 8px 12px; border-radius: 6px; font-size: 13px; }
 }
 
 /* Form styles - mobile first */

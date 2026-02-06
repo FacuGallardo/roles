@@ -3,7 +3,7 @@ import RegistrarFixture from "./RegistrarFixture";
 import EditarFixture from "./EditarFixture";
 import ListaFixture from "./ListaFixture";
 import type { CSSProperties } from "react";
-import { hasRole } from "../utils/auth"; // 🔒 Importar seguridad
+import { hasRole } from "../utils/auth"; 
 import './fixture-responsive.css';
 
 // --- Tipos de la API ---
@@ -56,7 +56,7 @@ interface Styles {
 const styles: Styles = {
   pageContainer: {
     padding: '30px 20px',
-    paddingTop: '50px', /* Espacio para header sticky */
+    paddingTop: '1rem',
     width: '100%',
     boxSizing: 'border-box',
     backgroundColor: '#eef2f6',
@@ -64,7 +64,7 @@ const styles: Styles = {
   },
   fixtureCard: {
     width: '100%',
-    maxWidth: '1100px', 
+    maxWidth: '1200px', 
     margin: '0 auto', 
     fontFamily: 'Roboto, "Helvetica Neue", Arial, sans-serif',
     backgroundColor: '#ffffff',
@@ -75,11 +75,10 @@ const styles: Styles = {
   },
   title: {
     textAlign: 'center',
-    color: '#1f3c88', 
-    borderBottom: '3px solid #1f3c88', 
+    color: '#ffffff',
     paddingBottom: '15px',
     marginBottom: '30px',
-    fontSize: '2.2rem', 
+    fontSize: '2.2rem',
     fontWeight: 700,
     letterSpacing: '0.5px',
   },
@@ -301,7 +300,12 @@ const FixturePage: React.FC = () => {
         </header>
 
         {error && <div style={styles.errorMessage}>{error}</div>}
-        {loading && <p style={styles.loadingMessage}>Cargando...</p>}
+        {loading && (
+          <div className="loading-container">
+            <div className="spinner"></div>
+            <p className="loading-text">Cargando fixtures...</p>
+          </div>
+        )}
 
         {/* 🔒 SECCIÓN DE EDICIÓN (SOLO PRESIDENTA) */}
         {fixtureEditando && esPresidenta ? (
@@ -326,7 +330,7 @@ const FixturePage: React.FC = () => {
           )
         )}
 
-        <h3 style={{ color: '#2c3e50', fontSize: '1.5rem', marginBottom: '20px' }}>
+        <h3 style={{ color: '#4919f5', fontSize: '1.5rem', marginBottom: '20px' }}>
           Fixtures Existentes
         </h3>
 

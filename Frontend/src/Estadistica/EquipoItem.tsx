@@ -83,12 +83,13 @@ const EquipoItem: React.FC<Props> = ({
   };
 
   const cellStyle: React.CSSProperties = {
-    padding: '10px 15px', 
+    padding: '12px 15px',
     textAlign: "center",
-    borderBottom: "1px solid #e9ecef", 
-    fontSize: '0.9rem', 
+    borderBottom: "1px solid #e9ecef",
+    fontSize: '0.9rem',
     verticalAlign: 'middle',
-    color: '#333', // Color oscuro para contraste
+    color: '#1a1a1a',
+    minHeight: '44px',
   };
   const inputStyle: React.CSSProperties = {
     padding: '4px 6px',
@@ -102,12 +103,14 @@ const EquipoItem: React.FC<Props> = ({
   const puntosCalculados = tempStats.pg * 3 + tempStats.pe;
 
   const baseButtonStyle: React.CSSProperties = {
-    padding: "0.5rem 1rem",
+    padding: "8px 12px",
     borderRadius: 5,
     border: "none",
     cursor: "pointer",
-    margin: "0 4px", 
+    margin: "0 4px",
     fontSize: "0.85em",
+    minWidth: "90px",
+    minHeight: "40px",
     transition: 'background-color 0.2s',
   };
 

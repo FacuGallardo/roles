@@ -73,10 +73,10 @@ const formStyles = {
     // Estilo para el contenedor del formulario de un solo partido (Grid)
     formPartidoGrid: {
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-        gap: 'clamp(12px, 3vw, 15px)',
+        gridTemplateColumns: 'repeat(2, 1fr)',
+        gap: 'clamp(1rem, 2vw, 1.5rem)',
         alignItems: 'flex-start',
-        padding: 'clamp(12px, 2.5vw, 15px)',
+        padding: 'clamp(1rem, 2.5vw, 1.5rem)',
         backgroundColor: '#f9f9f9',
         borderRadius: '8px',
         border: '1px solid #eee',
@@ -400,11 +400,11 @@ const RegistrarFixture: React.FC<Props> = ({
             )}
 
             {/* --- Botones de Acción Final (sin iconos) --- */}
-            <div style={styles.buttonContainer || { marginTop: 24, justifyContent: 'center' }}>
+            <div className="button-group button-group-right" style={{ marginTop: 24 }}>
                 <button
                     onClick={guardarFixture}
                     disabled={fixtureDto.partidos.length === 0 || !fixtureDto.fecha || !fixtureDto.lugar}
-                    style={botonGuardarStyle} // Usa el nuevo estilo base (Azul Fuerte)
+                    className="btn-primary"
                 >
                     Guardar Fixture Completo
                 </button>
@@ -412,7 +412,7 @@ const RegistrarFixture: React.FC<Props> = ({
                     <button
                         type="button"
                         onClick={onGenerarAutomatico}
-                        style={botonGenerarStyle} // Usa el estilo Primary del padre (que tiene #1f3c88)
+                        className="btn-secondary"
                     >
                         Generar Automático
                     </button>

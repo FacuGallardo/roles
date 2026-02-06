@@ -11,18 +11,24 @@
   max-width: 100%;
   padding: 12px;
   margin: 0 auto;
-  margin-top: 15px; /* Evita superposición con header sticky */
+  margin-top: 0;
   font-family: Arial, sans-serif;
 }
 
 /* Header */
 .clubes-header {
-  background: linear-gradient(90deg, #1f3c88, #3a6ea5);
+  background: linear-gradient(90deg, #032063, #3a6ea5);
   color: #fff;
   padding: 16px;
   border-radius: 10px;
   margin-bottom: 16px;
   text-align: center;
+}
+
+.clubes-header h1,
+.clubes-header p {
+  color: #fff !important;
+  margin: 0;
 }
 
 .club-error {
@@ -182,8 +188,9 @@
 /* Desktop */
 @media (min-width: 600px) {
   .clubes-page {
-    max-width: 900px;
-    padding: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: clamp(1rem, 4vw, 1.5rem);
   }
 
   .clubes-filters {

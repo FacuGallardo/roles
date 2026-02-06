@@ -75,26 +75,36 @@ const ListaFixture: React.FC<ListaFixtureProps> = ({ fixtures, onEdit, canEdit }
 
   return (
     <div className="lista-fixture-container">
-      {fixtures.map((f) => (
-        <article key={f.id} className="fixture-item-card">
-          <header className="fixture-header">
-            <div>
-              <h3 className="fixture-title" style={{ margin: 0 }}>{f.fecha} — {f.lugar}</h3>
-            </div>
-            <div className="buttonContainer" style={{ display: 'flex', gap: 8 }}>
-              {canEdit && <button className="btn-action" onClick={() => onEdit(f)}>Editar</button>}
-            </div>
-          </header>
+      {fixtures.length === 0 ? (
+        <div className="empty-state">
+          <div className="empty-state-icon">📅</div>
+          <h3 className="empty-state-title">Sin Fixtures Registrados</h3>
+          <p className="empty-state-subtitle">
+            No hay fixtures registrados aún. Comienza registrando el primer fixture.
+          </p>
+        </div>
+      ) : (
+        fixtures.map((f) => (
+          <article key={f.id} className="fixture-item-card">
+            <header className="fixture-header">
+              <div>
+                <h3 className="fixture-title" style={{ margin: 0 }}>{f.fecha} — {f.lugar}</h3>
+              </div>
+              <div className="buttonContainer" style={{ display: 'flex', gap: 8 }}>
+                {canEdit && <button className="btn-action" style={{ backgroundColor: '#1f3c88', color: '#ffffff' }} onClick={() => onEdit(f)}>Editar</button>}
+              </div>
+            </header>
 
-          <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-            {f.partidos.map(p => (
-              <li key={p.id} style={{ padding: '8px 0', borderBottom: '1px solid #eee' }}>
-                <PartidoRow partido={p} />
-              </li>
-            ))}
-          </ul>
-        </article>
-      ))}
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+              {f.partidos.map(p => (
+                <li key={p.id} style={{ padding: '8px 0', borderBottom: '1px solid #eee' }}>
+                  <PartidoRow partido={p} />
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))
+      )}
     </div>
   );
 };
