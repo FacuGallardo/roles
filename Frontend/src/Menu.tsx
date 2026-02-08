@@ -39,14 +39,23 @@ export default function App() {
     localStorage.setItem("vista", vista);
   }, [vista]);
 
+  // 🔒 EVENT LISTENERS: Cerrar dropdowns al hacer click o scroll
   useEffect(() => {
-    const close = () => {
+    const closeDropdowns = () => {
       setOpenHandball(false);
       setOpenInstitucional(false);
-      // setIsMobileMenuOpen(false);
     };
-    window.addEventListener("click", close);
-    return () => window.removeEventListener("click", close);
+    
+    // Cierra al hacer click fuera
+    window.addEventListener("click", closeDropdowns);
+    
+    // Cierra al scrollear - SOLUCIÓN SENIOR
+    window.addEventListener("scroll", closeDropdowns, { passive: true });
+    
+    return () => {
+      window.removeEventListener("click", closeDropdowns);
+      window.removeEventListener("scroll", closeDropdowns);
+    };
   }, []);
 
   const stop = (e: any) => e.stopPropagation();
@@ -130,8 +139,27 @@ export default function App() {
   .nav-btn:hover:not(.active-nav-btn)::after { width: 100%; }
   .nav-btn span[role="img"] { display: inline-block; transition: transform 0.3s ease; }
   .nav-btn[aria-expanded="true"] span[role="img"] { transform: rotate(180deg); }
-  .dropdown { position: absolute; top: 3.5rem; left: 0; background: white; color: #1f3c88; min-width: 200px; max-width: 90vw; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.2); z-index: 100; display: flex; flex-direction: column; font-size: 1rem; overflow: hidden; animation: dropdownIn 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; transform-origin: top center; }
+  .dropdown { 
+    position: absolute; 
+    top: 3.5rem; 
+    left: 0; 
+    background: white; 
+    color: #1f3c88; 
+    min-width: 200px; 
+    max-width: 90vw; 
+    border-radius: 16px; 
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2); 
+    z-index: 100; 
+    display: flex; 
+    flex-direction: column; 
+    font-size: 1rem; 
+    overflow: hidden; 
+    animation: dropdownIn 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; 
+    transform-origin: top center;
+    pointer-events: auto;
+  }
   @keyframes dropdownIn { from { opacity: 0; transform: translateY(-10px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+  @keyframes dropdownOut { from { opacity: 1; transform: translateY(0) scale(1); } to { opacity: 0; transform: translateY(-10px) scale(0.95); } }
   .dropdown-btn { background: none; border: none; color: #1f3c88; text-align: left; padding: 1rem 1.25rem; cursor: pointer; font-weight: 500; transition: background-color 0.2s ease, transform 0.1s ease; min-height: 44px; display: flex; align-items: center; }
   .dropdown-btn:hover { background: #e9ecef; }
   .dropdown-btn:active { transform: scale(0.98); }
@@ -290,29 +318,36 @@ export default function App() {
     width: 100%;
     text-align: left;
     border-collapse: collapse;
+    background-color: #1f3c88;
+    border-radius: 8px;
+    overflow: hidden;
   }
   .tabla-posiciones th, .tabla-posiciones td {
     padding: 0.75rem 0.5rem;
-    border-bottom: 1px solid #eee;
-    color: #333;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
     font-size: clamp(0.875rem, 2vw, 1rem);
   }
   .tabla-posiciones th {
     font-size: clamp(0.8rem, 2vw, 0.9rem);
-    color: #555;
+    color: white;
     text-transform: uppercase;
     font-weight: 600;
+    background-color: #152a5f;
   }
   .tabla-posiciones td {
     font-weight: 500;
-    color: #333;
+    color: white;
+    background-color: #1f3c88;
   }
-  .tabla-posiciones tr:hover {
-    background-color: #f9f9f9;
+  .tabla-posiciones tbody tr {
+    background-color: #1f3c88;
+  }
+  .tabla-posiciones tbody tr:hover {
+    background-color: #2a4b9f;
   }
   .tabla-posiciones .team-name {
     font-weight: 600;
-    color: #1f3c88;
+    color: #a0c4ff;
   }
 
   .calendario-item {
@@ -456,7 +491,13 @@ export default function App() {
           </button>
           <nav className={isMobileMenuOpen ? "is-open" : ""}>
             {/* ... (Menús desplegables de Handball e Institucional - sin cambios) ... */}
-            <div style={{ position: "relative" }} onClick={stop}>
+            <div 
+              style={{ position: "relative" }} 
+              onClick={stop}
+              onMouseLeave={() => {
+                setOpenHandball(false);
+              }}
+            >
               <button
                 className={`nav-btn ${openHandball || isNavItemActive("handball") ? "active-nav-btn" : ""}`}
                 onClick={e => {
@@ -479,7 +520,13 @@ export default function App() {
                 </div>
               )}
             </div>
-            <div style={{ position: "relative" }} onClick={stop}>
+            <div 
+              style={{ position: "relative" }} 
+              onClick={stop}
+              onMouseLeave={() => {
+                setOpenInstitucional(false);
+              }}
+            >
               <button
                 className={`nav-btn ${openInstitucional || isNavItemActive("institucional") ? "active-nav-btn" : ""}`}
                 onClick={e => {

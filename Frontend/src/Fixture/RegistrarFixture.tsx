@@ -139,7 +139,7 @@ const RegistrarFixture: React.FC<Props> = ({
 
     // Combina estilos de botón con el estilo base
     // Usamos styles.buttonBase para obtener el padding, border, color, etc.
-    const botonGuardarStyle = { ...styles.buttonBase }; 
+    const botonGenerarStyl = { ...styles.buttonBase }; 
     // Usamos styles.buttonPrimary que ya debe tener #1f3c88, o styles.buttonSuccess (Verde) para Automático
     // Asumiendo que el padre ya pasó el estilo correcto para Generar Automático
     const botonGenerarStyle = { ...styles.buttonBase, ...styles.buttonPrimary };
@@ -149,7 +149,7 @@ const RegistrarFixture: React.FC<Props> = ({
         ...styles.buttonBase, 
         ...formStyles.gridButton,
         marginRight: '0', // Anulamos el marginRight del buttonBase para que el botón ocupe todo su espacio en el grid
-        backgroundColor: '#1f3c88', // ¡AZUL OSCURO SOLICITADO! 🟦
+        backgroundColor: '#1f3c88', // 
     };
 
 
@@ -247,7 +247,7 @@ const RegistrarFixture: React.FC<Props> = ({
     return (
         <div>
             {/* Título sin ícono */}
-            <h2 style={{ color: '#1f3c88', fontSize: '1.8rem', marginBottom: '20px' }}>
+            <h2 style={{ color: '#1445c1', fontSize: '1.8rem', marginBottom: '20px' }}>
                 Registro Manual de Fixture
             </h2>
 
@@ -352,7 +352,7 @@ const RegistrarFixture: React.FC<Props> = ({
                     </select>
                 </div>
 
-                {/* Resultado */}
+                
                 <div>
                     <label style={{ display: 'block', fontWeight: 600, color: '#4a5568' }}>Resultado *</label>
                     <input
@@ -365,10 +365,10 @@ const RegistrarFixture: React.FC<Props> = ({
                     />
                 </div>
 
-                {/* Botón Agregar Partido (sin ícono) */}
+                
                 <div style={formStyles.gridButton} className="gridButton">
                   <button
-                      style={botonAgregarPartidoStyle} // Usa el nuevo estilo base para el botón con el color #1f3c88
+                      style={botonAgregarPartidoStyle} 
                       onClick={agregarPartido}
                       type="button"
                   >

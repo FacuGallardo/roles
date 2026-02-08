@@ -271,32 +271,32 @@ const FormularioPago: React.FC<Props> = ({ tipo, club, montoMinimo, partidos = [
         
         {tipo === "cuota" && (
           <div>
-            <label style={styleConfig.label}>Cantidad de Jugadores *</label>
-            <input type="number" min={1} value={cantidadJugadores} onChange={e => setCantidadJugadores(Number(e.target.value))} style={styleConfig.input} required />
+            <label style={styleConfig.label} htmlFor="cantidadJugadores">Cantidad de Jugadores *</label>
+            <input id="cantidadJugadores" name="cantidadJugadores" type="number" min={1} value={cantidadJugadores} onChange={e => setCantidadJugadores(Number(e.target.value))} style={styleConfig.input} required />
           </div>
         )}
         
         {(tipo === "multa" || tipo === "otro") && (
           <div>
-            <label style={styleConfig.label}>Motivo *</label>
-            <input type="text" value={motivo} placeholder="Descripción" onChange={e => setMotivo(e.target.value)} style={styleConfig.input} required />
+            <label style={styleConfig.label} htmlFor="motivo">Motivo *</label>
+            <input id="motivo" name="motivo" type="text" value={motivo} placeholder="Descripción" onChange={e => setMotivo(e.target.value)} style={styleConfig.input} required />
           </div>
         )}
 
         <div>
-          <label style={styleConfig.label}>Monto ($) *</label>
-          <input type="number" min={montoMinimo} value={monto} onChange={e => setMonto(Number(e.target.value))} style={styleConfig.input} required />
+          <label style={styleConfig.label} htmlFor="monto">Monto ($) *</label>
+          <input id="monto" name="monto" type="number" min={montoMinimo} value={monto} onChange={e => setMonto(Number(e.target.value))} style={styleConfig.input} required />
             <small style={styleConfig.smallText}>Mínimo: ${montoMinimo.toLocaleString()}</small>
         </div>
         
         <div>
-          <label style={styleConfig.label}>Nº Comprobante *</label>
-          <input type="text" value={comprobante} placeholder="Ej: 12345" onChange={e => setComprobante(e.target.value)} style={styleConfig.input} required />
+          <label style={styleConfig.label} htmlFor="comprobante">Nº Comprobante *</label>
+          <input id="comprobante" name="comprobante" type="text" value={comprobante} placeholder="Ej: 12345" onChange={e => setComprobante(e.target.value)} style={styleConfig.input} required />
         </div>
         
         <div>
-          <label style={styleConfig.label}>Adjuntar (Opcional)</label>
-          <input type="file" accept="image/*,application/pdf" onChange={handleFileUpload} style={{padding: '5px 0'}} />
+          <label style={styleConfig.label} htmlFor="comprobante-archivo">Adjuntar (Opcional)</label>
+          <input id="comprobante-archivo" name="comprobante-archivo" type="file" accept="image/*,application/pdf" onChange={handleFileUpload} style={{padding: '5px 0'}} />
             {comprobanteArchivo && <small style={{color: 'green'}}> Archivo listo.</small>}
         </div>
 

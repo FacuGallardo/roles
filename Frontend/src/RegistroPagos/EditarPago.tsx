@@ -56,13 +56,13 @@ const EditarPago: React.FC<Props> = ({ pago, montoMinimo, partidos, onGuardar, o
 
                 <form onSubmit={handleSubmit}>
                     <div>
-                        <label className="form-label">Club</label>
-                        <input className="form-input" value={form.club} readOnly style={{backgroundColor: '#f9f9f9'}} />
+                        <label htmlFor="club" className="form-label">Club</label>
+                        <input id="club" className="form-input" value={form.club} readOnly style={{backgroundColor: '#f9f9f9'}} />
                     </div>
                     
                     <div>
-                        <label className="form-label">Estado (Validación)</label>
-                        <select name="estado" className="form-input" value={form.estado} onChange={handleChange}>
+                        <label htmlFor="estado" className="form-label">Estado (Validación)</label>
+                        <select id="estado" name="estado" className="form-input" value={form.estado} onChange={handleChange}>
                             <option value="pendiente">Pendiente</option>
                             <option value="validado">Validado</option>
                             <option value="invalido">Inválido</option>
@@ -70,24 +70,24 @@ const EditarPago: React.FC<Props> = ({ pago, montoMinimo, partidos, onGuardar, o
                     </div>
 
                     <div>
-                        <label className="form-label">Monto ($)</label>
-                        <input name="monto" type="number" className="form-input" value={form.monto} onChange={handleChange} min={montoMinimo} required />
+                        <label htmlFor="monto" className="form-label">Monto ($)</label>
+                        <input id="monto" name="monto" type="number" className="form-input" value={form.monto} onChange={handleChange} min={montoMinimo} required />
                     </div>
 
                     <div>
-                        <label className="form-label">Nº Comprobante</label>
-                        <input name="comprobante" type="text" className="form-input" value={form.comprobante} onChange={handleChange} required />
+                        <label htmlFor="comprobante" className="form-label">Nº Comprobante</label>
+                        <input id="comprobante" name="comprobante" type="text" className="form-input" value={form.comprobante} onChange={handleChange} required />
                     </div>
 
                     <div>
-                        <label className="form-label">Fecha</label>
-                        <input name="fecha" type="date" className="form-input" value={fechaInputValue} onChange={handleChange} required />
+                        <label htmlFor="fecha" className="form-label">Fecha</label>
+                        <input id="fecha" name="fecha" type="date" className="form-input" value={fechaInputValue} onChange={handleChange} required />
                     </div>
 
                     {(form.tipo === 'multa' || form.tipo === 'otro') && (
                         <div>
-                            <label className="form-label">Motivo</label>
-                            <input name="motivo" className="form-input" value={form.motivo || ''} onChange={handleChange} />
+                            <label htmlFor="motivo" className="form-label">Motivo</label>
+                            <input id="motivo" name="motivo" className="form-input" value={form.motivo || ''} onChange={handleChange} />
                         </div>
                     )}
 

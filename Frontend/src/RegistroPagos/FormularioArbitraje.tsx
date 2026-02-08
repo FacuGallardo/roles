@@ -319,8 +319,8 @@ const FormularioArbitraje: React.FC<Props> = ({ club, partidos, montoMinimo, onG
                         <label className={styleConfig.label} htmlFor="monto">Monto</label>
                         <input
                             id="monto"
-                            type="number"
                             name="monto"
+                            type="number"
                             min={montoMinimo}
                             value={monto}
                             onChange={e => setMonto(Number(e.target.value))}
@@ -336,6 +336,7 @@ const FormularioArbitraje: React.FC<Props> = ({ club, partidos, montoMinimo, onG
                         <label className={styleConfig.label} htmlFor="comprobante">Número de Comprobante</label>
                         <input
                             id="comprobante"
+                            name="comprobante"
                             type="text"
                             value={comprobante}
                             onChange={e => setComprobante(e.target.value)}
@@ -350,6 +351,7 @@ const FormularioArbitraje: React.FC<Props> = ({ club, partidos, montoMinimo, onG
                         <label className={styleConfig.label} htmlFor="archivo">Adjuntar Comprobante (Opcional)</label>
                         <input
                             id="archivo"
+                            name="archivo"
                             type="file"
                             accept="image/*,application/pdf"
                             onChange={handleFileUpload}

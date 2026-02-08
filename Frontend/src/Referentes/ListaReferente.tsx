@@ -106,7 +106,7 @@ const ListaReferente: React.FC<Props> = ({
             <th style={tablaStyles.headerCell}>Apellido</th>
             <th style={tablaStyles.headerCell}>Equipo</th>
             <th style={tablaStyles.headerCell}>Correo</th>
-            <th style={tablaStyles.headerCell}>Teléfono</th> {/* <--- COLUMNA AÑADIDA */}
+            <th style={tablaStyles.headerCell}>Teléfono</th>
             <th style={{ ...tablaStyles.headerCell, borderTopRightRadius: "10px" }}>
               Acciones
             </th>
@@ -128,7 +128,7 @@ const ListaReferente: React.FC<Props> = ({
                 {ref.club ? ref.club.nombre : "Sin club"}
               </td>
               <td style={tablaStyles.bodyCell}>{ref.correo}</td>
-              <td style={tablaStyles.bodyCell}>{ref.telefono}</td> {/* <--- CELDA AÑADIDA */}
+              <td style={tablaStyles.bodyCell}>{ref.telefono}</td>
               <td style={tablaStyles.actionsContainer}>
                 <button
                   onClick={() => onVer(ref)}

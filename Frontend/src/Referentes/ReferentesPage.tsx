@@ -133,7 +133,6 @@ export const styles: Styles = {
     borderRadius: '8px',
     fontWeight: '600',
     textAlign: 'center',
-    marginBottom: '16px',
   } as CSSProperties,
   mensajeError: {
     backgroundColor: '#fee2e2',

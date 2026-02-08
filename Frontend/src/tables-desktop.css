@@ -13,10 +13,12 @@
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  border-radius: 8px;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  background: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  background: #ffffff;
+  min-height: auto;
+  padding-bottom: 1px;
 }
 
 /* Global table styles */
@@ -25,7 +27,8 @@ table,
 .table-pagos-club {
   width: 100%;
   border-collapse: collapse;
-  background-color: white;
+  background-color: #ffffff;
+  display: table;
 }
 
 /* Sticky table headers - DESKTOP CRITICAL */
@@ -35,8 +38,8 @@ table thead,
   position: sticky;
   top: 0;
   z-index: 10;
-  background-color: #f3f4f6;
-  border-bottom: 2px solid #e5e7eb;
+  background-color: #1f3c88;
+  border-bottom: 2px solid #1f3c88;
 }
 
 table th,
@@ -44,13 +47,13 @@ table th,
 .table-pagos-club th {
   padding: clamp(0.75rem, 2vw, 1rem);
   text-align: left;
-  font-weight: 600;
-  color: #1f3c88;
+  font-weight: 700;
+  color: #ffffff;
   font-size: clamp(0.875rem, 2vw, 0.95rem);
   white-space: nowrap;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  border-bottom: 2px solid #d1d5db;
+  border-bottom: 2px solid #1f3c88;
 }
 
 /* Alternating row colors (zebra striping) */

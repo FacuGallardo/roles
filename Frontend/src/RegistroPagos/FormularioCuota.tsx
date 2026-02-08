@@ -310,6 +310,7 @@ const FormularioCuota: React.FC<Props> = ({ club, onGuardar, montoMinimo, onCerr
                         <label className={styleConfig.label} htmlFor="jugadores">Cantidad de Jugadores</label>
                         <input
                             id="jugadores"
+                            name="jugadores"
                             type="number"
                             min={1}
                             value={cantidadJugadores}
@@ -325,6 +326,7 @@ const FormularioCuota: React.FC<Props> = ({ club, onGuardar, montoMinimo, onCerr
                         <label className={styleConfig.label} htmlFor="monto">Monto</label>
                         <input
                             id="monto"
+                            name="monto"
                             type="number"
                             min={montoMinimo}
                             value={monto}
@@ -341,6 +343,7 @@ const FormularioCuota: React.FC<Props> = ({ club, onGuardar, montoMinimo, onCerr
                         <label className={styleConfig.label} htmlFor="comprobante">Número de Comprobante</label>
                         <input
                             id="comprobante"
+                            name="comprobante"
                             type="text"
                             value={comprobante}
                             onChange={e => setComprobante(e.target.value)}
@@ -355,6 +358,7 @@ const FormularioCuota: React.FC<Props> = ({ club, onGuardar, montoMinimo, onCerr
                         <label className={styleConfig.label} htmlFor="archivo">Adjuntar Comprobante (Opcional)</label>
                         <input
                             id="archivo"
+                            name="archivo"
                             type="file"
                             accept="image/*,application/pdf"
                             onChange={handleFileUpload}
