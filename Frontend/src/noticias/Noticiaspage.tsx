@@ -16,125 +16,6 @@ type Noticia = {
 // Tipo para el formulario
 type FormNoticia = Omit<Noticia, 'id'> & { id?: number };
 
-// Estilos
-const DARK_BLUE = "#1f3c88"; 
-
-const styles = {
-  pageContainer: {
-      padding: '1.5rem', 
-      paddingTop: '1rem', 
-      display: 'flex',
-      flexDirection: 'column' as const,
-      gap: '2rem', 
-      backgroundColor: '#f9fafb', 
-      minHeight: '100vh',
-      minwidth: '400px',
-      fontFamily: 'sans-serif' 
-  },
-  contentWrapper: {
-      maxWidth: '800px', 
-      margin: '0 auto', 
-      width: '100%', 
-  },
-  mainTitle: {
-    color: DARK_BLUE, 
-    marginBottom: "30px",
-    textAlign: "center" as const,
-    fontSize: "2.5em",
-    fontWeight: 600,
-    borderBottom: `3px solid ${DARK_BLUE}`, 
-    paddingBottom: "5px",
-    margin: "0 auto 30px auto", 
-    display: "block",
-    width: "fit-content",
-  },
-  carrouselSection: {
-      marginBottom: '2rem', 
-      padding: '1.5rem', 
-      backgroundColor: 'white', 
-      boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)', 
-      borderRadius: '1rem', 
-      border: '1px solid #e0e7ff', 
-  },
-  carrouselTitle: {
-      color: DARK_BLUE, 
-      marginBottom: '1.5rem', 
-      textAlign: 'center' as const, 
-      fontSize: '1.8em', 
-      fontWeight: 600,
-      borderBottom: `3px solid ${DARK_BLUE}`, 
-      paddingBottom: '5px', 
-      margin: '0 auto 1.5rem auto', 
-      display: 'block',
-      width: 'fit-content',
-  },
-  managementSection: {
-      padding: '2rem', 
-      backgroundColor: 'white', 
-      boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)', 
-      borderRadius: '1.5rem', 
-      border: '1px solid #d1fae5', 
-      width: '100%', 
-      margin: '0 auto', 
-  },
-  formTitle: {
-      color: DARK_BLUE, 
-      marginBottom: '1.5rem', 
-      textAlign: 'center' as const, 
-      fontSize: '1.8em', 
-      fontWeight: 600,
-      borderBottom: `3px solid ${DARK_BLUE}`, 
-      paddingBottom: '5px', 
-      margin: '0 auto 1.5rem auto', 
-      display: 'block',
-      width: 'fit-content',
-  },
-  listTitle: {
-      color: DARK_BLUE, 
-      marginBottom: '1.5rem', 
-      textAlign: 'center' as const, 
-      fontSize: '1.8em', 
-      fontWeight: 600,
-      borderBottom: `3px solid ${DARK_BLUE}`, 
-      paddingBottom: '5px', 
-      margin: '0 auto 1.5rem auto', 
-      display: 'block',
-      width: 'fit-content',
-  },
-  toggleButtonContainer: {
-      display: 'flex', 
-      gap: '0.5rem', 
-      marginBottom: '2rem', 
-      width: '100%',
-      maxWidth: '800px', 
-      margin: '0 auto 2rem auto', 
-      justifyContent: 'center' // Centrar botones
-  },
-  toggleButton: {
-    padding: '0.5rem 1rem', 
-    borderRadius: '5px', 
-    fontWeight: '600',
-    cursor: 'pointer',
-    border: 'none', 
-    transition: 'all 0.2s',
-    flex: 1, 
-    minWidth: '150px',
-    textAlign: 'center' as const,
-    boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
-    marginRight: '0.5rem', 
-  },
-  activeButton: {
-    backgroundColor: DARK_BLUE, 
-    color: 'white', 
-    border: `1px solid ${DARK_BLUE}`, 
-  },
-  inactiveButton: {
-    backgroundColor: 'white',
-    color: DARK_BLUE, 
-    border: `1px solid ${DARK_BLUE}`, 
-  },
-};
-
 type View = 'formulario' | 'lista' | 'novedades';
 const API_URL = 'http://localhost:3001/noticias';
 
@@ -259,20 +140,21 @@ const NoticiasPage: React.FC = () => {
   };
 
   return (
-    <div style={styles.pageContainer as React.CSSProperties} className="noticias-page-container">
-      <div style={styles.contentWrapper} className="noticias-content-wrapper">
-        <h2 style={styles.mainTitle as React.CSSProperties} className="noticias-main-title">
+    <div className="noticias-page-container" role="main" aria-label="Portal de Noticias">
+      <div className="noticias-content-wrapper">
+        <h2 className="noticias-main-title">
             Portal de Noticias y Anuncios
         </h2>
 
-        <div style={styles.toggleButtonContainer} className="noticias-toggle-buttons">
+        <div className="noticias-toggle-buttons" role="tablist" aria-label="Vistas de contenido">
             {/* Botón visible para todos */}
             <button
                 onClick={() => handleVistaToggle('novedades')} 
-                style={{
-                    ...styles.toggleButton,
-                    ...(activeView === 'novedades' ? styles.activeButton : styles.inactiveButton)
-                }}
+                className={activeView === 'novedades' ? 'active' : ''}
+                role="tab"
+                id="novedades-tab"
+                aria-selected={activeView === 'novedades'}
+                aria-controls="novedades-panel"
             >
                 Últimas Novedades
             </button>
@@ -282,19 +164,21 @@ const NoticiasPage: React.FC = () => {
                 <>
                     <button
                         onClick={() => handleVistaToggle('formulario')}
-                        style={{
-                            ...styles.toggleButton,
-                            ...(activeView === 'formulario' ? styles.activeButton : styles.inactiveButton)
-                        }}
+                        className={activeView === 'formulario' ? 'active' : ''}
+                        role="tab"
+                        id="formulario-tab"
+                        aria-selected={activeView === 'formulario'}
+                        aria-controls="formulario-panel"
                     >
                         Gestión de Noticias
                     </button>
                     <button
                         onClick={() => handleVistaToggle('lista')}
-                        style={{
-                            ...styles.toggleButton,
-                            ...(activeView === 'lista' ? styles.activeButton : styles.inactiveButton)
-                        }}
+                        className={activeView === 'lista' ? 'active' : ''}
+                        role="tab"
+                        id="lista-tab"
+                        aria-selected={activeView === 'lista'}
+                        aria-controls="lista-panel"
                     >
                         Ver Listado
                     </button>
@@ -303,8 +187,8 @@ const NoticiasPage: React.FC = () => {
         </div>
 
         {activeView === 'novedades' && (
-          <section style={styles.carrouselSection} className="noticias-carrusel-section">
-            <h3 style={styles.carrouselTitle as React.CSSProperties} className="noticias-carrusel-title">
+          <section className="noticias-carrusel-section" id="novedades-panel" role="tabpanel" aria-labelledby="novedades-tab">
+            <h3 className="noticias-carrusel-title">
               Últimas Novedades
             </h3>
             <CarrouselNoticias noticias={noticias} />
@@ -313,11 +197,11 @@ const NoticiasPage: React.FC = () => {
 
         {/* 🔒 Sección de gestión solo si es Presidenta */}
         {activeView !== 'novedades' && esPresidenta && (
-            <section style={styles.managementSection} className="noticias-management-section"> 
+            <section className="noticias-management-section"> 
                 
                 {activeView === 'formulario' && (
-                    <div className="noticias-formulario-container">
-                        <h3 style={styles.formTitle as React.CSSProperties} className="noticias-form-title">
+                    <div className="noticias-formulario-container" id="formulario-panel" role="tabpanel" aria-labelledby="formulario-tab">
+                        <h3 className="noticias-form-title">
                             {noticiaAEditar ? 'Editar Noticia Existente' : 'Crear Nueva Noticia'}
                         </h3>
                         <FormularioNoticia 
@@ -330,8 +214,8 @@ const NoticiasPage: React.FC = () => {
                 )}
 
                 {activeView === 'lista' && (
-                    <div className="noticias-lista-container">
-                        <h3 style={styles.listTitle as React.CSSProperties} className="noticias-list-title">
+                    <div className="noticias-lista-container" id="lista-panel" role="tabpanel" aria-labelledby="lista-tab">
+                        <h3 className="noticias-list-title">
                             Noticias Publicadas
                         </h3>
                         <NoticiasLista 

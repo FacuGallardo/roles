@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import RegistrarFixture from "./RegistrarFixture";
 import EditarFixture from "./EditarFixture";
 import ListaFixture from "./ListaFixture";
-import type { CSSProperties } from "react";
 import { hasRole } from "../utils/auth"; 
 import './fixture-responsive.css';
 
@@ -47,86 +46,7 @@ interface CreateFixtureDto {
   partidos: CreateEncuentroDto[];
 }
 
-const API_URL = "http://localhost:3001"; 
-
-// --- ESTILOS ---
-interface Styles {
-  [key: string]: CSSProperties;
-}
-const styles: Styles = {
-  pageContainer: {
-    padding: '30px 20px',
-    paddingTop: '1rem',
-    width: '100%',
-    boxSizing: 'border-box',
-    backgroundColor: '#eef2f6',
-    minHeight: '100vh', 
-  },
-  fixtureCard: {
-    width: '100%',
-    maxWidth: '1200px', 
-    margin: '0 auto', 
-    fontFamily: 'Roboto, "Helvetica Neue", Arial, sans-serif',
-    backgroundColor: '#ffffff',
-    borderRadius: '12px', 
-    boxShadow: '0 4px 12px rgba(0,0,0,0.12)', 
-    padding: '40px', 
-    boxSizing: 'border-box',
-  },
-  title: {
-    textAlign: 'center',
-    color: '#ffffff',
-    borderBottom: '3px solid #1f3c88',
-    paddingBottom: '15px',
-    marginBottom: '30px',
-    fontSize: '2.2rem',
-    fontWeight: 700,
-    letterSpacing: '0.5px',
-  },
-  divider: {
-    border: 'none',
-    borderTop: '1px solid #e0e0e0', 
-    margin: '30px 0' 
-  },
-  buttonContainer: {
-    display: 'flex',
-    justifyContent: 'flex-start', 
-    marginTop: '20px',
-    marginBottom: '10px',
-  },
-  buttonBase: { 
-    padding: "0.5rem 1rem", 
-    border: "none", 
-    borderRadius: "5px", 
-    cursor: "pointer", 
-    marginRight: "0.5rem", 
-    fontWeight: "bold",
-    transition: "background-color 0.3s, transform 0.1s",
-    whiteSpace: "nowrap" as const, 
-    boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-    backgroundColor: "#1f3c88", 
-    color: "white", 
-  },
-  buttonPrimary: {
-    backgroundColor: "#1f3c88", 
-    color: "#fff",
-  },
-  errorMessage: { 
-      color: "#dc3545", 
-      backgroundColor: "#f8d7da", 
-      padding: "10px",
-      borderRadius: "4px",
-      textAlign: "center" as const,
-      marginBottom: "1rem",
-      border: "1px solid #f5c6cb", 
-  },
-  loadingMessage: { 
-      textAlign: "center" as const,
-      color: "#6c757d", 
-      fontSize: "1.1em",
-      margin: "20px 0",
-  }
-};
+const API_URL = "http://localhost:3001";
 
 const FixturePage: React.FC = () => {
   // 🔒 Permisos: Solo la Presidenta edita/crea
@@ -291,18 +211,18 @@ const FixturePage: React.FC = () => {
   };
 
   return (
-    <main style={styles.pageContainer} className="pageContainer">
-      <section style={styles.fixtureCard} className="fixture-card">
+    <main className="pageContainer" role="main" aria-label="Gestión de Fixture">
+      <section className="fixture-card">
         <header className="fixture-header">
-          <h1 style={styles.title} className="title">Gestión y Registro de Fixture</h1>
-          <div style={styles.buttonContainer} className="buttonContainer">
+          <h1 className="title">Gestión y Registro de Fixture</h1>
+          <div className="buttonContainer" role="toolbar" aria-label="Acciones de Fixture">
             {/* buttons handled below */}
           </div>
         </header>
 
-        {error && <div style={styles.errorMessage}>{error}</div>}
+        {error && <div className="errorMessage" role="alert" aria-live="polite">{error}</div>}
         {loading && (
-          <div className="loading-container">
+          <div className="loading-container" role="status" aria-live="polite" aria-label="Cargando fixtures">
             <div className="spinner"></div>
             <p className="loading-text">Cargando fixtures...</p>
           </div>
@@ -324,16 +244,13 @@ const FixturePage: React.FC = () => {
                 onAgregarFixture={agregarFixture}
                 onGenerarAutomatico={generarFixtureAutomatico}
                 clubes={clubes}
-                styles={{...styles} as any} 
               />
-              <hr style={styles.divider} />
+              <hr className="divider" aria-hidden="true" />
             </>
           )
         )}
 
-        <h3 style={{ color: '#4919f5', fontSize: '1.5rem', marginBottom: '20px' }}>
-          Fixtures Existentes
-        </h3>
+        <h3>Fixtures Existentes</h3>
 
         <ListaFixture
           fixtures={fixtures}

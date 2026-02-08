@@ -1,5 +1,13 @@
 /* estadistica-responsive.css */
 
+/* ========================================
+   RESPONSIVE BREAKPOINTS STRATEGY
+   Mobile-first approach:
+   - Mobile: max-width 480px (target: 360-480px)
+   - Tablet: 481px - 1024px
+   - Desktop: 1025px+ (1200px recommended)
+   ======================================== */
+
 /* Mobile-first: Aplicar estilos base para todos los tamaños */
 .estadistica-container {
     box-sizing: border-box;
@@ -13,7 +21,7 @@
     box-sizing: border-box;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 480px) {
     /* Contenedor principal */
     .estadistica-container {
         padding: 20px 8px !important;
@@ -36,11 +44,10 @@
         box-sizing: border-box !important;
     }
 
-    /* Tabla: mantener estructura pero permitir scroll */
+    /* Tabla: mantener estructura pero permitir scroll - responsive */
     .tabla-wrapper table {
-        min-width: 650px !important;
-        font-size: 0.9em !important;
         width: 100% !important;
+        font-size: 0.9em !important;
     }
 
     .tabla-wrapper th,
@@ -133,7 +140,7 @@
 
     /* Tabla: mantener estructura pero permitir scroll */
     .tabla-wrapper table {
-        min-width: 550px !important;
+        width: 100% !important;
         font-size: 0.8em !important;
     }
 

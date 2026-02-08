@@ -194,7 +194,6 @@
 
   .table-pagos-club {
     width: 100%;
-    min-width: 350px; /* Reducido para mobile */
     font-size: 0.85rem;
     margin: 0;
   }
