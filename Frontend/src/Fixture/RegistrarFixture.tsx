@@ -368,7 +368,7 @@ const RegistrarFixture: React.FC<Props> = ({
                 
                 <div style={formStyles.gridButton} className="gridButton">
                   <button
-                      style={botonAgregarPartidoStyle} 
+                      style={{ ...botonAgregarPartidoStyle, color: 'white' }} 
                       onClick={agregarPartido}
                       type="button"
                   >
@@ -400,11 +400,20 @@ const RegistrarFixture: React.FC<Props> = ({
             )}
 
             {/* --- Botones de Acción Final (sin iconos) --- */}
-            <div className="button-group button-group-right" style={{ marginTop: 24 }}>
+            <div className="button-group button-group-right" style={{ marginTop: 24, display: 'flex', gap: '10px', justifyContent: 'flex-end' }}>
                 <button
                     onClick={guardarFixture}
                     disabled={fixtureDto.partidos.length === 0 || !fixtureDto.fecha || !fixtureDto.lugar}
-                    className="btn-primary"
+                    style={{
+                        padding: '10px 20px',
+                        backgroundColor: '#1f3c88',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '5px',
+                        cursor: 'pointer',
+                        fontWeight: 'bold',
+                        opacity: (fixtureDto.partidos.length === 0 || !fixtureDto.fecha || !fixtureDto.lugar) ? 0.6 : 1,
+                    }}
                 >
                     Guardar Fixture Completo
                 </button>
@@ -412,7 +421,15 @@ const RegistrarFixture: React.FC<Props> = ({
                     <button
                         type="button"
                         onClick={onGenerarAutomatico}
-                        className="btn-secondary"
+                        style={{
+                            padding: '10px 20px',
+                            backgroundColor: '#1f3c88',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '5px',
+                            cursor: 'pointer',
+                            fontWeight: 'bold',
+                        }}
                     >
                         Generar Automático
                     </button>

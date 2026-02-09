@@ -362,7 +362,7 @@ const ReferentesPage: React.FC = () => {
           </div>
 
           {error && mostrarRegistro && (
-            <div style={{ ...styles.mensajeAlerta, ...styles.mensajeError, maxWidth: "52rem", margin: "0 auto 16px auto" }}>
+            <div style={{ ...styles.mensajeAlerta, ...styles.mensajeError, maxWidth: "52rem", marginLeft: "auto", marginRight: "auto", marginBottom: "16px", marginTop: 0 }}>
               {error}
             </div>
           )}

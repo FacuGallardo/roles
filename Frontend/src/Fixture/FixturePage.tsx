@@ -58,6 +58,47 @@ const FixturePage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
+  // 🎨 ESTILOS PARA REGISTRAR FIXTURE
+  const buttonStyles = {
+    buttonBase: {
+      padding: "10px 20px",
+      border: "none",
+      borderRadius: "5px",
+      cursor: "pointer",
+      fontWeight: "bold" as const,
+      transition: "background-color 0.3s",
+    },
+    buttonPrimary: {
+      backgroundColor: "#1f3c88",
+      color: "white",
+    },
+    buttonSuccess: {
+      backgroundColor: "#28a745",
+      color: "white",
+    },
+    buttonContainer: {
+      display: "flex" as const,
+      gap: "10px",
+      marginTop: "20px",
+    },
+    errorMessage: {
+      color: "#d32f2f",
+      backgroundColor: "#ffebee",
+      padding: "10px",
+      borderRadius: "4px",
+      marginBottom: "10px",
+      border: "1px solid #ef5350",
+    },
+    successMessage: {
+      color: "#388e3c",
+      backgroundColor: "#e8f5e9",
+      padding: "10px",
+      borderRadius: "4px",
+      marginBottom: "10px",
+      border: "1px solid #66bb6a",
+    },
+  };
+
   useEffect(() => {
     cargarFixtures();
     cargarClubes();
@@ -244,6 +285,7 @@ const FixturePage: React.FC = () => {
                 onAgregarFixture={agregarFixture}
                 onGenerarAutomatico={generarFixtureAutomatico}
                 clubes={clubes}
+                styles={buttonStyles}
               />
               <hr className="divider" aria-hidden="true" />
             </>

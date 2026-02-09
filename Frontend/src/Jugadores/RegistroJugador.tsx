@@ -167,14 +167,18 @@ const RegistroJugador: React.FC<Props> = ({ onRegistrar, clubes }) => {
 
         <div className="form-group">
           <label htmlFor="categoria">Categoría <span aria-hidden style={{color:'#c00'}}>*</span></label>
-          <input
+          <select
             id="categoria"
             name="categoria"
             className="form-input"
             value={form.categoria}
             onChange={handleChange}
-            placeholder="Ej: Juvenil"
-          />
+            aria-required
+          >
+            <option value="">--- Seleccione una categoría ---</option>
+            <option value="Masculino">Masculino</option>
+            <option value="Femenino">Femenino</option>
+          </select>
         </div>
 
         <div className="form-group">

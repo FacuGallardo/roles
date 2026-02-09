@@ -45,7 +45,12 @@ const PartidoRow: React.FC<{ partido: EncuentroAPI }> = ({ partido }) => {
     return { score1: resultado, score2: "" };
   };
 
-  const { score1, score2 } = parseResultado(partido.resultado);
+  const { score1, score2 } = parseResultado(partido?.resultado || "-");
+  
+  // Validar que los datos del partido existan
+  if (!partido) {
+    return <div className="partido-row">Error: Datos del partido no disponibles</div>;
+  }
 
   return (
     <div className="partido-row" role="group" aria-label={`Partido jornada ${partido.jornada}`}>
@@ -67,44 +72,46 @@ const PartidoRow: React.FC<{ partido: EncuentroAPI }> = ({ partido }) => {
 };
 
 const ListaFixture: React.FC<ListaFixtureProps> = ({ fixtures, onEdit, canEdit }) => {
-
-
   if (!fixtures || fixtures.length === 0) {
-    return <div className="no-fixtures-message">No hay fixtures cargados.</div>;
+    return (
+      <div className="empty-state">
+        <div className="empty-state-icon">📅</div>
+        <h3 className="empty-state-title">Sin Fixtures Registrados</h3>
+        <p className="empty-state-subtitle">
+          No hay fixtures registrados aún. Comienza registrando el primer fixture.
+        </p>
+      </div>
+    );
   }
 
   return (
     <div className="lista-fixture-container">
-      {fixtures.length === 0 ? (
-        <div className="empty-state">
-          <div className="empty-state-icon">📅</div>
-          <h3 className="empty-state-title">Sin Fixtures Registrados</h3>
-          <p className="empty-state-subtitle">
-            No hay fixtures registrados aún. Comienza registrando el primer fixture.
-          </p>
-        </div>
-      ) : (
-        fixtures.map((f) => (
-          <article key={f.id} className="fixture-item-card">
-            <header className="fixture-header">
-              <div>
-                <h3 className="fixture-title" style={{ margin: 0 }}>{f.fecha} — {f.lugar}</h3>
-              </div>
-              <div className="buttonContainer" style={{ display: 'flex', gap: 8 }}>
-                {canEdit && <button className="btn-action" style={{ backgroundColor: '#1f3c88', color: '#ffffff' }} onClick={() => onEdit(f)}>Editar</button>}
-              </div>
-            </header>
+      {fixtures.map((f) => (
+        <article key={f.id} className="fixture-item-card">
+          <header className="fixture-header">
+            <div>
+              <h3 className="fixture-title" style={{ margin: 0 }}>{f.fecha} — {f.lugar}</h3>
+            </div>
+            <div className="buttonContainer" style={{ display: 'flex', gap: 8 }}>
+              {canEdit && <button className="btn-action" style={{ backgroundColor: '#1f3c88', color: '#ffffff' }} onClick={() => onEdit(f)}>Editar</button>}
+            </div>
+          </header>
 
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-              {f.partidos.map(p => (
+          <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+            {f.partidos && f.partidos.length > 0 ? (
+              f.partidos.map(p => (
                 <li key={p.id} style={{ padding: '8px 0', borderBottom: '1px solid #eee' }}>
                   <PartidoRow partido={p} />
                 </li>
-              ))}
-            </ul>
-          </article>
-        ))
-      )}
+              ))
+            ) : (
+              <li style={{ padding: '8px 0', color: '#999', fontStyle: 'italic' }}>
+                No hay partidos registrados para este fixture
+              </li>
+            )}
+          </ul>
+        </article>
+      ))}
     </div>
   );
 };

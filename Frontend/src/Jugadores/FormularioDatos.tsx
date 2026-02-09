@@ -79,7 +79,7 @@ const FormularioDatos: React.FC<Props> = ({ jugador, onGuardar, onCancelar, juga
     setForm({ ...form, [name]: value });
   };
 
-  const categorias = ["Infantil", "Cadete", "Juvenil", "Senior"];
+  const categorias = ["Masculino", "Femenino"];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

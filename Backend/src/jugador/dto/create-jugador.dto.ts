@@ -8,6 +8,11 @@ import {
   IsDateString,
 } from 'class-validator';
 
+enum CategoriaEnum {
+  MASCULINO = 'Masculino',
+  FEMENINO = 'Femenino',
+}
+
 export class CreateJugadorDto {
   @IsString()
   @IsNotEmpty()
@@ -21,7 +26,7 @@ export class CreateJugadorDto {
   @IsNotEmpty()
   dni: string;
 
-  @IsString()
+  @IsEnum(CategoriaEnum)
   @IsNotEmpty()
   categoria: string;
 
