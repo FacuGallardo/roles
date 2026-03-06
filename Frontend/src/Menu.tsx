@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import Autoridades from "./Autoridades/Autoridades";
-import VerClubes from "./Clubes/VerClub";
+import { ClubesListado } from "./Clubes/pages/ClubesListado";
+import { CrearClub } from "./Clubes/pages/CrearClub";
+import { EditarClub } from "./Clubes/pages/EditarClub";
+import { DetalleClub } from "./Clubes/pages/DetalleClub";
 import JugadoresPage from "./Jugadores/JugadoresPage";
 import ReferentesPage from "./Referentes/ReferentesPage";
 import FixturePage from "./Fixture/FixturePage";
@@ -23,6 +26,7 @@ export default function App() {
   const [vista, setVista] = useState(
     () => (localStorage.getItem("vista") as any) || "inicio"
   );
+  const [clubIdActual, setClubIdActual] = useState<number | null>(null);
 
   const [openHandball, setOpenHandball] = useState(false);
   const [openInstitucional, setOpenInstitucional] = useState(false);
@@ -88,7 +92,7 @@ export default function App() {
   };
 
   const isNavItemActive = (item: string) => {
-    if (item === "handball" && (vista === "clubes" || vista === "jugadores" || vista === "estadisticas" || vista === "fixture" || vista === "reglamento")) {
+    if (item === "handball" && (vista === "clubes" || vista === "crear-club" || vista === "editar-club" || vista === "detalle-club" || vista === "jugadores" || vista === "estadisticas" || vista === "fixture" || vista === "reglamento")) {
       return true;
     }
     if (item === "institucional" && (vista === "autoridades" || vista === "referentes" || vista === "historia")) {
@@ -723,7 +727,66 @@ export default function App() {
           
           {/* ... (Renderizado del resto de tus vistas) ... */}
           {vista === "autoridades" && <Autoridades />}
-          {vista === "clubes" && <VerClubes />}
+          
+          {/* CLUBES - Nueva estructura */}
+          {vista === "clubes" && (
+            <ClubesListado
+              onCrearClick={() => {
+                setVista("crear-club");
+                setClubIdActual(null);
+              }}
+              onEditarClick={(id) => {
+                setVista("editar-club");
+                setClubIdActual(id);
+              }}
+              onVerClick={(id) => {
+                setVista("detalle-club");
+                setClubIdActual(id);
+              }}
+            />
+          )}
+          
+          {vista === "crear-club" && (
+            <CrearClub
+              onBack={() => {
+                setVista("clubes");
+                setClubIdActual(null);
+              }}
+              onSuccess={() => {
+                setVista("clubes");
+                setClubIdActual(null);
+              }}
+            />
+          )}
+          
+          {vista === "editar-club" && clubIdActual && (
+            <EditarClub
+              clubId={clubIdActual}
+              onBack={() => {
+                setVista("clubes");
+                setClubIdActual(null);
+              }}
+              onSuccess={() => {
+                setVista("clubes");
+                setClubIdActual(null);
+              }}
+            />
+          )}
+          
+          {vista === "detalle-club" && clubIdActual && (
+            <DetalleClub
+              clubId={clubIdActual}
+              onBack={() => {
+                setVista("clubes");
+                setClubIdActual(null);
+              }}
+              onEdit={(id) => {
+                setVista("editar-club");
+                setClubIdActual(id);
+              }}
+            />
+          )}
+          
           {vista === "jugadores" && <JugadoresPage />}
           {vista === "fixture" && <FixturePage />}
           {vista === "historia" && <Historia />}

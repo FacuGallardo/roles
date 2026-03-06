@@ -1,14 +1,4 @@
-/* estadistica-responsive.css */
 
-/* ========================================
-   RESPONSIVE BREAKPOINTS STRATEGY
-   Mobile-first approach:
-   - Mobile: max-width 480px (target: 360-480px)
-   - Tablet: 481px - 1024px
-   - Desktop: 1025px+ (1200px recommended)
-   ======================================== */
-
-/* Mobile-first: Aplicar estilos base para todos los tamaños */
 .estadistica-container {
     box-sizing: border-box;
     width: 100%;
