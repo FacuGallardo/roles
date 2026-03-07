@@ -4,7 +4,7 @@ import { ClubesListado } from "./Clubes/pages/ClubesListado";
 import { CrearClub } from "./Clubes/pages/CrearClub";
 import { EditarClub } from "./Clubes/pages/EditarClub";
 import { DetalleClub } from "./Clubes/pages/DetalleClub";
-import JugadoresPage from "./Jugadores/JugadoresPage";
+import { JugadoresPage } from "./Jugadores";
 import ReferentesPage from "./Referentes/ReferentesPage";
 import FixturePage from "./Fixture/FixturePage";
 import Historia from "./Historia/Historia";

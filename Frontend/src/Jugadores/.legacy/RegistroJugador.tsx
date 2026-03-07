@@ -198,34 +198,3 @@ const RegistroJugador: React.FC<Props> = ({ onRegistrar, clubes }) => {
           <label htmlFor="fechaNacimiento">Fecha de Nacimiento</label>
           <input
             id="fechaNacimiento"
-            name="fechaNacimiento"
-            className="form-input"
-            value={form.fechaNacimiento}
-            onChange={handleChange}
-            placeholder="dd/mm/yyyy"
-            inputMode="numeric"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="estado">Estado</label>
-          <select
-            id="estado"
-            name="estado"
-            className="form-input"
-            value={form.estado}
-            onChange={handleChange}
-          >
-            <option value="activo">Activo</option>
-            <option value="inactivo">Inactivo</option>
-          </select>
-        </div>
-      </div>
-
-      <div className="button-group button-group-right">
-        <button type="submit" className="btn-primary">Registrar</button>
-      </div>
-    </form>
-  );
-};
-
-export default RegistroJugador;

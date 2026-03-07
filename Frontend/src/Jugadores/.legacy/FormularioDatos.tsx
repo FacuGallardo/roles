@@ -198,8 +198,3 @@ const FormularioDatos: React.FC<Props> = ({ jugador, onGuardar, onCancelar, juga
         <button type="submit" className="btn-action btn-primary">Guardar</button>
         <button type="button" onClick={onCancelar} className="btn-action btn-secondary">Cancelar</button>
       </div>
-    </form>
-  );
-};
-
-export default FormularioDatos;

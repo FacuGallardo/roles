@@ -45,9 +45,22 @@ export class Jugador {
 
   // --- Campos para Base64 ---
   // Usamos mediumtext para que soporte el tamaño de la cadena Base64
+  // --- Campos Deportivos ---
+  @Column({ nullable: true })
+  dorsal: number; // Número de camiseta 1-99
+
+  @Column({ nullable: true })
+  posicion: string; // Portero, Extremo Izquierdo, Extremo Derecho, Lateral Izquierdo, Lateral Derecho, Pivote
+
+  // --- Campos para Base64 ---
+  // Usamos mediumtext para que soporte el tamaño de la cadena Base64
   @Column({ type: 'mediumtext', nullable: true })
   carnetUrl: string;
 
   @Column({ type: 'mediumtext', nullable: true })
   fichaMedicaUrl: string;
+
+  // --- Notas internas ---
+  @Column({ type: 'text', nullable: true })
+  observacion: string;
 }

@@ -6,6 +6,8 @@ import {
   IsEnum,
   IsOptional,
   IsDateString,
+  Min,
+  Max,
 } from 'class-validator';
 
 enum CategoriaEnum {
@@ -47,10 +49,24 @@ export class CreateJugadorDto {
   estado?: string;
 
   @IsOptional()
+  @IsInt()
+  @Min(1)
+  @Max(99)
+  dorsal?: number; // Número de camiseta
+
+  @IsOptional()
+  @IsString()
+  posicion?: string; // Portero, Extremo Izquierdo, etc.
+
+  @IsOptional()
   @IsString()
   carnetUrl?: string;
 
   @IsOptional()
   @IsString()
   fichaMedicaUrl?: string;
+
+  @IsOptional()
+  @IsString()
+  observacion?: string; // Notas internas
 }
