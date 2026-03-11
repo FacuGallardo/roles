@@ -1,108 +1,128 @@
-import React, { useState, useEffect } from "react";
-import "./registropagos-responsive.css";
+import React, { useState } from 'react';
 
-type Pago = any;
+interface Props {
+  pagoId: number;
+  pagoActual: any;
+  onGuardar: (updateData: any) => void;
+  onCancelar: () => void;
+}
 
-type Props = {
-    pago: Pago;
-    montoMinimo: number;
-    partidos: any[];
-    onGuardar: (actualizado: Pago) => void;
-    onCancelar: () => void;
-};
+const EditarPago: React.FC<Props> = ({
+  pagoId,
+  pagoActual,
+  onGuardar,
+  onCancelar,
+}) => {
+  const [form, setForm] = useState({
+    monto: pagoActual.monto,
+    estado: pagoActual.estado,
+    metodo_pago: pagoActual.metodo_pago || '',
+    numero_transaccion: pagoActual.numero_transaccion || '',
+    observaciones: pagoActual.observaciones || '',
+  });
 
-// Estilos CSS inyectados
-const globalStyles = `
-    .edit-form-card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); max-width: 500px; margin: 20px auto; }
-    .form-label { display: block; margin-bottom: 5px; font-weight: bold; color: #555; }
-    .form-input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; margin-bottom: 15px; }
-    .btn-group { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
-    .btn-save { background: #1f3c88; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
-    .btn-cancel { background: #ef4444; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
-`;
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setForm(prev => ({
+      ...prev,
+      [name]: name === 'monto' ? Number(value) : value,
+    }));
+  };
 
-const EditarPago: React.FC<Props> = ({ pago, montoMinimo, partidos, onGuardar, onCancelar }) => {
-    const [form, setForm] = useState<Pago>({ ...pago });
-    const [loading, setLoading] = useState(false);
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    onGuardar(form);
+  };
 
-    useEffect(() => {
-        setForm({ ...pago });
-    }, [pago]);
+  return (
+    <div className="modal-overlay" onClick={onCancelar}>
+      <div className="modal-content" onClick={e => e.stopPropagation()}>
+        <h2 className="form-title">Editar Pago #{pagoId}</h2>
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-        const { name, value } = e.target;
-        setForm((prev: any) => ({
-             ...prev,
-             [name]: (name === "monto" || name === "partidoId" || name === "cantidadJugadores") ? Number(value) : value
-        }));
-    };
+        <form onSubmit={handleSubmit} className="form-grid">
+          <div className="form-group">
+            <label htmlFor="monto">Monto</label>
+            <input
+              id="monto"
+              type="number"
+              name="monto"
+              value={form.monto}
+              onChange={handleChange}
+              step="0.01"
+            />
+          </div>
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        setLoading(true);
-        onGuardar(form);
-    };
+          <div className="form-group">
+            <label htmlFor="estado">
+              Estado <span className="required">*</span>
+            </label>
+            <select
+              id="estado"
+              name="estado"
+              value={form.estado}
+              onChange={handleChange}
+              required
+            >
+              <option value="pendiente">Pendiente</option>
+              <option value="pagado">Pagado</option>
+              <option value="validado">Validado</option>
+              <option value="invalido">Inválido</option>
+            </select>
+          </div>
 
-    // Formato fecha
-    const fechaInputValue = form.fecha ? new Date(form.fecha).toISOString().split('T')[0] : '';
+          <div className="form-group">
+            <label htmlFor="metodo_pago">Método de Pago</label>
+            <select
+              id="metodo_pago"
+              name="metodo_pago"
+              value={form.metodo_pago}
+              onChange={handleChange}
+            >
+              <option value="">Selecciona...</option>
+              <option value="efectivo">Efectivo</option>
+              <option value="transferencia">Transferencia</option>
+              <option value="cheque">Cheque</option>
+              <option value="tarjeta">Tarjeta</option>
+            </select>
+          </div>
 
-    return (
-        <>
-            <style>{globalStyles}</style>
-            <div className="edit-form-card">
-                <h3 style={{textAlign: 'center', color: '#333', borderBottom: '1px solid #eee', paddingBottom: '10px'}}>
-                    Editar Pago #{form.id}
-                </h3>
+          <div className="form-group">
+            <label htmlFor="numero_transaccion">Número de Transacción</label>
+            <input
+              id="numero_transaccion"
+              type="text"
+              name="numero_transaccion"
+              value={form.numero_transaccion}
+              onChange={handleChange}
+              placeholder="Ej: CVU, Referencia, etc"
+            />
+          </div>
 
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <label htmlFor="club" className="form-label">Club</label>
-                        <input id="club" className="form-input" value={form.club} readOnly style={{backgroundColor: '#f9f9f9'}} />
-                    </div>
-                    
-                    <div>
-                        <label htmlFor="estado" className="form-label">Estado (Validación)</label>
-                        <select id="estado" name="estado" className="form-input" value={form.estado} onChange={handleChange}>
-                            <option value="pendiente">Pendiente</option>
-                            <option value="validado">Validado</option>
-                            <option value="invalido">Inválido</option>
-                        </select>
-                    </div>
+          <div className="form-group" style={{ gridColumn: '1 / -1' }}>
+            <label htmlFor="observaciones">Observaciones</label>
+            <textarea
+              id="observaciones"
+              name="observaciones"
+              value={form.observaciones}
+              onChange={handleChange}
+              placeholder="Notas adicionales..."
+            />
+          </div>
 
-                    <div>
-                        <label htmlFor="monto" className="form-label">Monto ($)</label>
-                        <input id="monto" name="monto" type="number" className="form-input" value={form.monto} onChange={handleChange} min={montoMinimo} required />
-                    </div>
-
-                    <div>
-                        <label htmlFor="comprobante" className="form-label">Nº Comprobante</label>
-                        <input id="comprobante" name="comprobante" type="text" className="form-input" value={form.comprobante} onChange={handleChange} required />
-                    </div>
-
-                    <div>
-                        <label htmlFor="fecha" className="form-label">Fecha</label>
-                        <input id="fecha" name="fecha" type="date" className="form-input" value={fechaInputValue} onChange={handleChange} required />
-                    </div>
-
-                    {(form.tipo === 'multa' || form.tipo === 'otro') && (
-                        <div>
-                            <label htmlFor="motivo" className="form-label">Motivo</label>
-                            <input id="motivo" name="motivo" className="form-input" value={form.motivo || ''} onChange={handleChange} />
-                        </div>
-                    )}
-
-                    <div className="btn-group">
-                        <button type="submit" className="btn-save" disabled={loading}>
-                            {loading ? 'Guardando...' : 'Guardar'}
-                        </button>
-                        <button type="button" className="btn-cancel" onClick={onCancelar} disabled={loading}>
-                            Cancelar
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </>
-    );
+          <div className="button-group" style={{ gridColumn: '1 / -1' }}>
+            <button type="button" className="btn secondary" onClick={onCancelar}>
+              Cancelar
+            </button>
+            <button type="submit" className="btn primary">
+              Guardar Cambios
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
 };
 
 export default EditarPago;

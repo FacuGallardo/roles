@@ -1,77 +1,141 @@
-import React, { useState } from "react";
+import React from 'react';
+import type { Pago, Club } from './types';
 
-type Pago = any;
+interface Props {
+  pagos: Pago[];
+  clubes: Club[];
+  canEdit: boolean;
+  canDelete: boolean;
+  onEditar: (pago: Pago | null) => void;
+  onActualizar: (pagoId: number, updateData: Partial<Pago>) => void;
+  onEliminar: (pagoId: number) => void;
+  editingPago: Pago | null;
+}
 
-type Props = {
-    pagos: Pago[];
-    clubes: string[];
-    onEditar: (pago: Pago) => void;
-    onEliminar: (id: number) => void;
-    canEdit: boolean;   // 🔒
-    canDelete: boolean; // 🔒
-};
+const HistorialPagos: React.FC<Props> = ({
+  pagos,
+  clubes,
+  canEdit,
+  canDelete,
+  onEditar,
+  onActualizar,
+  onEliminar,
+  editingPago,
+}) => {
+  const getStatusClass = (status: string) => `status-pill status-${status}`;
+  const getClubName = (clubId: number) =>
+    clubes.find(c => c.id === clubId)?.nombre || `Club #${clubId}`;
 
-// ... (Configuración de estilos igual que antes) ...
-const styleConfig = {
-    editButton: "historial-edit-button",
-    deleteButton: "historial-delete-button",
-    // ...
-};
+  const handleStatusChange = (pagoId: number, newStatus: string) => {
+    onActualizar(pagoId, { estado: newStatus as Pago['estado'] });
+  };
 
-const globalStyles = `
-  /* ... TUS ESTILOS PREVIOS ... */
-  .historial-edit-button { background-color: #1f3c88; color: white; padding: 5px 10px; border: none; border-radius: 4px; cursor: pointer; margin-right: 5px; }
-  .historial-delete-button { background-color: #ef4444; color: white; padding: 5px 10px; border: none; border-radius: 4px; cursor: pointer; }
-`;
+  return (
+    <div className="card">
+      <div className="card-header">
+        <h2 className="card-title">Historial de Pagos</h2>
+        <span className="badge">{pagos.length} pagos</span>
+      </div>
 
-const HistorialPagos: React.FC<Props> = ({ pagos, clubes, onEditar, onEliminar, canEdit, canDelete }) => {
-    const [clubFiltro, setClubFiltro] = useState<string>("");
-    // ... otros filtros ...
+      <div className="table-container">
+        {pagos.length === 0 ? (
+          <div className="empty-state">
+            <div className="empty-state-icon">📋</div>
+            <div className="empty-state-title">Sin pagos registrados</div>
+            <div className="empty-state-message">No hay pagos para mostrar</div>
+          </div>
+        ) : (
+          <table className="pagos-table">
+            <thead className="table-header">
+              <tr>
+                <th>Club</th>
+                <th>Tipo</th>
+                <th>Monto</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                {(canEdit || canDelete) && <th>Acciones</th>}
+              </tr>
+            </thead>
+            <tbody>
+              {pagos.map(pago => (
+                <tr key={pago.id} className="table-row">
+                  <td data-label="Club">{getClubName(pago.clubId)}</td>
+                  <td data-label="Tipo">
+                    <span className="badge">{pago.tipo}</span>
+                  </td>
+                  <td data-label="Monto">${pago.monto.toFixed(2)}</td>
+                  <td data-label="Fecha">
+                    {new Date(pago.fecha).toLocaleDateString('es-AR')}
+                  </td>
+                  <td data-label="Estado">
+                    <span className={getStatusClass(pago.estado)}>
+                      {pago.estado}
+                    </span>
+                  </td>
+                  {(canEdit || canDelete) && (
+                    <td data-label="Acciones" className="actions-cell">
+                      {canEdit && (
+                        <button
+                          className="action-btn edit"
+                          onClick={() => onEditar(pago)}
+                          title="Editar"
+                        >
+                          ✎
+                        </button>
+                      )}
+                      {canDelete && (
+                        <button
+                          className="action-btn delete"
+                          onClick={() => onEliminar(pago.id)}
+                          title="Eliminar"
+                        >
+                          🗑
+                        </button>
+                      )}
+                    </td>
+                  )}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
 
-    const pagosFiltrados = pagos.filter(p => (!clubFiltro || p.club === clubFiltro)); // Filtro simple
-
-    return (
-        <>
-            <style>{globalStyles}</style>
-            <div className="historial-pagos">
-                {/* ... Filtros ... */}
-                <div className="table-responsive" style={{ width: "100%", overflowX: "auto", WebkitOverflowScrolling: "touch" as const }}>
-                    <table style={{width: '100%', minWidth: '500px', borderCollapse: 'collapse'}}>
-                        <thead style={{backgroundColor: '#1f3c88', color: 'white'}}>
-                            <tr>
-                                <th style={{padding: '10px'}}>Club</th>
-                                <th style={{padding: '10px'}}>Tipo</th>
-                                <th style={{padding: '10px'}}>Monto</th>
-                                <th style={{padding: '10px'}}>Estado</th>
-                                {(canEdit || canDelete) && <th style={{padding: '10px'}}>Acciones</th>}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {pagosFiltrados.map(pago => (
-                                <tr key={pago.id} style={{borderBottom: '1px solid #eee'}}>
-                                    <td style={{padding: '10px'}}>{pago.club}</td>
-                                    <td style={{padding: '10px'}}>{pago.tipo}</td>
-                                    <td style={{padding: '10px'}}>${pago.monto}</td>
-                                    <td style={{padding: '10px'}}>{pago.estado}</td>
-                                    
-                                    {(canEdit || canDelete) && (
-                                        <td style={{padding: '10px', whiteSpace: 'nowrap'}}>
-                                            {canEdit && (
-                                                <button className={styleConfig.editButton} onClick={() => onEditar(pago)}>Editar</button>
-                                            )}
-                                            {canDelete && (
-                                                <button className={styleConfig.deleteButton} onClick={() => onEliminar(pago.id)}>Eliminar</button>
-                                            )}
-                                        </td>
-                                    )}
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+      {/* Modal de edición */}
+      {editingPago && (
+        <div className="modal-overlay" onClick={() => onEditar(null)}>
+          <div className="modal-content" onClick={e => e.stopPropagation()}>
+            <div className="modal-title">Editar Pago #{editingPago.id}</div>
+            <div className="card-content">
+              <div className="card-row">
+                <div className="card-label">Estado</div>
+                <select
+                  className="filter-select"
+                  value={editingPago.estado}
+                  onChange={e =>
+                    handleStatusChange(editingPago.id, e.target.value)
+                  }
+                >
+                  <option value="pendiente">Pendiente</option>
+                  <option value="pagado">Pagado</option>
+                  <option value="validado">Validado</option>
+                  <option value="invalido">Inválido</option>
+                </select>
+              </div>
             </div>
-        </>
-    );
+            <div className="modal-actions">
+              <button
+                className="btn secondary"
+                onClick={() => onEditar(null)}
+              >
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default HistorialPagos;

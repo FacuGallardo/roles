@@ -1,101 +1,103 @@
-import React from "react";
-import "./registropagos-responsive.css";
+import React from 'react';
+import type { Pago, Club } from './types';
 
-type TipoPago = "cuota" | "arbitraje" | "multa" | "otro";
-
-interface Pago {
-    id: number;
-    tipo: TipoPago;
-    club: string;
-    monto: number;
-    estado: "pendiente" | "pagado" | "validado" | "invalido";
-    fecha: string;
+interface Props {
+  clubes: Club[];
+  pagos: Pago[];
+  canCreate: boolean;
+  onCrearPago: (pago: Omit<Pago, 'id'>) => void;
 }
 
-type Props = {
-    clubes: string[];
-    pagos: Pago[];
-    onRealizarPago: (club: string, tipo: TipoPago) => void;
-    canCreate: boolean; // 🔒 Permiso para crear
+const TablaPagosClub: React.FC<Props> = ({
+  clubes,
+  pagos,
+  canCreate,
+  onCrearPago,
+}) => {
+  const tiposTabla = [
+    { tipo: 'cuota', label: 'Cuota Anual' },
+    { tipo: 'arbitraje', label: 'Arbitraje' },
+  ];
+
+  const getPaymentCount = (clubId: number, tipo: string) =>
+    pagos.filter(p => p.clubId === clubId && p.tipo === tipo).length;
+
+  const getTotalAmount = (clubId: number, tipo: string) =>
+    pagos
+      .filter(p => p.clubId === clubId && p.tipo === tipo)
+      .reduce((sum, p) => sum + p.monto, 0);
+
+  const handleCrearPago = (clubId: number, tipo: string) => {
+    if (!canCreate) {
+      alert('No tienes permiso para crear pagos');
+      return;
+    }
+    // Crear pago base mínimo y pasar al padre
+    const nuevoPago: Omit<Pago, 'id'> = {
+      tipo: tipo as any,
+      concepto: '',
+      clubId,
+      monto: 0,
+      fecha: new Date().toISOString().split('T')[0],
+      estado: 'pendiente',
+    };
+    onCrearPago(nuevoPago);
+  };
+
+  return (
+    <div className="card">
+      <div className="card-header">
+        <h2 className="card-title">Resumen de Pagos por Club</h2>
+      </div>
+
+      <div className="table-container">
+        <table className="pagos-table">
+          <thead className="table-header">
+            <tr>
+              <th>Club</th>
+              {tiposTabla.map(t => (
+                <th key={t.tipo} style={{ textAlign: 'center' }}>
+                  {t.label}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {clubes.map(club => (
+              <tr key={club.id} className="table-row">
+                <td data-label="Club">{club.nombre}</td>
+                {tiposTabla.map(t => (
+                  <td
+                    key={`${club.id}-${t.tipo}`}
+                    data-label={t.label}
+                    style={{ textAlign: 'center' }}
+                  >
+                    <div className="gap-2">
+                      <span className="badge">
+                        {getPaymentCount(club.id, t.tipo)}
+                      </span>
+                      <span className="text-secondary">
+                        ${getTotalAmount(club.id, t.tipo).toFixed(2)}
+                      </span>
+                      {canCreate && (
+                        <button
+                          className="btn primary"
+                          onClick={() => handleCrearPago(club.id, t.tipo)}
+                          style={{ fontSize: '0.8rem', padding: '0.4rem 0.8rem' }}
+                        >
+                          +
+                        </button>
+                      )}
+                    </div>
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
 };
-
-const estadosColor = {
-    pendiente: "estado-pendiente",
-    pagado: "estado-pagado",
-    validado: "estado-pagado",
-    invalido: "estado-invalido"
-};
-
-const styleConfig = {
-    tableWrapper: "table-pagos-club-wrapper",
-    table: "table-pagos-club",
-    // ... (El resto de tus clases se mantienen igual que en tu archivo original)
-    statusBadge: "status-badge",
-    btnPagoBase: "btn-pago-base", 
-};
-
-// ... (Tus estilos CSS globales se mantienen igual) ...
-const globalStyles = `
-  /* ... TUS ESTILOS PREVIOS ... */
-  .btn-pago-base { padding: clamp(0.3rem, 1vw, 0.4rem) clamp(0.6rem, 1.5vw, 0.8rem); font-size: 0.75rem; border-radius: 0.375rem; cursor: pointer; border: none; background-color: #1f3c88; color: white; min-height: 44px; }
-  .btn-pago-base:disabled { background-color: #e5e7eb; color: #6b7280; cursor: not-allowed; }
-  /* ... */
-`;
-
-const tiposTabla: Array<{ tipo: TipoPago, label: string }> = [
-    { tipo: "cuota", label: "Cuota Anual" },
-    { tipo: "arbitraje", label: "Pago Arbitraje" },
-];
-
-const TablaPagosClub: React.FC<Props> = ({ clubes, pagos, onRealizarPago, canCreate }) => (
-    <>
-        <style>{globalStyles}</style>
-        <div className={styleConfig.tableWrapper}>
-            <table className={styleConfig.table}>
-                <thead>
-                    <tr>
-                        <th style={{padding: 'clamp(0.75rem, 2vw, 1rem)', textAlign: 'left', backgroundColor: '#1f3c88', color:'white'}}>Club</th>
-                        {tiposTabla.map((t) => (
-                            <th key={t.tipo} style={{padding: 'clamp(0.75rem, 2vw, 1rem)', textAlign: 'center', backgroundColor: '#1f3c88', color:'white'}}>{t.label}</th>
-                        ))}
-                    </tr>
-                </thead>
-                <tbody>
-                    {clubes.map(club => (
-                        <tr key={club}>
-                            <td style={{padding: 'clamp(0.75rem, 2vw, 1rem)', fontWeight: 'bold'}}>{club}</td>
-                            {tiposTabla.map((t) => {
-                                const ultimoPago = pagos
-                                    .filter(p => p.club === club && p.tipo === t.tipo)
-                                    .sort((a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime())[0];
-
-                                const estado = ultimoPago?.estado || "pendiente";
-                                const estadoClass = estadosColor[estado as keyof typeof estadosColor] || estadosColor.pendiente;
-
-                                return (
-                                    <td key={t.tipo} style={{padding: 'clamp(0.5rem, 1.5vw, 0.75rem)', textAlign: 'center', borderBottom: '1px solid #eee'}}>
-                                        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'clamp(0.25rem, 1vw, 0.5rem)'}}>
-                                            <span className={`${styleConfig.statusBadge} ${estadoClass}`}>{estado.toUpperCase()}</span>
-                                            
-                                            {/* 🔒 BOTÓN PROTEGIDO */}
-                                            {canCreate && (
-                                                <button
-                                                    className={styleConfig.btnPagoBase}
-                                                    onClick={() => onRealizarPago(club, t.tipo)}
-                                                >
-                                                    Registrar Pago
-                                                </button>
-                                            )}
-                                        </div>
-                                    </td>
-                                );
-                            })}
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </div>
-    </>
-);
 
 export default TablaPagosClub;
