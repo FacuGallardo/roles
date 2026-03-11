@@ -10,10 +10,10 @@ export class Pago {
   tipo: string;
 
   // --- INICIO DE LA CORRECCIÓN ---
-
+  // --- INICIO DE LA CORRECCIÓN ---
   @Column({ nullable: true }) // <-- AÑADIR ESTO
   clubId: number; // Clave foránea
-
+  @ManyToOne(() => Club, (club) => club.pagos, { // (club) => club.pagos es buena práctica
   @ManyToOne(() => Club, (club) => club.pagos, { // (club) => club.pagos es buena práctica
     onDelete: 'SET NULL',
     nullable: true // <-- AÑADIR ESTO

@@ -40,5 +40,17 @@ export class CreatePagoDto {
   @IsString()
   motivo?: string;
 
+    @IsOptional()
+    @IsString()
+    metodo_pago?: string;
+
+    @IsOptional()
+    @IsString()
+    numero_transaccion?: string;
+
+    @IsOptional()
+    @IsString()
+    observaciones?: string;
+
   // No incluyas id, fecha, estado aquí (se manejan en el backend)
 }
