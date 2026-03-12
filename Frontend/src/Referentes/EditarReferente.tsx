@@ -1,42 +1,16 @@
 import React, { useState } from "react";
 import type { CSSProperties } from "react";
 import { styles } from "./ReferentesPage";
+import type { Referente, Club, UpdateReferenteDto } from "./types";
 import "./referentes-responsive.css";
 
-interface Club {
-  id: number;
-  nombre: string;
-}
-
-interface Referente {
-  id: number;
-  nombre: string;
-  apellido: string;
-  categoria: "Masculino" | "Femenino";
-  dni: string;
-  correo: string;
-  telefono: string; // <--- AÑADIDO
-  clubId: number;
-  club: Club;
-}
-
-type UpdateReferenteDto = Partial<{
-  nombre: string;
-  apellido: string;
-  categoria: "Masculino" | "Femenino";
-  dni: string;
-  correo: string;
-  telefono: string; // <--- AÑADIDO
-  clubId: number;
-}>;
-
-type Props = {
+interface Props {
   referente: Referente;
   clubes: Club[];
   onActualizar: (id: number, dto: UpdateReferenteDto) => void;
   onCancelar: () => void;
   error: string | null;
-};
+}
 
 const categorias = ["Masculino", "Femenino"];
 
@@ -75,7 +49,7 @@ const EditarReferente: React.FC<Props> = ({
     categoria: referente.categoria,
     dni: referente.dni,
     correo: referente.correo,
-    telefono: referente.telefono, // <--- Cargar teléfono existente
+    telefono: referente.telefono,
     clubId: referente.clubId,
   });
 
@@ -131,12 +105,12 @@ const EditarReferente: React.FC<Props> = ({
           <div className="categoria-grid">
             {categorias.map((c) => (
               <div key={c} className="categoria-option">
-                <input 
-                  type="radio" 
+                <input
+                  type="radio"
                   id={`cat-${c}`}
                   name="categoria"
                   value={c}
-                  checked={form.categoria === c}
+                  checked={form.categoria === c as any}
                   onChange={handleChange}
                   required
                 />
@@ -168,7 +142,6 @@ const EditarReferente: React.FC<Props> = ({
           required
         />
 
-        {/* INPUT DE TELÉFONO PARA EDITAR */}
         <input
           name="telefono"
           type="tel"
@@ -206,7 +179,7 @@ const EditarReferente: React.FC<Props> = ({
           <button
             type="button"
             onClick={onCancelar}
-            style={{ ...estiloBotonCancelar, width: "50%" }}
+            style={{ ...estiloBotonCancelar, width: "50%", marginTop: 0 }}
           >
             Cancelar
           </button>

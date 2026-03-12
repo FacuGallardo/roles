@@ -1,0 +1,325 @@
+/* Referentes - Mobile First Responsive Styles */
+
+/* Categoría Grid Selection */
+.categoria-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: clamp(8px, 2vw, 12px);
+  margin-bottom: clamp(0.75rem, 2vw, 1rem);
+}
+
+.categoria-option {
+  position: relative;
+}
+
+.categoria-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.categoria-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(8px, 2vw, 12px) clamp(12px, 2.5vw, 16px);
+  background-color: #f9fafb;
+  border: 2px solid #d1d5db;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #374151;
+  min-height: 44px;
+}
+
+.categoria-option input[type="radio"]:checked + .categoria-label {
+  background-color: #1f3c88;
+  border-color: #1f3c88;
+  color: white;
+  box-shadow: 0 0 0 3px rgba(31, 60, 136, 0.2);
+}
+
+.categoria-label:hover {
+  border-color: #1f3c88;
+  background-color: #f0f4ff;
+}
+
+.categoria-option input[type="radio"]:checked + .categoria-label:hover {
+  background-color: #153d7b;
+}
+
+.referentes-container {
+  width: 100%;
+  max-width: 100%;
+  padding: clamp(8px, 2vw, 12px);
+  padding-top: calc(var(--header-height, 60px) + clamp(8px, 2vw, 12px));
+  box-sizing: border-box;
+  background-color: #f3f4f6;
+}
+
+/* Formularios */
+.referentes-form {
+  width: 100%;
+  max-width: 100%;
+  background: white;
+  padding: clamp(12px, 3vw, 16px);
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.referentes-form h2 {
+  font-size: clamp(1.2rem, 4vw, 1.5rem);
+  color: #1f3c88;
+  margin: 0 0 clamp(1rem, 2.5vw, 1.5rem) 0;
+  text-align: center;
+}
+
+/* Form fields - 1 columna en mobile */
+.form-fields-referentes {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(12px, 3vw, 16px);
+  margin-bottom: clamp(12px, 3vw, 20px);
+}
+
+.form-group-referentes {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(4px, 1vw, 6px);
+}
+
+.form-group-referentes label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1f2937;
+  line-height: 1.3;
+}
+
+.form-group-referentes input,
+.form-group-referentes select,
+.form-group-referentes textarea {
+  width: 100%;
+  padding: clamp(8px, 2vw, 12px);
+  border-radius: 8px;
+  border: 2px solid #d1d5db;
+  font-size: 1rem;
+  background: #fff;
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  font-family: inherit;
+  min-height: 44px;
+}
+
+.form-group-referentes input:focus,
+.form-group-referentes select:focus,
+.form-group-referentes textarea:focus {
+  outline: none;
+  border-color: #1f3c88;
+  box-shadow: 0 0 0 3px rgba(31, 60, 136, 0.1);
+}
+
+/* Dos inputs en fila en mobile (nombre + apellido) */
+.form-row-two-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(8px, 2vw, 12px);
+}
+
+.form-row-two-cols .form-group-referentes {
+  margin: 0;
+}
+
+/* Buttons */
+.button-group-referentes {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(6px, 1.5vw, 10px);
+  margin-top: clamp(12px, 3vw, 20px);
+  margin-bottom: clamp(12px, 3vw, 20px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.btn-referentes {
+  width: 100%;
+  min-height: 44px;
+  padding: clamp(0.5rem, 1.5vw, 0.75rem) clamp(0.75rem, 2vw, 1rem);
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-primary-referentes {
+  background-color: #1f3c88;
+  color: white;
+}
+
+.btn-primary-referentes:hover {
+  background-color: #152a5f;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(31, 60, 136, 0.3);
+}
+
+.btn-secondary-referentes {
+  background-color: #e5e7eb;
+  color: #1f3c88;
+  border: 1px solid #d1d5db;
+}
+
+.btn-secondary-referentes:hover {
+  background-color: #d1d5db;
+  transform: translateY(-2px);
+}
+
+.btn-danger-referentes {
+  background-color: #ef4444;
+  color: white;
+}
+
+.btn-danger-referentes:hover {
+  background-color: #dc2626;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(239, 68, 68, 0.3);
+}
+
+/* Lista */
+.referentes-list {
+  width: 100%;
+  background: white;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.referentes-list h2 {
+  font-size: clamp(1.2rem, 4vw, 1.5rem);
+  color: #1f3c88;
+  margin: 0 0 1.5rem 0;
+  text-align: center;
+}
+
+/* Tabla de referentes */
+.table-referentes {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: clamp(0.85rem, 2vw, 0.95rem);
+}
+
+.table-referentes thead {
+  background-color: #1f3c88;
+  color: white;
+}
+
+.table-referentes th {
+  padding: 12px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+.table-referentes td {
+  padding: 12px;
+  border-bottom: 1px solid #e5e7eb;
+  color: #1f2937;
+}
+
+.table-referentes tbody tr:hover {
+  background-color: #f9fafb;
+}
+
+/* Mobile: Convertir tabla a cards */
+@media (max-width: 600px) {
+  .table-referentes thead {
+    display: none;
+  }
+
+  .table-referentes tbody {
+    display: block;
+  }
+
+  .table-referentes tr {
+    display: block;
+    margin-bottom: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    padding: 12px;
+    background: white;
+  }
+
+  .table-referentes td {
+    display: block;
+    padding: 8px 0;
+    border: none;
+    text-align: right;
+    position: relative;
+    padding-left: 40%;
+  }
+
+  .table-referentes td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    font-weight: 600;
+    width: 35%;
+    text-align: left;
+    color: #6b7280;
+  }
+
+  /* Table actions - improve button sizing */
+  .table-referentes td[style*="display: flex"] {
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px 0;
+  }
+
+  .table-referentes button {
+    min-height: 44px;
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Desktop: 2 columnas en formularios */
+@media (min-width: 768px) {
+  .referentes-container {
+    padding: 24px;
+    padding-top: calc(var(--header-height, 60px) + 24px);
+  }
+
+  .referentes-form,
+  .referentes-list {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 24px;
+  }
+
+  .form-fields-referentes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .form-row-two-cols {
+    grid-column: 1 / -1;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .button-group-referentes {
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  .btn-referentes {
+    width: auto;
+    min-width: 140px;
+  }
+}

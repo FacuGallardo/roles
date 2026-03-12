@@ -1,40 +1,82 @@
 import React, { useState } from "react";
-import { styles } from "./ReferentesPage";
 import type { CSSProperties } from "react";
-import type { Club, CreateReferenteDto } from "./types";
+import { styles } from "./ReferentesPage";
 import "./referentes-responsive.css";
 
-interface Props {
-  onGuardar: (dto: CreateReferenteDto) => void;
-  clubes: Club[];
+interface Club {
+  id: number;
+  nombre: string;
 }
+
+interface Referente {
+  id: number;
+  nombre: string;
+  apellido: string;
+  categoria: "Masculino" | "Femenino";
+  dni: string;
+  correo: string;
+  telefono: string; // <--- AÑADIDO
+  clubId: number;
+  club: Club;
+}
+
+type UpdateReferenteDto = Partial<{
+  nombre: string;
+  apellido: string;
+  categoria: "Masculino" | "Femenino";
+  dni: string;
+  correo: string;
+  telefono: string; // <--- AÑADIDO
+  clubId: number;
+}>;
+
+type Props = {
+  referente: Referente;
+  clubes: Club[];
+  onActualizar: (id: number, dto: UpdateReferenteDto) => void;
+  onCancelar: () => void;
+  error: string | null;
+};
 
 const categorias = ["Masculino", "Femenino"];
 
-const estiloBotonGuardar: CSSProperties = {
+const estiloBotonBase: CSSProperties = {
   padding: "0.5rem 1rem",
   borderRadius: "5px",
-  backgroundColor: "#1f3c88",
   color: "white",
   border: "none",
   cursor: "pointer",
   fontWeight: "600",
   fontSize: "16px",
+  transition: 'background-color 0.3s ease, transform 0.1s ease',
   boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-  width: "100%",
-  marginTop: "20px",
-  transition: 'background-color 0.3s ease',
 };
 
-const RegistrarReferente: React.FC<Props> = ({ onGuardar, clubes }) => {
-  const [form, setForm] = useState<CreateReferenteDto>({
-    nombre: "",
-    apellido: "",
-    categoria: "Masculino",
-    dni: "",
-    correo: "",
-    telefono: "",
-    clubId: 0,
+const estiloBotonActualizar: CSSProperties = {
+  ...estiloBotonBase,
+  backgroundColor: "#1f3c88",
+};
+
+const estiloBotonCancelar: CSSProperties = {
+  ...estiloBotonBase,
+  backgroundColor: "#ef4444",
+};
+
+const EditarReferente: React.FC<Props> = ({
+  referente,
+  clubes,
+  onActualizar,
+  onCancelar,
+  error,
+}) => {
+  const [form, setForm] = useState<UpdateReferenteDto>({
+    nombre: referente.nombre,
+    apellido: referente.apellido,
+    categoria: referente.categoria,
+    dni: referente.dni,
+    correo: referente.correo,
+    telefono: referente.telefono, // <--- Cargar teléfono existente
+    clubId: referente.clubId,
   });
 
   const handleChange = (
@@ -49,23 +91,18 @@ const RegistrarReferente: React.FC<Props> = ({ onGuardar, clubes }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onGuardar(form);
-
-    // Limpiar formulario
-    setForm({
-      nombre: "",
-      apellido: "",
-      categoria: "Masculino",
-      dni: "",
-      correo: "",
-      telefono: "",
-      clubId: 0,
-    });
+    onActualizar(referente.id, form);
   };
 
   return (
-    <div>
-      <h2 style={styles.formTitulo}>Registro de Referente</h2>
+    <div style={styles.cardFormulario}>
+      <h2 style={styles.formTitulo}>Editar Referente</h2>
+
+      {error && (
+        <div style={{ ...styles.mensajeAlerta, ...styles.mensajeError }}>
+          {error}
+        </div>
+      )}
 
       <form onSubmit={handleSubmit}>
         <div style={{ display: "flex", gap: "16px", marginBottom: "16px" }}>
@@ -94,12 +131,12 @@ const RegistrarReferente: React.FC<Props> = ({ onGuardar, clubes }) => {
           <div className="categoria-grid">
             {categorias.map((c) => (
               <div key={c} className="categoria-option">
-                <input
-                  type="radio"
+                <input 
+                  type="radio" 
                   id={`cat-${c}`}
                   name="categoria"
                   value={c}
-                  checked={form.categoria === c as any}
+                  checked={form.categoria === c}
                   onChange={handleChange}
                   required
                 />
@@ -131,10 +168,11 @@ const RegistrarReferente: React.FC<Props> = ({ onGuardar, clubes }) => {
           required
         />
 
+        {/* INPUT DE TELÉFONO PARA EDITAR */}
         <input
           name="telefono"
           type="tel"
-          placeholder="Teléfono (mínimo 7 números)"
+          placeholder="Teléfono"
           value={form.telefono}
           onChange={handleChange}
           style={styles.inputOscuro}
@@ -158,12 +196,24 @@ const RegistrarReferente: React.FC<Props> = ({ onGuardar, clubes }) => {
           ))}
         </select>
 
-        <button type="submit" style={estiloBotonGuardar}>
-          Guardar Referente
-        </button>
+        <div style={{ display: "flex", gap: "16px", marginTop: "30px" }}>
+          <button
+            type="submit"
+            style={{ ...estiloBotonActualizar, width: "50%", marginTop: 0 }}
+          >
+            Actualizar
+          </button>
+          <button
+            type="button"
+            onClick={onCancelar}
+            style={{ ...estiloBotonCancelar, width: "50%" }}
+          >
+            Cancelar
+          </button>
+        </div>
       </form>
     </div>
   );
 };
 
-export default RegistrarReferente;
+export default EditarReferente;

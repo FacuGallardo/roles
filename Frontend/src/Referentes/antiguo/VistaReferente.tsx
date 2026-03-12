@@ -1,7 +1,23 @@
 import React from "react";
 import { styles } from "./ReferentesPage";
 import type { CSSProperties } from "react";
-import type { Referente } from "./types";
+
+interface Club {
+  id: number;
+  nombre: string;
+}
+
+interface Referente {
+  id: number;
+  nombre: string;
+  apellido: string;
+  categoria: "Masculino" | "Femenino";
+  dni: string;
+  correo: string;
+  telefono: string; // <--- AÑADIDO
+  clubId: number;
+  club: Club;
+}
 
 interface Props {
   referente: Referente;
@@ -42,7 +58,7 @@ const VistaReferente: React.FC<Props> = ({ referente, onVolver }) => {
     { label: "Categoría", value: referente.categoria },
     { label: "DNI", value: referente.dni },
     { label: "Correo", value: referente.correo },
-    { label: "Teléfono", value: referente.telefono },
+    { label: "Teléfono", value: referente.telefono }, // <--- AÑADIDO: Muestra el teléfono
     { label: "Equipo", value: referente.club ? referente.club.nombre : "N/A" },
   ];
 

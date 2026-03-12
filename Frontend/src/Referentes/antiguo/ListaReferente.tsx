@@ -1,6 +1,22 @@
 import React from "react";
 import type { CSSProperties } from "react";
-import type { Referente } from "./types";
+
+interface Club {
+  id: number;
+  nombre: string;
+}
+
+interface Referente {
+  id: number;
+  nombre: string;
+  apellido: string;
+  categoria: "Masculino" | "Femenino";
+  dni: string;
+  correo: string;
+  telefono: string; // <--- AÑADIDO
+  clubId: number;
+  club: Club;
+}
 
 interface Props {
   referentes: Referente[];
