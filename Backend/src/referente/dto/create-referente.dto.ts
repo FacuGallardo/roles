@@ -1,4 +1,4 @@
-import { IsString, IsEmail, IsNotEmpty, IsInt, IsEnum } from 'class-validator';
+import { IsString, IsEmail, IsNotEmpty, IsInt, IsEnum, IsOptional } from 'class-validator';
 
 export class CreateReferenteDto {
   @IsString()
@@ -18,7 +18,12 @@ export class CreateReferenteDto {
   dni: string;
 
   @IsEmail()
+  @IsNotEmpty()
   correo: string;
+
+  @IsString()
+  @IsOptional()
+  telefono?: string;
 
   // Recibimos el ID del club, no el nombre
   @IsInt()

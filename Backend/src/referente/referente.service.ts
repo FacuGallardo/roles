@@ -42,20 +42,20 @@ export class ReferenteService {
     });
 
     // 4. Guardar en BD
-    await this.referenteRepository.save(nuevoReferente);
+    const savedReferente = await this.referenteRepository.save(nuevoReferente);
 
-    // 5. Retornar datos + contraseña plana (SOLO para mostrarla ahora)
+    // 5. Cargar la relación del club
+    const referenteConClub = await this.referenteRepository.findOne({
+      where: { id: savedReferente.id },
+      relations: ['club']
+    });
+
+    // 6. Retornar datos + contraseña plana (SOLO para mostrarla ahora)
     return {
       message: 'Referente creado y usuario generado exitosamente.',
-      usuario: nuevoReferente.correo,
+      usuario: referenteConClub.correo,
       tempPassword: tempPassword, // <--- MUESTRA ESTO AL ADMIN
-      referente: {
-        id: nuevoReferente.id,
-        nombre: nuevoReferente.nombre,
-        apellido: nuevoReferente.apellido,
-        correo: nuevoReferente.correo,
-        clubId: nuevoReferente.clubId
-      }
+      referente: referenteConClub
     };
   }
 
@@ -79,7 +79,12 @@ export class ReferenteService {
       ...updateReferenteDto,
     });
     if (!referente) throw new NotFoundException(`Referente #${id} no encontrado`);
-    return this.referenteRepository.save(referente);
+    await this.referenteRepository.save(referente);
+    // Retornar con la relación complett
+    return this.referenteRepository.findOne({
+      where: { id },
+      relations: ['club']
+    });
   }
 
   async remove(id: number) {

@@ -1,4 +1,3 @@
-// src/Jugadores/components/JugadorForm.tsx
 
 import React, { useEffect, useState } from 'react';
 import type { Jugador, CreateJugadorPayload, JugadorFormMode, Club } from '../types/jugador.types';

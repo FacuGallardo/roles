@@ -23,9 +23,11 @@ const PagosPage: React.FC = () => {
     const loadData = async () => {
       try {
         setLoading(true);
+        const token = localStorage.getItem('token');
+        const headers = { 'Authorization': `Bearer ${token}` };
         const [pagosRes, clubesRes] = await Promise.all([
-          fetch('/api/pagos'),
-          fetch('/api/clubes'),
+          fetch('/api/pagos', { headers }),
+          fetch('/api/clubes', { headers }),
         ]);
 
         if (!pagosRes.ok || !clubesRes.ok) throw new Error('Error cargando datos');
@@ -50,7 +52,10 @@ const PagosPage: React.FC = () => {
     try {
       const res = await fetch('/api/pagos', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}` 
+        },
         body: JSON.stringify(pago),
       });
 
@@ -69,7 +74,10 @@ const PagosPage: React.FC = () => {
     try {
       const res = await fetch(`/api/pagos/${pagoId}`, {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}` 
+        },
         body: JSON.stringify(updateData),
       });
 
@@ -89,7 +97,10 @@ const PagosPage: React.FC = () => {
     if (!confirm('¿Confirmar eliminación de pago?')) return;
 
     try {
-      const res = await fetch(`/api/pagos/${pagoId}`, { method: 'DELETE' });
+      const res = await fetch(`/api/pagos/${pagoId}`, { 
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+      });
 
       if (!res.ok) throw new Error('Error eliminando pago');
 

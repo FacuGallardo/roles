@@ -1,10 +1,11 @@
+
 import React, { useState, useEffect } from "react";
 import TablaPagosClub from "./TablaPagosClub";
 import FormularioPago from "./FormularioPago";
 import HistorialPagos from "./HistorialPagos";
 import EditarPago from "./EditarPago";
 import type { CSSProperties } from "react";
-import { hasRole } from "../utils/auth"; // 🔒 Importar utilidad de roles
+import { hasRole } from "../utils/auth";
 import "./registropagos-responsive.css";
 // ============================================
 // CONFIGURACIÓN DE ESTILOS (Mantenida)
@@ -115,7 +116,9 @@ const PagosPage: React.FC = () => {
     const cargarClubes = async () => {
         setLoadingClubes(true);
         try {
-            const response = await fetch(`${API_URL}/clubes`);
+            const response = await fetch(`${API_URL}/clubes`, {
+                headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+            });
             if (!response.ok) throw new Error("No se pudieron cargar los clubes.");
             const data: ClubAPI[] = await response.json();
             const activos = data.filter(club => club.activo !== false);

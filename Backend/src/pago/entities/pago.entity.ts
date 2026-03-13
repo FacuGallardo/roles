@@ -9,19 +9,15 @@ export class Pago {
   @Column()
   tipo: string;
 
-  // --- INICIO DE LA CORRECCIÓN ---
-  // --- INICIO DE LA CORRECCIÓN ---
-  @Column({ nullable: true }) // <-- AÑADIR ESTO
-  clubId: number; // Clave foránea
-  @ManyToOne(() => Club, (club) => club.pagos, { // (club) => club.pagos es buena práctica
-  @ManyToOne(() => Club, (club) => club.pagos, { // (club) => club.pagos es buena práctica
+  @Column({ nullable: true })
+  clubId: number;
+
+  @ManyToOne(() => Club, (club) => club.pagos, { 
     onDelete: 'SET NULL',
-    nullable: true // <-- AÑADIR ESTO
+    nullable: true
   })
   @JoinColumn({ name: 'clubId' })
   club: Club;
-
-  // --- FIN DE LA CORRECCIÓN ---
 
   @Column('decimal', { precision: 10, scale: 2 })
   monto: number;

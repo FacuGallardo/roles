@@ -1,3 +1,16 @@
+/**
+ * ⚠️ ARCHIVO DEPRECATED - NO USAR ⚠️
+ * Este componente ha sido reemplazado por una versión mejorada en ../ReferentesPage.tsx
+ * 
+ * ARCHIVOS A UTILIZAR:
+ * - Componente principal: ../ReferentesPage.tsx
+ * - Hook de datos: ../hooks/useReferentes.ts
+ * - Tipos: ../types/index.ts
+ * 
+ * Este archivo legacy se mantiene solo como respaldo histórico.
+ * Si necesitas usar Referentes, importa desde: import ReferentesPage from "./Referentes/ReferentesPage";
+ */
+
 import React, { useState, useEffect } from "react";
 import type { CSSProperties } from "react";
 import RegistrarReferente from "./RegistrarReferente";
@@ -198,7 +211,9 @@ const ReferentesPage: React.FC = () => {
 
   const cargarReferentes = async () => {
     try {
-      const res = await fetch(`${API_URL}/referentes`);
+      const res = await fetch(`${API_URL}/referentes`, {
+        headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+      });
       if (!res.ok) throw new Error("Error al cargar referentes");
       const data: Referente[] = await res.json();
       setReferentes(data);
@@ -209,7 +224,9 @@ const ReferentesPage: React.FC = () => {
 
   const cargarClubes = async () => {
     try {
-      const res = await fetch(`${API_URL}/clubes`);
+      const res = await fetch(`${API_URL}/clubes`, {
+        headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+      });
       if (!res.ok) throw new Error("Error al cargar clubes");
       const data: Club[] = await res.json();
       setClubes(data);
@@ -245,7 +262,10 @@ const ReferentesPage: React.FC = () => {
     try {
       const res = await fetch(`${API_URL}/referentes`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${localStorage.getItem('token')}`
+        },
         body: JSON.stringify(dto),
       });
       if (!res.ok) {
@@ -270,7 +290,10 @@ const ReferentesPage: React.FC = () => {
     try {
       const res = await fetch(`${API_URL}/referentes/${id}`, {
         method: "PATCH",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${localStorage.getItem('token')}`
+        },
         body: JSON.stringify(dto),
       });
       if (!res.ok) {
@@ -289,6 +312,7 @@ const ReferentesPage: React.FC = () => {
     try {
       const res = await fetch(`${API_URL}/referentes/${id}`, {
         method: "DELETE",
+        headers: { "Authorization": `Bearer ${localStorage.getItem('token')}` },
       });
       if (!res.ok) {
         throw new Error("Error al eliminar referente");

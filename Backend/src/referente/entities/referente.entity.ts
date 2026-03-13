@@ -22,6 +22,12 @@ export class Referente {
   @Column()
   apellido: string;
 
+  @Column()
+  categoria: 'Masculino' | 'Femenino';
+
+  @Column()
+  dni: string;
+
   @Column({ unique: true })
   correo: string;
 
