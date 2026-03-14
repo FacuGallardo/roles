@@ -26,7 +26,7 @@ export const useJugadores = (): UseJugadoresReturn => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(`${API_URL}/jugador`);
+      const response = await fetch(`${API_URL}/jugadores`);
       if (!response.ok) throw new Error('Error al cargar jugadores');
       const data = await response.json();
       setJugadores(data);
@@ -43,7 +43,7 @@ export const useJugadores = (): UseJugadoresReturn => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(`${API_URL}/jugador/${id}`);
+      const response = await fetch(`${API_URL}/jugadores/${id}`);
       if (!response.ok) throw new Error('Error al cargar jugador');
       return await response.json();
     } catch (err) {
@@ -59,7 +59,7 @@ export const useJugadores = (): UseJugadoresReturn => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(`${API_URL}/jugador`, {
+      const response = await fetch(`${API_URL}/jugadores`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
@@ -82,7 +82,7 @@ export const useJugadores = (): UseJugadoresReturn => {
       setLoading(true);
       setError(null);
       try {
-        const response = await fetch(`${API_URL}/jugador/${id}`, {
+        const response = await fetch(`${API_URL}/jugadores/${id}`, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
@@ -108,7 +108,7 @@ export const useJugadores = (): UseJugadoresReturn => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(`${API_URL}/jugador/${id}`, {
+      const response = await fetch(`${API_URL}/jugadores/${id}`, {
         method: 'DELETE',
       });
       if (!response.ok) throw new Error('Error al eliminar jugador');

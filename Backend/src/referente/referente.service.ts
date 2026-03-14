@@ -50,6 +50,10 @@ export class ReferenteService {
       relations: ['club']
     });
 
+    if (!referenteConClub) {
+      throw new NotFoundException('Error al cargar el referente creado');
+    }
+
     // 6. Retornar datos + contraseña plana (SOLO para mostrarla ahora)
     return {
       message: 'Referente creado y usuario generado exitosamente.',

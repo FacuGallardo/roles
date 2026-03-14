@@ -1,6 +1,8 @@
 import { useState, useCallback } from 'react';
 import type { Referente, Club, CreateReferenteDto, UpdateReferenteDto } from '../types';
 
+const API_URL = 'http://localhost:3001/api';
+
 interface UseReferentesReturn {
   referentes: Referente[];
   clubes: Club[];
@@ -22,15 +24,15 @@ export const useReferentes = (): UseReferentesReturn => {
 
   const getHeaders = () => ({
     'Content-Type': 'application/json',
-    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+    'Authorization': `Bearer ${localStorage.getItem('token') || ''}`,
   });
 
   const fetchReferentes = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch('/api/referentes', {
-        headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` },
+      const response = await fetch(`${API_URL}/referentes`, {
+        headers: { 'Authorization': `Bearer ${localStorage.getItem('token') || ''}` },
       });
       if (!response.ok) throw new Error('Error al cargar referentes');
       const data = await response.json();
@@ -48,8 +50,8 @@ export const useReferentes = (): UseReferentesReturn => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch('/api/clubes', {
-        headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` },
+      const response = await fetch(`${API_URL}/clubes`, {
+        headers: { 'Authorization': `Bearer ${localStorage.getItem('token') || ''}` },
       });
       if (!response.ok) throw new Error('Error al cargar clubes');
       const data = await response.json();
@@ -68,7 +70,7 @@ export const useReferentes = (): UseReferentesReturn => {
       setLoading(true);
       setError(null);
       try {
-        const response = await fetch('/api/referentes', {
+        const response = await fetch(`${API_URL}/referentes`, {
           method: 'POST',
           headers: getHeaders(),
           body: JSON.stringify(payload),
@@ -96,7 +98,7 @@ export const useReferentes = (): UseReferentesReturn => {
       setLoading(true);
       setError(null);
       try {
-        const response = await fetch(`/api/referentes/${id}`, {
+        const response = await fetch(`${API_URL}/referentes/${id}`, {
           method: 'PATCH',
           headers: getHeaders(),
           body: JSON.stringify(payload),
@@ -125,9 +127,9 @@ export const useReferentes = (): UseReferentesReturn => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(`/api/referentes/${id}`, {
+      const response = await fetch(`${API_URL}/referentes/${id}`, {
         method: 'DELETE',
-        headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` },
+        headers: getHeaders(),
       });
       if (!response.ok) throw new Error('Error al eliminar referente');
       setReferentes((prev) => prev.filter((r) => r.id !== id));
