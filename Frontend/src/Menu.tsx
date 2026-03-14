@@ -12,7 +12,9 @@ import EstadisticasPage from "./Estadistica/EstadisticasPage";
 import NoticiasPage from "./noticias/Noticiaspage";
 import Reglamento from "./Reglamento/Reglamento";
 import PagosPage from "./RegistroPagos/PagosPage";
+import Contacto from "./pages/Contacto";
 import LoginModal from "./LoginModal";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./menu-responsive.css";
 import "./images-responsive.css";
 import "./tables-desktop.css";
@@ -143,6 +145,9 @@ export default function App() {
   .nav-btn:hover:not(.active-nav-btn)::after { width: 100%; }
   .nav-btn span[role="img"] { display: inline-block; transition: transform 0.3s ease; }
   .nav-btn[aria-expanded="true"] span[role="img"] { transform: rotate(180deg); }
+  .nav-btn i { margin-right: 0.5rem; display: inline-block; width: 20px; text-align: center; }
+  .nav-btn i.fa-chevron-down { margin-right: 0.25rem; margin-left: auto; font-size: 0.75rem; }
+  .dropdown-btn i { margin-right: 0.5rem; display: inline-block; width: 20px; text-align: center; }
   .dropdown { 
     position: absolute; 
     top: 3.5rem; 
@@ -494,7 +499,15 @@ export default function App() {
             ☰
           </button>
           <nav className={isMobileMenuOpen ? "is-open" : ""}>
-            {/* ... (Menús desplegables de Handball e Institucional - sin cambios) ... */}
+            {/* INICIO */}
+            <button 
+              className={`nav-btn ${isNavItemActive("inicio") ? "active-nav-btn" : ""}`} 
+              onClick={() => handleLinkClick("inicio")}
+            >
+              <i className="fas fa-home"></i> Inicio
+            </button>
+
+            {/* HANDBALL DROPDOWN */}
             <div 
               style={{ position: "relative" }} 
               onClick={stop}
@@ -512,18 +525,20 @@ export default function App() {
                 aria-haspopup="true"
                 aria-expanded={openHandball}
               >
-                <span role="img" aria-label="handball"></span> Handball ▼
+                <i className="fas fa-basketball"></i> Handball <i className="fas fa-chevron-down"></i>
               </button>
               {openHandball && (
                 <div className="dropdown" onClick={stop}>
-                  <button className="dropdown-btn" onClick={() => handleLinkClick("clubes")}>Clubes</button>
-                  <button className="dropdown-btn" onClick={() => handleLinkClick("jugadores")}>Jugadores</button>
-                  <button className="dropdown-btn" onClick={() => handleLinkClick("estadisticas")}>Tablas de puntuación</button>
-                  <button className="dropdown-btn" onClick={() => handleLinkClick("fixture")}>Fixture</button>
-                  <button className="dropdown-btn" onClick={() => handleLinkClick("reglamento")}>Reglamento</button>
+                  <button className="dropdown-btn" onClick={() => handleLinkClick("clubes")}><i className="fas fa-shield-alt"></i> Clubes</button>
+                  <button className="dropdown-btn" onClick={() => handleLinkClick("jugadores")}><i className="fas fa-users"></i> Jugadores</button>
+                  <button className="dropdown-btn" onClick={() => handleLinkClick("estadisticas")}><i className="fas fa-chart-bar"></i> Tablas & Puntuación</button>
+                  <button className="dropdown-btn" onClick={() => handleLinkClick("fixture")}><i className="fas fa-calendar-alt"></i> Fixture</button>
+                  <button className="dropdown-btn" onClick={() => handleLinkClick("reglamento")}><i className="fas fa-book"></i> Reglamento</button>
                 </div>
               )}
             </div>
+
+            {/* INSTITUCIONAL DROPDOWN */}
             <div 
               style={{ position: "relative" }} 
               onClick={stop}
@@ -541,45 +556,58 @@ export default function App() {
                 aria-haspopup="true"
                 aria-expanded={openInstitucional}
               >
-                <span role="img" aria-label="institucional"></span> Institucional ▼
+                <i className="fas fa-building"></i> Institucional <i className="fas fa-chevron-down"></i>
               </button>
               {openInstitucional && (
                 <div className="dropdown" onClick={stop}>
-                  <button className="dropdown-btn" onClick={() => handleLinkClick("autoridades")}>Autoridades</button>
+                  <button className="dropdown-btn" onClick={() => handleLinkClick("autoridades")}><i className="fas fa-user-tie"></i> Autoridades</button>
                   
-                  {/* --- 4. MODIFICACIÓN: Mostrar solo si está logueado --- */}
+                  {/* Mostrar solo si está logueado */}
                   {isLoggedIn && (
                     <>
-                      <button className="dropdown-btn" onClick={() => handleLinkClick("referentes")}>Referentes</button>
-                      <button className="dropdown-btn" onClick={() => handleLinkClick("Pago de Arbitros")}>Pago de árbitros</button>
+                      <button className="dropdown-btn" onClick={() => handleLinkClick("referentes")}><i className="fas fa-clipboard-list"></i> Referentes</button>
+                      <button className="dropdown-btn" onClick={() => handleLinkClick("Pago de Arbitros")}><i className="fas fa-money-bill-wave"></i> Pago de árbitros</button>
                     </>
                   )}
-                  {/* --------------------------------------------------- */}
 
-                  <button className="dropdown-btn" onClick={() => handleLinkClick("historia")}>Historia</button>
+                  <button className="dropdown-btn" onClick={() => handleLinkClick("historia")}><i className="fas fa-history"></i> Historia</button>
                 </div>
               )}
             </div>
             
-            <button className={`nav-btn ${isNavItemActive("noticias") ? "active-nav-btn" : ""}`} onClick={() => handleLinkClick("noticias")}>Noticias</button>
+            {/* NOTICIAS */}
+            <button 
+              className={`nav-btn ${isNavItemActive("noticias") ? "active-nav-btn" : ""}`} 
+              onClick={() => handleLinkClick("noticias")}
+            >
+              <i className="fas fa-newspaper"></i> Noticias
+            </button>
+
+            {/* CONTACTO */}
+            <button 
+              className={`nav-btn ${isNavItemActive("contacto") ? "active-nav-btn" : ""}`} 
+              onClick={() => handleLinkClick("contacto")}
+            >
+              <i className="fas fa-envelope"></i> Contacto
+            </button>
             
-            {/* --- 5. BOTONES DE LOGIN/LOGOUT CONDICIONALES --- */}
+            {/* LOGIN/LOGOUT */}
             {!isLoggedIn ? (
               <button 
                 className="nav-btn" 
                 onClick={() => {
                   setIsLoginModalOpen(true);
-                  setIsMobileMenuOpen(false); // Cierra menú móvil al abrir modal
+                  setIsMobileMenuOpen(false);
                 }}
               >
-                Iniciar Sesión
+                <i className="fas fa-user"></i> Iniciar Sesión
               </button>
             ) : (
               <button 
                 className="nav-btn" 
                 onClick={handleLogout}
               >
-                Cerrar Sesión
+                <i className="fas fa-sign-out-alt"></i> Cerrar Sesión
               </button>
             )}
           </nav>
@@ -792,6 +820,7 @@ export default function App() {
           {vista === "historia" && <Historia />}
           {vista === "estadisticas" && <EstadisticasPage />}
           {vista === "noticias" && <NoticiasPage />}
+          {vista === "contacto" && <Contacto />}
           {vista === "reglamento" && <Reglamento />}
           
           {/* --- 7. MODIFICACIÓN: Renderizar componentes protegidos solo si hay login --- */}
