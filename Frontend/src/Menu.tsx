@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Autoridades from "./Autoridades/Autoridades";
 import { ClubesListado } from "./Clubes/pages/ClubesListado";
 import { CrearClub } from "./Clubes/pages/CrearClub";
 import { EditarClub } from "./Clubes/pages/EditarClub";
@@ -7,15 +6,25 @@ import { DetalleClub } from "./Clubes/pages/DetalleClub";
 import { JugadoresPage } from "./Jugadores";
 import ReferentesPage from "./Referentes/ReferentesPage";
 import FixturePage from "./Fixture/FixturePage";
-import Historia from "./Historia/Historia";
 import EstadisticasPage from "./Estadistica/EstadisticasPage";
 import NoticiasPage from "./noticias/Noticiaspage";
-import Reglamento from "./Reglamento/Reglamento";
 import PagosPage from "./RegistroPagos/PagosPage";
 import Contacto from "./pages/Contacto";
+import Nosotros from "./Nosotros/Nosotros";
+import Error404 from "./Error404/Error404";
 import LoginModal from "./LoginModal";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./menu-responsive.css";
+
+// Tipo de Noticia para las nuevas vistas
+export type Noticia = {
+  id: number;
+  titulo: string;
+  contenido: string;
+  fecha: string;
+  imagenUrl?: string;
+  autor?: string;
+};
 import "./images-responsive.css";
 import "./tables-desktop.css";
 import "./typography-desktop.css";
@@ -29,6 +38,10 @@ export default function App() {
     () => (localStorage.getItem("vista") as any) || "inicio"
   );
   const [clubIdActual, setClubIdActual] = useState<number | null>(null);
+
+  // Estados para noticias
+  const [noticias, setNoticias] = useState<Noticia[]>([]);
+  const [noticiaSeleccionada, setNoticiaSeleccionada] = useState<Noticia | null>(null);
 
   const [openHandball, setOpenHandball] = useState(false);
   const [openInstitucional, setOpenInstitucional] = useState(false);
@@ -44,6 +57,22 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem("vista", vista);
   }, [vista]);
+
+  // Cargar noticias de la API
+  useEffect(() => {
+    const cargarNoticias = async () => {
+      try {
+        const respuesta = await fetch("http://localhost:3001/noticias");
+        if (respuesta.ok) {
+          const data = await respuesta.json();
+          setNoticias(data);
+        }
+      } catch (error) {
+        console.error("Error al cargar noticias:", error);
+      }
+    };
+    cargarNoticias();
+  }, []);
 
   // 🔒 EVENT LISTENERS: Cerrar dropdowns al hacer click o scroll
   useEffect(() => {
@@ -70,7 +99,11 @@ export default function App() {
     setVista(newVista);
     setOpenHandball(false);
     setOpenInstitucional(false);
-    setIsMobileMenuOpen(false); 
+    setIsMobileMenuOpen(false);
+    // Limpiar noticia seleccionada cuando cambias de vista
+    if (newVista !== "noticias") {
+      setNoticiaSeleccionada(null);
+    }
   };
   
   // --- Función para el éxito del login ---
@@ -94,10 +127,10 @@ export default function App() {
   };
 
   const isNavItemActive = (item: string) => {
-    if (item === "handball" && (vista === "clubes" || vista === "crear-club" || vista === "editar-club" || vista === "detalle-club" || vista === "jugadores" || vista === "estadisticas" || vista === "fixture" || vista === "reglamento")) {
+    if (item === "handball" && (vista === "clubes" || vista === "crear-club" || vista === "editar-club" || vista === "detalle-club" || vista === "jugadores" || vista === "estadisticas" || vista === "fixture")) {
       return true;
     }
-    if (item === "institucional" && (vista === "autoridades" || vista === "referentes" || vista === "historia")) {
+    if (item === "institucional" && (vista === "nosotros" || vista === "referentes")) {
       return true;
     }
     return vista === item;
@@ -145,9 +178,9 @@ export default function App() {
   .nav-btn:hover:not(.active-nav-btn)::after { width: 100%; }
   .nav-btn span[role="img"] { display: inline-block; transition: transform 0.3s ease; }
   .nav-btn[aria-expanded="true"] span[role="img"] { transform: rotate(180deg); }
-  .nav-btn i { margin-right: 0.5rem; display: inline-block; width: 20px; text-align: center; }
-  .nav-btn i.fa-chevron-down { margin-right: 0.25rem; margin-left: auto; font-size: 0.75rem; }
-  .dropdown-btn i { margin-right: 0.5rem; display: inline-block; width: 20px; text-align: center; }
+  .nav-btn i { margin-right: 0.5rem; display: inline-block; width: 20px; text-align: center; color: #FF8C00; }
+  .nav-btn i.fa-chevron-down { margin-right: 0.25rem; margin-left: auto; font-size: 0.75rem; color: #FF8C00; }
+  .dropdown-btn i { margin-right: 0.5rem; display: inline-block; width: 20px; text-align: center; color: #FF8C00; }
   .dropdown { 
     position: absolute; 
     top: 3.5rem; 
@@ -314,14 +347,40 @@ export default function App() {
   .card-content { padding: clamp(1rem, 3vw, 1.5rem); flex: 1; display: flex; flex-direction: column; }
   .card-content h2 { font-size: clamp(1.1rem, 3vw, 1.25rem); margin-bottom: 0.5rem; color: #1f3c88; line-height: 1.3; }
   .card-content p { font-size: clamp(0.9rem, 2.5vw, 0.95rem); color: #555; margin-bottom: 1rem; line-height: 1.5; }
+  .card-content .noticia-meta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 1rem;
+  }
+  .card-content .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .card-content .meta-item i {
+    color: #FF8C00;
+    width: 16px;
+  }
   .card-content .read-more {
     margin-top: auto;
     font-weight: 600;
     color: #1f3c88;
     text-decoration: none;
     font-size: clamp(0.85rem, 2vw, 0.9rem);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
   }
-  .card-content .read-more:hover { text-decoration: underline; }
+  .card-content .read-more:hover { 
+    color: #FF8C00;
+    gap: 0.75rem;
+  }
+  .card-content .read-more i {
+    color: #FF8C00;
+  }
 
   .tabla-posiciones {
     width: 100%;
@@ -533,7 +592,6 @@ export default function App() {
                   <button className="dropdown-btn" onClick={() => handleLinkClick("jugadores")}><i className="fas fa-users"></i> Jugadores</button>
                   <button className="dropdown-btn" onClick={() => handleLinkClick("estadisticas")}><i className="fas fa-chart-bar"></i> Tablas & Puntuación</button>
                   <button className="dropdown-btn" onClick={() => handleLinkClick("fixture")}><i className="fas fa-calendar-alt"></i> Fixture</button>
-                  <button className="dropdown-btn" onClick={() => handleLinkClick("reglamento")}><i className="fas fa-book"></i> Reglamento</button>
                 </div>
               )}
             </div>
@@ -560,7 +618,7 @@ export default function App() {
               </button>
               {openInstitucional && (
                 <div className="dropdown" onClick={stop}>
-                  <button className="dropdown-btn" onClick={() => handleLinkClick("autoridades")}><i className="fas fa-user-tie"></i> Autoridades</button>
+                  <button className="dropdown-btn" onClick={() => handleLinkClick("nosotros")}><i className="fas fa-info-circle"></i> Nosotros</button>
                   
                   {/* Mostrar solo si está logueado */}
                   {isLoggedIn && (
@@ -569,8 +627,6 @@ export default function App() {
                       <button className="dropdown-btn" onClick={() => handleLinkClick("Pago de Arbitros")}><i className="fas fa-money-bill-wave"></i> Pago de árbitros</button>
                     </>
                   )}
-
-                  <button className="dropdown-btn" onClick={() => handleLinkClick("historia")}><i className="fas fa-history"></i> Historia</button>
                 </div>
               )}
             </div>
@@ -621,33 +677,41 @@ export default function App() {
               <section>
                 <h2 className="inicio-section-title">Últimas Noticias</h2>
                 <div className="inicio-noticias-grid">
-                  {/* Noticia 1 (Placeholder) */}
-                  <div className="card">
-                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80" alt="Noticia 1" />
-                    <div className="card-content">
-                      <h2>Nueva victoria clave</h2>
-                      <p>El equipo suma una nueva victoria clave de cara a los playoffs. Gran actuación del conjunto local.</p>
-                      <a href="#" className="read-more">Leer más...</a>
+                  {noticias.length > 0 ? (
+                    noticias.slice(0, 3).map((noticia) => (
+                      <div key={noticia.id} className="card">
+                        {noticia.imagenUrl && (
+                          <img src={noticia.imagenUrl} alt={noticia.titulo} />
+                        )}
+                        <div className="card-content">
+                          <h2>{noticia.titulo}</h2>
+                          <p className="noticia-meta">
+                            <span className="meta-item">
+                              <i className="fas fa-user"></i> {noticia.autor || "Admin"}
+                            </span>
+                            <span className="meta-item">
+                              <i className="fas fa-calendar"></i> {new Date(noticia.fecha).toLocaleDateString("es-AR")}
+                            </span>
+                          </p>
+                          <p>{noticia.contenido.substring(0, 150)}...</p>
+                          <a 
+                            href="#" 
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleLinkClick("noticias");
+                            }}
+                            className="read-more"
+                          >
+                            Leer más... <i className="fas fa-arrow-right"></i>
+                          </a>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="card" style={{ gridColumn: "1 / -1", textAlign: "center", padding: "2rem" }}>
+                      <p style={{ color: "#999" }}>No hay noticias disponibles aún.</p>
                     </div>
-                  </div>
-                  {/* Noticia 2 (Placeholder) */}
-                  <div className="card">
-                    <img src="unnamed.jpg" alt="Noticia 2" />
-                    <div className="card-content">
-                      <h2>Jugador Destacado</h2>
-                      <p>Juan Pérez lidera con 5 goles y 2 asistencias en los últimos 3 partidos.</p>
-                      <a href="#" className="read-more">Leer más...</a>
-                    </div>
-                  </div>
-                  {/* Noticia 3 (Placeholder) */}
-                  <div className="card">
-                    <img src="https://plus.unsplash.com/premium_photo-1677567996070-68fa4181566a?auto=format&fit=crop&w=1200&q=80" alt="Noticia 3" />
-                    <div className="card-content">
-                      <h2>Próxima Fecha: Definiciones</h2>
-                      <p>La liga entra en su etapa definitoria. No te pierdas los encuentros de este fin de semana.</p>
-                      <a href="#" className="read-more">Leer más...</a>
-                    </div>
-                  </div>
+                  )}
                 </div>
               </section>
 
@@ -753,9 +817,6 @@ export default function App() {
             </div>
           )}
           
-          {/* ... (Renderizado del resto de tus vistas) ... */}
-          {vista === "autoridades" && <Autoridades />}
-          
           {/* CLUBES - Nueva estructura */}
           {vista === "clubes" && (
             <ClubesListado
@@ -817,11 +878,20 @@ export default function App() {
           
           {vista === "jugadores" && <JugadoresPage />}
           {vista === "fixture" && <FixturePage />}
-          {vista === "historia" && <Historia />}
           {vista === "estadisticas" && <EstadisticasPage />}
+          
+          {/* NOTICIAS - Componente completo con CRUD */}
           {vista === "noticias" && <NoticiasPage />}
+
           {vista === "contacto" && <Contacto />}
-          {vista === "reglamento" && <Reglamento />}
+          {vista === "nosotros" && <Nosotros />}
+          {vista === "error404" && (
+            <Error404 
+              onBack={() => {
+                setVista("inicio");
+              }}
+            />
+          )}
           
           {/* --- 7. MODIFICACIÓN: Renderizar componentes protegidos solo si hay login --- */}
           {vista === "referentes" && isLoggedIn && <ReferentesPage />}

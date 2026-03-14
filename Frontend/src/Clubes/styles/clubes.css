@@ -44,12 +44,14 @@
   margin: 0 0 0.5rem 0;
   font-size: clamp(1.75rem, 5vw, 2.5rem);
   font-weight: 700;
+  color: white !important;
 }
 
 .club-header-content p {
   margin: 0;
   font-size: 0.95rem;
   opacity: 0.95;
+  color: white !important;
 }
 
 /* ===== ALERTAS ===== */
@@ -260,7 +262,7 @@
 
 .info-label i {
   font-size: 0.85rem;
-  color: var(--color-primary);
+  color: #FF8C00;
 }
 
 .info-value {
@@ -379,6 +381,14 @@
 .club-action-delete:hover {
   background-color: var(--color-danger-hover);
   transform: translateY(-2px);
+}
+
+.club-action-btn i {
+  color: #FF8C00;
+}
+
+.btn-add i {
+  color: #FF8C00;
 }
 
 /* ===== ESTADO VACÍO ===== */
