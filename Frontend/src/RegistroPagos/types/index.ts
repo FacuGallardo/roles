@@ -20,3 +20,6 @@ export interface Club {
   id: number;
   nombre: string;
 }
+
+export type CreatePagoDto = Omit<Pago, 'id'>;
+export type UpdatePagoDto = Partial<CreatePagoDto>;

@@ -7,6 +7,7 @@ import VistaReferente from "./VistaReferente";
 import { useReferentes } from "./hooks/useReferentes";
 import type { Referente, CreateReferenteDto, UpdateReferenteDto } from "./types";
 import { validarReferente } from "./utils/referenteValidations";
+import "./referentes-responsive.css";
 
 // =========================================================
 // 🎨 SECCIÓN DE ESTILOS

@@ -45,6 +45,30 @@ CREATE TABLE IF NOT EXISTS referentes (
   INDEX(clubId)
 );
 
+-- Crear la tabla de Pagos
+CREATE TABLE IF NOT EXISTS pagos (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  tipo ENUM('cuota', 'arbitraje', 'multa', 'otro') NOT NULL,
+  concepto VARCHAR(200) NOT NULL,
+  clubId INT NOT NULL,
+  monto DECIMAL(10, 2) NOT NULL,
+  fecha DATE NOT NULL,
+  vencimiento DATE,
+  estado ENUM('pendiente', 'pagado', 'validado', 'invalido') DEFAULT 'pendiente',
+  categoria VARCHAR(100),
+  cantidadJugadores INT,
+  partidoId INT,
+  motivo VARCHAR(255),
+  metodo_pago ENUM('efectivo', 'transferencia', 'cheque', 'tarjeta'),
+  numero_transaccion VARCHAR(100),
+  observaciones TEXT,
+  createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (clubId) REFERENCES clubes(id),
+  INDEX(clubId),
+  INDEX(estado)
+);
+
 -- Crear la tabla de Jugadores
 CREATE TABLE Jugadores (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -162,6 +186,15 @@ INSERT INTO referentes (nombre, apellido, categoria, dni, correo, telefono, club
 ('Ana', 'Martínez González', 'Femenino', '4567890', 'ana.martinez@clubA.com', '3518901234', 1),
 ('Roberto', 'López Morales', 'Masculino', '5678901', 'roberto.lopez@liga.com', '3519012345', 2),
 ('Laura', 'Fernández Castro', 'Femenino', '6789012', 'laura.fernandez@clubB.com', '3510123456', 3);
+
+-- Insertar pagos de ejemplo
+INSERT INTO pagos (tipo, concepto, clubId, monto, fecha, vencimiento, estado, metodo_pago, observaciones) VALUES
+('cuota', 'Cuota afiliación mensual', 1, 5000.00, '2026-01-15', '2026-02-15', 'pendiente', NULL, 'Pago de cuota de afiliación para enero 2026'),
+('cuota', 'Cuota afiliación mensual', 2, 5000.00, '2026-01-15', '2026-02-15', 'pagado', 'transferencia', 'Pago realizado mediante transferencia bancaria'),
+('arbitraje', 'Honorarios arbitraje - Encuentro 5', 1, 2500.00, '2026-01-20', NULL, 'pendiente', NULL, 'Encuentro entre clubes clasificatorios'),
+('multa', 'Multa - Falta reglamentaria', 3, 1000.00, '2026-01-25', '2026-02-10', 'pendiente', NULL, 'Multa por conducta antideportiva'),
+('cuota', 'Cuota afiliación mensual', 3, 5000.00, '2026-01-15', '2026-02-15', 'validado', 'efectivo', 'Pago validado por tesorería'),
+('otro', 'Aporte extraordinario - Mejoras instalaciones', 2, 10000.00, '2026-02-01', '2026-02-28', 'pendiente', NULL, 'Aporte para mejoras de infraestructura');
 
 ALTER TABLE usuarios DROP INDEX username;
 -- Insertar el usuario "Karina" con la contraseña "Punilla2018"

@@ -1,6 +1,7 @@
 import React from "react";
 import type { CSSProperties } from "react";
 import type { Referente } from "./types";
+import "./referentes-responsive.css";
 
 interface Props {
   referentes: Referente[];

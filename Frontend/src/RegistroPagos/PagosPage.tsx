@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { hasRole } from '../utils/auth';
+import { useRegistroPagos } from './hooks/useRegistroPagos';
 import './styles/pagos.css';
 import TablaPagosClub from './TablaPagosClub.tsx';
 import HistorialPagos from './HistorialPagos.tsx';
-import type { Pago, Club } from './types';
+import type { Pago } from './types';
 
 const PagosPage: React.FC = () => {
-  const [pagos, setPagos] = useState<Pago[]>([]);
-  const [clubes, setClubes] = useState<Club[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const { pagos, clubes, loading, error, fetchPagos, fetchClubes, crearPago, actualizarPago, eliminarPago, setError } = useRegistroPagos();
   const [activeTab, setActiveTab] = useState<'tabla' | 'historial'>('tabla');
   const [editingPago, setEditingPago] = useState<Pago | null>(null);
 
@@ -20,94 +18,33 @@ const PagosPage: React.FC = () => {
 
   // Cargar datos
   useEffect(() => {
-    const loadData = async () => {
-      try {
-        setLoading(true);
-        const token = localStorage.getItem('token');
-        const headers = { 'Authorization': `Bearer ${token}` };
-        const [pagosRes, clubesRes] = await Promise.all([
-          fetch('/api/pagos', { headers }),
-          fetch('/api/clubes', { headers }),
-        ]);
-
-        if (!pagosRes.ok || !clubesRes.ok) throw new Error('Error cargando datos');
-
-        const pagosData = await pagosRes.json();
-        const clubesData = await clubesRes.json();
-
-        setPagos(pagosData);
-        setClubes(clubesData);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Error desconocido');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadData();
-  }, []);
+    fetchPagos();
+    fetchClubes();
+  }, [fetchPagos, fetchClubes]);
 
   // Crear pago
   const handleCrearPago = async (pago: Omit<Pago, 'id'>) => {
-    try {
-      const res = await fetch('/api/pagos', {
-        method: 'POST',
-        headers: { 
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}` 
-        },
-        body: JSON.stringify(pago),
-      });
-
-      if (!res.ok) throw new Error('Error creando pago');
-
-      const nuevoPago = await res.json();
-      setPagos([...pagos, nuevoPago]);
+    const result = await crearPago(pago);
+    if (result) {
       setError(null);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Error al crear pago');
     }
   };
 
   // Actualizar pago
   const handleActualizarPago = async (pagoId: number, updateData: Partial<Pago>) => {
-    try {
-      const res = await fetch(`/api/pagos/${pagoId}`, {
-        method: 'PATCH',
-        headers: { 
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}` 
-        },
-        body: JSON.stringify(updateData),
-      });
-
-      if (!res.ok) throw new Error('Error actualizando pago');
-
-      const updated = await res.json();
-      setPagos(pagos.map(p => (p.id === pagoId ? updated : p)));
+    const result = await actualizarPago(pagoId, updateData);
+    if (result) {
       setEditingPago(null);
       setError(null);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Error al actualizar pago');
     }
   };
 
   // Eliminar pago
   const handleEliminarPago = async (pagoId: number) => {
     if (!confirm('¿Confirmar eliminación de pago?')) return;
-
-    try {
-      const res = await fetch(`/api/pagos/${pagoId}`, { 
-        method: 'DELETE',
-        headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
-      });
-
-      if (!res.ok) throw new Error('Error eliminando pago');
-
-      setPagos(pagos.filter(p => p.id !== pagoId));
+    const result = await eliminarPago(pagoId);
+    if (result) {
       setError(null);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Error al eliminar pago');
     }
   };
 

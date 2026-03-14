@@ -1,23 +1,23 @@
 import { useState, useCallback } from 'react';
-import type { Referente, Club, CreateReferenteDto, UpdateReferenteDto } from '../types';
+import type { Pago, Club, CreatePagoDto, UpdatePagoDto } from '../types';
 
 const API_URL = 'http://localhost:3001/api';
 
-interface UseReferentesReturn {
-  referentes: Referente[];
+interface UseRegistroPagosReturn {
+  pagos: Pago[];
   clubes: Club[];
   loading: boolean;
   error: string | null;
-  fetchReferentes: () => Promise<void>;
+  fetchPagos: () => Promise<void>;
   fetchClubes: () => Promise<void>;
-  crearReferente: (payload: CreateReferenteDto) => Promise<Referente | null>;
-  actualizarReferente: (id: number, payload: UpdateReferenteDto) => Promise<Referente | null>;
-  eliminarReferente: (id: number) => Promise<boolean>;
+  crearPago: (payload: CreatePagoDto) => Promise<Pago | null>;
+  actualizarPago: (id: number, payload: UpdatePagoDto) => Promise<Pago | null>;
+  eliminarPago: (id: number) => Promise<boolean>;
   setError: (error: string | null) => void;
 }
 
-export const useReferentes = (): UseReferentesReturn => {
-  const [referentes, setReferentes] = useState<Referente[]>([]);
+export const useRegistroPagos = (): UseRegistroPagosReturn => {
+  const [pagos, setPagos] = useState<Pago[]>([]);
   const [clubes, setClubes] = useState<Club[]>([]);
   const [loading, setLoading] = useState(false);
   const [loadingClubes, setLoadingClubes] = useState(false);
@@ -28,20 +28,20 @@ export const useReferentes = (): UseReferentesReturn => {
     'Authorization': `Bearer ${localStorage.getItem('token') || ''}`,
   });
 
-  const fetchReferentes = useCallback(async () => {
+  const fetchPagos = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(`${API_URL}/referentes`, {
+      const response = await fetch(`${API_URL}/pagos`, {
         headers: { 'Authorization': `Bearer ${localStorage.getItem('token') || ''}` },
       });
-      if (!response.ok) throw new Error('Error al cargar referentes');
+      if (!response.ok) throw new Error('Error al cargar pagos');
       const data = await response.json();
-      setReferentes(data);
+      setPagos(data);
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Error desconocido';
       setError(message);
-      setReferentes([]);
+      setPagos([]);
     } finally {
       setLoading(false);
     }
@@ -65,23 +65,23 @@ export const useReferentes = (): UseReferentesReturn => {
     }
   }, []);
 
-  const crearReferente = useCallback(
-    async (payload: CreateReferenteDto): Promise<Referente | null> => {
+  const crearPago = useCallback(
+    async (payload: CreatePagoDto): Promise<Pago | null> => {
       setLoading(true);
       setError(null);
       try {
-        const response = await fetch(`${API_URL}/referentes`, {
+        const response = await fetch(`${API_URL}/pagos`, {
           method: 'POST',
           headers: getHeaders(),
           body: JSON.stringify(payload),
         });
         if (!response.ok) {
           const errData = await response.json();
-          throw new Error(errData.message || 'Error al crear referente');
+          throw new Error(errData.message || 'Error al crear pago');
         }
-        const newReferente = await response.json();
-        setReferentes((prev) => [...prev, newReferente]);
-        return newReferente;
+        const newPago = await response.json();
+        setPagos((prev) => [...prev, newPago]);
+        return newPago;
       } catch (err) {
         const message = err instanceof Error ? err.message : 'Error desconocido';
         setError(message);
@@ -93,25 +93,25 @@ export const useReferentes = (): UseReferentesReturn => {
     [],
   );
 
-  const actualizarReferente = useCallback(
-    async (id: number, payload: UpdateReferenteDto): Promise<Referente | null> => {
+  const actualizarPago = useCallback(
+    async (id: number, payload: UpdatePagoDto): Promise<Pago | null> => {
       setLoading(true);
       setError(null);
       try {
-        const response = await fetch(`${API_URL}/referentes/${id}`, {
+        const response = await fetch(`${API_URL}/pagos/${id}`, {
           method: 'PATCH',
           headers: getHeaders(),
           body: JSON.stringify(payload),
         });
         if (!response.ok) {
           const errData = await response.json();
-          throw new Error(errData.message || 'Error al actualizar referente');
+          throw new Error(errData.message || 'Error al actualizar pago');
         }
-        const updatedReferente = await response.json();
-        setReferentes((prev) =>
-          prev.map((r) => (r.id === id ? updatedReferente : r)),
+        const updatedPago = await response.json();
+        setPagos((prev) =>
+          prev.map((p) => (p.id === id ? updatedPago : p)),
         );
-        return updatedReferente;
+        return updatedPago;
       } catch (err) {
         const message = err instanceof Error ? err.message : 'Error desconocido';
         setError(message);
@@ -123,16 +123,16 @@ export const useReferentes = (): UseReferentesReturn => {
     [],
   );
 
-  const eliminarReferente = useCallback(async (id: number): Promise<boolean> => {
+  const eliminarPago = useCallback(async (id: number): Promise<boolean> => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(`${API_URL}/referentes/${id}`, {
+      const response = await fetch(`${API_URL}/pagos/${id}`, {
         method: 'DELETE',
         headers: getHeaders(),
       });
-      if (!response.ok) throw new Error('Error al eliminar referente');
-      setReferentes((prev) => prev.filter((r) => r.id !== id));
+      if (!response.ok) throw new Error('Error al eliminar pago');
+      setPagos((prev) => prev.filter((p) => p.id !== id));
       return true;
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Error desconocido';
@@ -144,15 +144,15 @@ export const useReferentes = (): UseReferentesReturn => {
   }, []);
 
   return {
-    referentes,
+    pagos,
     clubes,
     loading,
     error,
-    fetchReferentes,
+    fetchPagos,
     fetchClubes,
-    crearReferente,
-    actualizarReferente,
-    eliminarReferente,
+    crearPago,
+    actualizarPago,
+    eliminarPago,
     setError,
   };
 };
